@@ -1,0 +1,9 @@
+{
+  "name": "talks",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-all.js",
+    "build:local": "BASE_PATH=/ node scripts/build-all.js"
+  }
+}
