@@ -69,8 +69,8 @@ layoutClass: gap-8
 
 ::right::
 
-<div class="flex justify-center items-center h-full">
-  <img src="/assets/srihari.jpg" class="rounded-full w-48 h-48 object-cover shadow-lg" />
+<div class="flex justify-center items-start pt-16">
+  <img src="/assets/srihari.jpg" class="rounded-full w-40 h-40 object-cover shadow-xl border-2 border-gray-600" />
 </div>
 
 ---
