@@ -88,11 +88,43 @@ h1 {
   opacity: 1;
 }
 
+.talk-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
 .talk-date {
   font-size: 0.85rem;
   color: #60a5fa;
   font-weight: 500;
-  margin-bottom: 0.5rem;
+}
+
+.talk-badges {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.talk-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.talk-badge.upcoming {
+  background: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.talk-badge.draft {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
 }
 
 .talk-title {

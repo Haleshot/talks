@@ -83,6 +83,23 @@ function getTalkTitle(folderPath) {
   return null;
 }
 
+function getTalkMeta(folderPath) {
+  const slidesPath = join(folderPath, 'slides.md');
+  const meta = { draft: false };
+  if (existsSync(slidesPath)) {
+    const content = readFileSync(slidesPath, 'utf-8');
+    meta.draft = /^draft:\s*true$/m.test(content);
+  }
+  return meta;
+}
+
+function isUpcoming(month, year) {
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth() + 1;
+  return year > currentYear || (year === currentYear && month >= currentMonth);
+}
+
 function buildTalk(folder) {
   const folderPath = join(rootDir, folder);
   const talkBasePath = `${basePath}${folder}/`;
@@ -127,10 +144,22 @@ function generateLandingPage(talks) {
   const styles = readFileSync(join(rootDir, 'landing', 'styles.css'), 'utf-8');
 
   const talkCards = talks.map(talk => {
-    const title = getTalkTitle(join(rootDir, talk.folder)) || talk.topic;
+    const folderPath = join(rootDir, talk.folder);
+    const title = getTalkTitle(folderPath) || talk.topic;
+    const meta = getTalkMeta(folderPath);
+    const upcoming = isUpcoming(talk.month, talk.year);
+
+    const badges = [
+      upcoming ? '<span class="talk-badge upcoming">Upcoming</span>' : '',
+      meta.draft ? '<span class="talk-badge draft">Draft</span>' : '',
+    ].filter(Boolean).join('');
+
     return `
-      <a href="${basePath}${talk.folder}/" class="talk-card">
-        <div class="talk-date">${talk.date}</div>
+      <a href="${basePath}${talk.folder}/" class="talk-card${upcoming ? ' talk-card--upcoming' : ''}">
+        <div class="talk-card-header">
+          <div class="talk-date">${talk.date}</div>
+          ${badges ? `<div class="talk-badges">${badges}</div>` : ''}
+        </div>
         <h2 class="talk-title">${title}</h2>
         <div class="talk-event">${talk.event}</div>
       </a>`;
