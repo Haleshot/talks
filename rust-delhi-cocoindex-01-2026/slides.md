@@ -3,6 +3,15 @@ theme: seriph
 background: /assets/rustdelhi-logo.svg
 backgroundSize: 40%
 title: Stop reprocessing everything - Incremental data pipelines with CocoIndex
+event: Rust Delhi Meetup
+date: Jan 2026
+description: A meetup talk on building incremental data pipelines with CocoIndex, with a focus on real workflows, Rust-powered execution, and sync-friendly data systems.
+tags:
+  - Rust
+  - Data Pipelines
+  - CocoIndex
+  - OSS
+linkedinUrl: https://www.linkedin.com/posts/srihari-thyagarajan_kicking-off-2026-with-rust-delhi-meetup-12-activity-7420450968770764800-SQyb?utm_source=share&utm_medium=member_desktop&rcm=ACoAADSJzvgBkjBd85IWDyUWA6ttzq8B-NDq-Hs
 info: |
   ## CocoIndex - Rust Delhi Meetup
   Building incremental data pipelines with a Rust-powered engine

@@ -1,185 +1,359 @@
+@font-face {
+  font-family: "Atkinson";
+  src: url("./fonts/atkinson-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson";
+  src: url("./fonts/atkinson-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root,
+html[data-theme="light"] {
+  --background: #fdfdfd;
+  --foreground: #282728;
+  --accent: #006cac;
+  --muted: #e6e6e6;
+  --border: #ece9e9;
+}
+
+html[data-theme="dark"] {
+  --background: #212737;
+  --foreground: #eaedf3;
+  --accent: #ff6b01;
+  --muted: #343f60bf;
+  --border: #ab4b08;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  font-family: "Atkinson", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+  background: var(--background);
   min-height: 100vh;
-  color: #e4e4e7;
-  line-height: 1.6;
+  color: var(--foreground);
+  line-height: 1.65;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header,
+.site-footer {
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.nav-shell,
+.container,
+.footer-inner {
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.nav-shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.05rem 0 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.35rem;
+  flex-wrap: wrap;
+  font-size: 0.92rem;
+}
+
+.site-nav a {
+  text-decoration: none;
+  opacity: 0.92;
+}
+
+.active-nav {
+  opacity: 1;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--foreground);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+.theme-toggle__moon {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle__sun {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle__moon {
+  display: inline-flex;
 }
 
 .container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
+  flex: 1;
+  padding: 2.6rem 1rem 3.5rem;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 3rem;
+.intro {
+  margin-bottom: 1.8rem;
 }
 
 h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 0.5rem;
+  font-size: clamp(2rem, 3.7vw, 2.35rem);
+  line-height: 1.12;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.03em;
 }
 
 .subtitle {
-  color: #a1a1aa;
-  font-size: 1.1rem;
+  max-width: 40rem;
+  color: color-mix(in srgb, var(--foreground) 74%, transparent);
+  font-size: 1.02rem;
 }
 
-.subtitle a {
-  color: #60a5fa;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.subtitle a:hover {
-  color: #93c5fd;
-}
-
-.talks-grid {
-  display: grid;
-  gap: 1.25rem;
+.talks-list {
+  border-top: 1px solid var(--border);
 }
 
 .talk-card {
-  display: block;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.talk-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #60a5fa, #a78bfa);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.talk-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
-}
-
-.talk-card:hover::before {
-  opacity: 1;
+  padding: 1.85rem 0 2rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .talk-card-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 1rem;
   margin-bottom: 0.5rem;
 }
 
 .talk-date {
-  font-size: 0.85rem;
-  color: #60a5fa;
-  font-weight: 500;
+  color: color-mix(in srgb, var(--foreground) 62%, transparent);
+  font-size: 0.82rem;
 }
 
 .talk-badges {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 0.4rem;
 }
 
 .talk-badge {
   font-size: 0.7rem;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
+  font-weight: 700;
+  padding: 0.18rem 0.5rem;
   border-radius: 4px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.talk-badge.upcoming {
-  background: rgba(96, 165, 250, 0.15);
-  color: #60a5fa;
-  border: 1px solid rgba(96, 165, 250, 0.3);
-}
-
-.talk-badge.draft {
-  background: rgba(251, 191, 36, 0.12);
-  color: #fbbf24;
-  border: 1px solid rgba(251, 191, 36, 0.3);
+  letter-spacing: 0.08em;
+  border: 1px solid currentColor;
+  background: transparent;
 }
 
 .talk-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #fafafa;
-  margin-bottom: 0.5rem;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
   line-height: 1.3;
 }
 
 .talk-event {
-  font-size: 0.95rem;
-  color: #a1a1aa;
+  font-size: 1rem;
+  color: color-mix(in srgb, var(--foreground) 68%, transparent);
+  margin-bottom: 0.9rem;
 }
 
-footer {
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+.talk-description {
+  max-width: 44rem;
+  font-size: 1rem;
+  color: color-mix(in srgb, var(--foreground) 84%, transparent);
+}
+
+.talk-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.95rem;
+}
+
+.talk-tag {
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+}
+
+.talk-tag::before {
+  content: "#";
+  opacity: 0.55;
+}
+
+.talk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0;
+  border: 0;
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  font-size: 0.95rem;
+}
+
+.action-link:hover {
+  opacity: 0.82;
+}
+
+.action-link::after {
+  content: "→";
+}
+
+.action-link.primary {
+  font-weight: 700;
+}
+
+.site-footer {
+  padding-bottom: 1.5rem;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--border);
 }
 
 .links {
   display: flex;
-  justify-content: center;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .links a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #a1a1aa;
+  color: color-mix(in srgb, var(--foreground) 68%, transparent);
   text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.2s;
+  font-size: 0.92rem;
 }
 
 .links a:hover {
-  color: #fafafa;
+  color: var(--accent);
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 2rem 1rem;
+.footer-note {
+  color: color-mix(in srgb, var(--foreground) 60%, transparent);
+  font-size: 0.92rem;
+}
+
+.footer-note a {
+  text-decoration: none;
+}
+
+@media (max-width: 720px) {
+  .nav-shell,
+  .talk-card-header,
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  h1 {
-    font-size: 2.25rem;
+  .site-nav,
+  .talk-badges {
+    justify-content: flex-start;
+  }
+
+  .site-title {
+    font-size: 1.45rem;
+  }
+
+  .container {
+    padding-top: 2.1rem;
   }
 
   .talk-card {
-    padding: 1.25rem;
+    padding: 1.5rem 0 1.7rem;
   }
 
   .talk-title {
-    font-size: 1.15rem;
+    font-size: 1.35rem;
   }
 }

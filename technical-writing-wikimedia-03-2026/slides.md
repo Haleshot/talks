@@ -2,6 +2,14 @@
 theme: seriph
 layout: cover
 title: Technical Writing in the Age of AI
+event: Wikimedia Developer Skill Development Program India 2025
+date: Mar 2026
+description: A workshop on technical writing in the AI era, covering writing quality, documentation architecture, and advocacy as part of open source practice.
+tags:
+  - Technical Writing
+  - AI
+  - Documentation
+  - Community
 info: |
   90-minute workshop for WikiMedia Developer Skill Development Program India 2025.
   Covers writing quality in the AI era, Diátaxis documentation architecture,

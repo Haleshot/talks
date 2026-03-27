@@ -65,16 +65,101 @@ function capitalizeWords(str) {
   return str.replace(/\b\w/g, c => c.toUpperCase());
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function extractFrontmatter(content) {
+  const match = content.match(/^---\n([\s\S]*?)\n---\n?/);
+  return match ? match[1] : '';
+}
+
+function parseFrontmatter(content) {
+  const frontmatter = extractFrontmatter(content);
+  const meta = {};
+
+  if (!frontmatter) return meta;
+
+  const lines = frontmatter.split('\n');
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    if (!line.trim() || line.trim().startsWith('#')) continue;
+
+    const keyMatch = line.match(/^([A-Za-z][A-Za-z0-9_-]*):\s*(.*)$/);
+    if (!keyMatch) continue;
+
+    const [, key, rawValue] = keyMatch;
+    const value = rawValue.trim();
+
+    if (value === '|') {
+      const block = [];
+      i += 1;
+      while (i < lines.length && (/^\s+/.test(lines[i]) || lines[i] === '')) {
+        block.push(lines[i].replace(/^\s{2}/, ''));
+        i += 1;
+      }
+      i -= 1;
+      meta[key] = block.join('\n').trim();
+      continue;
+    }
+
+    if (value === '') {
+      const list = [];
+      let j = i + 1;
+      while (j < lines.length) {
+        const listItem = lines[j].match(/^\s*-\s+(.*)$/);
+        if (!listItem) break;
+        list.push(stripQuotes(listItem[1].trim()));
+        j += 1;
+      }
+      if (list.length > 0) {
+        meta[key] = list;
+        i = j - 1;
+        continue;
+      }
+      meta[key] = '';
+      continue;
+    }
+
+    meta[key] = parseScalarValue(value);
+  }
+
+  return meta;
+}
+
+function parseScalarValue(value) {
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+
+  if (value.startsWith('[') && value.endsWith(']')) {
+    return value
+      .slice(1, -1)
+      .split(',')
+      .map(item => stripQuotes(item.trim()))
+      .filter(Boolean);
+  }
+
+  return stripQuotes(value);
+}
+
+function stripQuotes(value) {
+  return value.replace(/^['"]|['"]$/g, '');
+}
+
 function getTalkTitle(folderPath) {
   const slidesPath = join(folderPath, 'slides.md');
   if (existsSync(slidesPath)) {
     const content = readFileSync(slidesPath, 'utf-8');
-    // Look for title in frontmatter
-    const titleMatch = content.match(/^title:\s*(.+)$/m);
-    if (titleMatch) {
-      return titleMatch[1].trim().replace(/^['"]|['"]$/g, '');
+    const frontmatter = parseFrontmatter(content);
+    if (frontmatter.title) {
+      return frontmatter.title;
     }
-    // Fallback: look for first # heading
     const headingMatch = content.match(/^#\s+(.+)$/m);
     if (headingMatch) {
       return headingMatch[1].trim();
@@ -85,10 +170,25 @@ function getTalkTitle(folderPath) {
 
 function getTalkMeta(folderPath) {
   const slidesPath = join(folderPath, 'slides.md');
-  const meta = { draft: false };
+  const meta = { draft: false, tags: [] };
   if (existsSync(slidesPath)) {
     const content = readFileSync(slidesPath, 'utf-8');
-    meta.draft = /^draft:\s*true$/m.test(content);
+    const frontmatter = parseFrontmatter(content);
+    const infoDescription = typeof frontmatter.info === 'string'
+      ? frontmatter.info
+          .split('\n')
+          .map(line => line.replace(/^#+\s*/, '').trim())
+          .find(Boolean)
+      : '';
+
+    meta.draft = Boolean(frontmatter.draft);
+    meta.event = frontmatter.event || '';
+    meta.date = frontmatter.date || '';
+    meta.description = frontmatter.description || infoDescription || '';
+    meta.tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [];
+    meta.slidesUrl = frontmatter.slidesUrl || '';
+    meta.linkedinUrl = frontmatter.linkedinUrl || '';
+    meta.blogUrl = frontmatter.blogUrl || '';
   }
   return meta;
 }
@@ -97,7 +197,7 @@ function isUpcoming(month, year) {
   const now = new Date();
   const currentYear = now.getFullYear();
   const currentMonth = now.getMonth() + 1;
-  return year > currentYear || (year === currentYear && month >= currentMonth);
+  return year > currentYear || (year === currentYear && month > currentMonth);
 }
 
 function buildTalk(folder) {
@@ -148,21 +248,48 @@ function generateLandingPage(talks) {
     const title = getTalkTitle(folderPath) || talk.topic;
     const meta = getTalkMeta(folderPath);
     const upcoming = isUpcoming(talk.month, talk.year);
+    const event = escapeHtml(meta.event || talk.event);
+    const date = escapeHtml(meta.date || talk.date);
+    const safeTitle = escapeHtml(title);
+    const description = meta.description ? `<p class="talk-description">${escapeHtml(meta.description)}</p>` : '';
+    const tags = meta.tags.length > 0
+      ? `<div class="talk-tags">${meta.tags.map(tag => `<span class="talk-tag">${escapeHtml(tag)}</span>`).join('')}</div>`
+      : '';
+    const actions = [
+      {
+        label: 'Slides',
+        href: meta.slidesUrl || `${basePath}${talk.folder}/`,
+        primary: true,
+      },
+      meta.linkedinUrl ? { label: 'LinkedIn Post', href: meta.linkedinUrl } : null,
+      meta.blogUrl ? { label: 'Blog Post', href: meta.blogUrl } : null,
+    ].filter(Boolean);
 
     const badges = [
       upcoming ? '<span class="talk-badge upcoming">Upcoming</span>' : '',
       meta.draft ? '<span class="talk-badge draft">Draft</span>' : '',
     ].filter(Boolean).join('');
 
+    const actionsMarkup = actions.length > 0
+      ? `<div class="talk-actions">${actions.map(action => `
+          <a href="${action.href}" class="action-link${action.primary ? ' primary' : ''}"${action.href.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>
+            ${action.label}
+          </a>`).join('')}
+        </div>`
+      : '';
+
     return `
-      <a href="${basePath}${talk.folder}/" class="talk-card${upcoming ? ' talk-card--upcoming' : ''}">
+      <article class="talk-card">
         <div class="talk-card-header">
-          <div class="talk-date">${talk.date}</div>
+          <div class="talk-date">${date}</div>
           ${badges ? `<div class="talk-badges">${badges}</div>` : ''}
         </div>
-        <h2 class="talk-title">${title}</h2>
-        <div class="talk-event">${talk.event}</div>
-      </a>`;
+        <h2 class="talk-title">${safeTitle}</h2>
+        <div class="talk-event">${event}</div>
+        ${description}
+        ${tags}
+        ${actionsMarkup}
+      </article>`;
   }).join('\n');
 
   const html = landingTemplate
@@ -180,6 +307,7 @@ async function main() {
 
   // Create dist directory
   mkdirSync(distDir, { recursive: true });
+  cpSync(join(rootDir, 'landing', 'fonts'), join(distDir, 'fonts'), { recursive: true });
 
   // Find all talk folders
   const folders = getTalkFolders();
