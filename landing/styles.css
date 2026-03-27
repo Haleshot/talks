@@ -77,7 +77,6 @@ button {
 .site-header,
 .site-footer {
   width: 100%;
-  padding: 0 1rem;
 }
 
 .nav-shell,
@@ -86,6 +85,8 @@ button {
   width: 100%;
   max-width: 48rem;
   margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .nav-shell {
@@ -100,6 +101,7 @@ button {
 .site-title {
   font-size: 1.6rem;
   font-weight: 700;
+  line-height: 1;
   text-decoration: none;
   letter-spacing: -0.02em;
 }
@@ -114,6 +116,9 @@ button {
 }
 
 .site-nav a {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
   text-decoration: none;
   opacity: 0.92;
 }
@@ -157,7 +162,8 @@ html[data-theme="dark"] .theme-toggle__moon {
 
 .container {
   flex: 1;
-  padding: 2.6rem 1rem 3.5rem;
+  padding-top: 2.6rem;
+  padding-bottom: 3.5rem;
 }
 
 .intro {
@@ -355,5 +361,18 @@ h1 {
 
   .talk-title {
     font-size: 1.35rem;
+  }
+}
+
+@media (min-width: 721px) {
+  .nav-shell {
+    padding: 1rem 0;
+  }
+
+  .site-title,
+  .site-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
   }
 }
