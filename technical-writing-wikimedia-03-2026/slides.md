@@ -132,7 +132,7 @@ transition: slide-up
 <img
   src="/linus.png"
   alt="Linus Torvalds"
-  class="absolute inset-0 h-full w-full object-cover object-right-top opacity-18 pointer-events-none"
+  class="absolute inset-0 h-full w-full object-cover object-right-top opacity-100 pointer-events-none"
 />
 <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/45 pointer-events-none"></div>
 
