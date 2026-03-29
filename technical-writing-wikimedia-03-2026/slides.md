@@ -766,7 +766,8 @@ transition: slide-up
 - Provide context: the why, design rationale, history.
 - Best read when the user is trying to understand, not fix something in the next 30 seconds.
 - <em>On Food and Cooking</em> is useful here as an analogy: it teaches you how a domain works without turning into a recipe book.
-- This is the most underinvested quadrant in most OSS projects.
+- This is the most underinvested quadrant in most OSS projects. 
+  - Any guesses on why? 👀
 
 </v-clicks>
 
@@ -883,7 +884,7 @@ hideInToc: true
 # Three moves. No rewrite required.
 
 <div class="text-sm opacity-75 leading-relaxed max-w-3xl mb-6">
-This is the part I want people to leave with because it makes the framework feel usable on Monday morning. You do not need a full rewrite to improve docs. You need a better way to separate jobs.
+This is the part I want people to leave with because it makes the framework feel usable. You do not need a full rewrite to improve docs. You need a better way to separate jobs.
 </div>
 
 <v-clicks>
