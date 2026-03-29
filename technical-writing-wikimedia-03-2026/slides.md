@@ -2,30 +2,27 @@
 theme: seriph
 layout: cover
 title: Technical Writing in the Age of AI
-event: Wikimedia Developer Skill Development Program India 2025
-date: Mar 2026
-description: A workshop on technical writing in the AI era, covering writing quality, documentation architecture, and advocacy as part of open source practice.
-tags:
-  - Technical Writing
-  - AI
-  - Documentation
-  - Community
 info: |
-  90-minute workshop for WikiMedia Developer Skill Development Program India 2025.
+  90-minute workshop for WikiMedia Developer Skill Development Program India 2026.
   Covers writing quality in the AI era, Diátaxis documentation architecture,
   and community advocacy as a natural extension of technical writing.
 class: text-center
 colorSchema: dark
 drawings:
   persist: false
-transition: slide-up
+transition: slide-left
 mdc: true
 fonts:
   sans: Inter
   mono: Fira Code
 hideInToc: true
-draft: true
 ---
+
+<img
+  src="/metawiki.svg"
+  alt="Meta-Wiki"
+  class="absolute right-8 top-8 h-56 w-56 opacity-12 pointer-events-none"
+/>
 
 <div v-motion :initial="{ y: -20, opacity: 0 }" :enter="{ y: 0, opacity: 1, transition: { duration: 500 } }">
 
@@ -38,7 +35,7 @@ Writing is thinking in public.
 </div>
 
 <div v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, transition: { delay: 600 } }" class="absolute bottom-8 left-0 right-0 text-center text-sm opacity-50">
-  Srihari Thyagarajan · WikiMedia Developer Skill Development Program India 2025
+  Srihari Thyagarajan · WikiMedia Developer Skill Development Program India 2026
 </div>
 
 <!--
@@ -51,7 +48,7 @@ hideInToc: true
 ---
 
 <div class="text-3xl font-bold text-center max-w-2xl mx-auto leading-tight">
-"You built something. Does anyone know how to use it?"
+You built something. Does anyone know how to use it?
 </div>
 
 <v-click>
@@ -73,19 +70,22 @@ hideInToc: true
 
 # About me
 
-<div class="text-base mt-4">
+<div class="text-base mt-4 text-left">
+
+<p class="text-sm opacity-80 leading-relaxed mb-5">
+I studied AI, got pulled into open source toward the end of college, and kept gravitating toward the same kind of work:
+trying tools properly, contributing where I felt friction, and then writing the guide I wish I had when I got stuck.
+</p>
+
+<p class="text-sm opacity-80 leading-relaxed mb-5">
+It took me a while to realise that this mix of community work, advocacy, educational writing, and developer tooling was
+already a role. I just hadn't learned the vocabulary for it yet.
+</p>
 
 - Technical Writer at [Deepnote](https://deepnote.com)
-- OSS contributor: [CocoIndex](https://github.com/cocoindex-io/cocoindex), [marimo](https://github.com/marimo-team/marimo)
+- Contributor to projects I actively use, including [CocoIndex](https://github.com/cocoindex-io/cocoindex) and [marimo](https://github.com/marimo-team/marimo)
 - Co-organizer, [SciPy India](https://scipy-india.github.io/)
-- Met the organiser at an OSS community booth, holding a community booth about marimo
-
-</div>
-
-<div class="text-sm mt-6 opacity-60">
-
-The through-line: writing clearly about projects you care about
-is how you get to rooms like this one.
+- I spend a lot of time around notebooks, tutorials, integrations, and OSS communities
 
 </div>
 
@@ -96,27 +96,7 @@ is how you get to rooms like this one.
 </div>
 
 <!--
-I started where you are — building things in public, writing about them, and eventually getting invited to talk about the writing. That's the arc.
--->
-
----
-layout: default
-hideInToc: true
----
-
-# Why these slides look like this
-
-<v-clicks>
-
-- No templates. No branded deck.
-- Inspired by a talk I saw at the [Happy Llama Battleground event](https://www.linkedin.com/posts/srihari-thyagarajan_makeaiinindia-aim-happy-activity-7321571014532849665-Z4Vt?utm_source=share&utm_medium=member_desktop&rcm=ACoAADSJzvgBkjBd85IWDyUWA6ttzq8B-NDq-Hs) in Bangalore: black screen, white text, real talk. No jargon, no slide-deck performance.
-- The speaker was Shekar Sivasubramanian of Wadhwani AI. Stayed with me.
-- The point: if the content is good, the slides don't need to carry it.
-
-</v-clicks>
-
-<!--
-Name-check Shekar only if the room has context. Otherwise just the principle. This is also why there are no bullet-point summaries of things I'm about to say aloud.
+I started where you are, building things in public, writing about them, and eventually getting invited to talk about the writing. That's the arc.
 -->
 
 ---
@@ -127,14 +107,49 @@ hideInToc: true
 
 # Table of contents
 
-<div class="mt-6 text-sm opacity-60">5 parts · exercises throughout</div>
+<div class="mt-8 text-sm opacity-75 leading-relaxed max-w-xl">
+We are going to move from why writing feels harder now, to what good writing is actually doing, to how to structure docs so they stop fighting the reader, and then to what that kind of work can grow into in public.
+</div>
+
+<div class="mt-4 text-sm opacity-60 leading-relaxed max-w-xl">
+If you have a project, a README, a wiki page, or even one annoying doc in mind, keep it with you through the session. A lot of these slides are built out of things I have read, quoted, argued with, and fallen down rabbit holes through. That felt fitting for a Wikimedia workshop.
+</div>
 
 ::right::
 
-<Toc text-sm minDepth="1" maxDepth="1" />
+<Toc class="mt-2 text-base leading-loose" minDepth="1" maxDepth="1" />
 
 <!--
-Orient the room.
+Set expectations and get them to keep one real doc in mind.
+-->
+
+---
+layout: quote
+hideInToc: true
+transition: slide-up
+---
+
+<img
+  src="/linus.png"
+  alt="Linus Torvalds"
+  class="absolute inset-0 h-full w-full object-cover object-right-top opacity-18 pointer-events-none"
+/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/45 pointer-events-none"></div>
+
+# "Talk is cheap. Show me the code."
+
+~ <em>Linus Torvalds</em>, August 2000
+
+<div class="mt-5 text-sm max-w-2xl opacity-72 leading-relaxed">
+He wrote this on the Linux kernel mailing list while pushing back on a proposal that was still mostly talk and confidence. In that moment, "show me the code" meant: stop telling me what you think should work and show me the version that has survived implementation, constraints, and contact with reality.
+</div>
+
+<div class="mt-4 text-sm max-w-2xl opacity-60 leading-relaxed">
+That only made sense because code was still expensive. Writing it was the proof of seriousness.
+</div>
+
+<!--
+"This was the whole deal. Effort was legible. Code was expensive. Let it sit." 30s.
 -->
 
 ---
@@ -153,21 +168,9 @@ Why writing is now the scarce input.
 -->
 
 ---
-layout: quote
-hideInToc: true
----
-
-# "Talk is cheap. Show me the code."
-
-~ <em>Linus Torvalds</em>, August 2000
-
-<!--
-"This was the whole deal. Effort was legible. Code was expensive. Let it sit." 30s.
--->
-
----
 layout: default
 hideInToc: true
+transition: slide-up
 ---
 
 <div class="text-4xl font-bold mb-12">
@@ -182,20 +185,38 @@ hideInToc: true
 </v-click>
 
 <v-click at="5">
-<div class="mt-8 border border-primary/25 rounded-lg p-3 font-mono text-sm">
-  "100% human written, including emdashes. Sigh."
-  <div class="text-xs mt-1 opacity-50 not-italic font-sans">footer on every post — <a href="https://nadh.in/blog/code-is-cheap/" class="underline opacity-70">nadh.in</a></div>
+<div class="mt-6 text-sm opacity-70 max-w-3xl">
+The point of Kailash Nadh's inversion is not that code stopped mattering. It is that code generation has been commodified so aggressively that output alone no longer tells you who understood the problem, who made the trade-offs, or who can be trusted to review what was produced.
 </div>
 </v-click>
 
 <v-click at="6">
+<div class="mt-3 text-xs opacity-60 max-w-3xl">
+  He talks about this kind of work elsewhere too, including performance and large-scale systems conversations on Perfology. The recurring theme is the same: the valuable part is not raw output, but the thinking that makes systems legible and reviewable.
+</div>
+</v-click>
+
+<v-click at="7">
+<div class="mt-8 border border-primary/25 rounded-lg p-3 font-mono text-sm">
+  "100% human written, including emdashes. Sigh."
+  <div class="text-xs mt-1 opacity-50 not-italic font-sans">footer on every post, <a href="https://nadh.in/blog/code-is-cheap/" class="underline opacity-70">nadh.in</a></div>
+</div>
+</v-click>
+
+<v-click at="8">
 <div class="mt-3 text-xs opacity-60">
   This is the world that made <a href="https://github.com/mitchellh/vouch" class="underline">Vouch</a> necessary: "contributors can no longer be trusted based on the minimal barrier to entry to simply submit a change."
 </div>
 </v-click>
 
+<v-click at="9">
+<div class="mt-3 text-xs opacity-60 max-w-3xl">
+  And honestly, I would still rather take a little less traffic and a little more friction if it means the people showing up are actual humans, not waves of bot-generated drive-by contributions.
+</div>
+</v-click>
+
 <!--
-Hold silence after click 3. "25 years of software development. One sentence." Then: "His footer on every post says it all."
+Pause after the inversion lands. Then connect it to provenance, review, and trust.
 -->
 
 ---
@@ -204,11 +225,15 @@ layoutClass: gap-16
 hideInToc: true
 ---
 
+<div class="mt-16">
+
 ### <carbon-time class="inline mr-2" />Then
 
 - Code was expensive
 - Effort signalled quality
 - Experience was legible
+
+</div>
 
 ::right::
 
@@ -216,13 +241,15 @@ hideInToc: true
   v-motion
   :initial="{ x: 80, opacity: 0 }"
   :enter="{ x: 0, opacity: 1, transition: { type: 'spring', damping: 10, stiffness: 20, delay: 200 } }"
+  class="mt-16"
 >
 
 ### <carbon-lightning class="inline mr-2" />Now
 
 - Code is near-free
 - Judgment is the bottleneck
-- **"Good talk is exponentially more valuable than good code."**{class="text-primary"}
+- Clear articulation becomes the differentiator
+- Opinionated review starts mattering again
 
 </div>
 
@@ -239,7 +266,7 @@ hideInToc: true
 
 <v-clicks>
 
-- The Library of Babel: every possible text already exists. None of it is useful.
+- Borges imagined a library containing every possible book. Most of it would be nonsense, and the few useful things would be buried beyond recovery. That is why <em>Library of Babel</em> fits here.
 - AI generation: every possible README already exists. Most of it is hollow.
 - The problem is not volume. The problem is ownership.
 
@@ -251,11 +278,13 @@ hideInToc: true
 </v-click>
 
 <v-click>
-<div class="text-sm mt-4 opacity-70">People read and share AI-generated content without noticing it's hollow. The problem isn't that people hate slop — it's that they can't tell. Neither can the person who published it.</div>
+<div class="text-sm mt-4 opacity-70">
+Slop did not begin with AI. We have always had filler, SEO sludge, and content farms. AI changes the scale, speed, and confidence of the problem. The floor rises, the volume explodes, and the cost of producing something plausible drops so far that discernment and ownership become the scarce part.
+</div>
 </v-click>
 
 <!--
-"People consume AI-generated content willingly. The ceiling has risen but so has the noise floor." 60s.
+The point is not that bad writing is new. It is that cheap plausibility changes the scale of the mess.
 -->
 
 ---
@@ -267,6 +296,12 @@ hideInToc: true
 
 ~ <em>Packy McCormick</em>, [<em>Not Boring</em>](https://www.notboring.co/)
 
+<v-click>
+<div class="text-sm mt-8 opacity-70 max-w-3xl mx-auto text-center">
+This comes from <em>Costless Sacrifice</em>: an essay about what happens when output becomes cheap and effort stops being a reliable signal of quality.
+</div>
+</v-click>
+
 <!--
 "The baseline has moved. Writing is now the table stake, not the differentiator. But judgment? Verification? Ownership? Those are still scarce." 30s.
 -->
@@ -276,7 +311,7 @@ layout: default
 hideInToc: true
 ---
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-8 mt-12">
 
 <div>
 
@@ -324,7 +359,8 @@ hideInToc: true
 
 - WikiMedia runs on documentation. Extensions, gadgets, bots all depend on contributors being able to read and write clearly.
 - Auto-generated docs feel hollow because they are. Users notice the absence of judgment.
-- The person who writes well is the person who shapes how the community understands the project.
+- If you want an example of this done well, look at notebook ecosystems: people like <a href="https://github.com/willingc" class="underline">Carol Willing</a> helped make documentation, governance, and education part of the project itself.
+- The person who writes well often becomes the person who shapes how the community understands the project.
 
 </v-clicks>
 
@@ -385,7 +421,13 @@ hideInToc: true
 
 <v-click>
 <div class="text-sm mt-8 opacity-70 max-w-2xl mx-auto text-center">
-When you write a design doc, a README, a how-to guide: you're not transcribing a decision that already happened. You're making it.
+When you write a design doc, a README, or a how-to guide, you are not just recording thought after the fact. You are using the act of writing to notice gaps, make trade-offs visible, and arrive at something worth sharing.
+</div>
+</v-click>
+
+<v-click>
+<div class="text-sm mt-4 opacity-60 max-w-3xl mx-auto text-center">
+That is the part I want to protect in an AI-heavy workflow: not the romance of suffering, but the thinking work that only becomes visible once you try to explain it to someone else.
 </div>
 </v-click>
 
@@ -397,13 +439,14 @@ When you write a design doc, a README, a how-to guide: you're not transcribing a
 layout: two-cols
 layoutClass: gap-8
 hideInToc: true
+transition: slide-up
 ---
 
 # The ideas layer is still expensive
 
 <div class="mt-4 text-sm opacity-70">
 
-<em>Prashanth Rao</em> on writing in the age of AI — on why clear thinking on the page still matters when code generation is nearly free. <em>Shreya Shankar</em> shared it.
+<em>Prashanth Rao</em> on why the ideas layer is still expensive, even when code generation is nearly free.
 
 </div>
 
@@ -413,14 +456,16 @@ hideInToc: true
 
 <!--
 Brief. Let the tweet breathe.
+The references and quotes in this workshop aren't decoration -- they're what's genuinely in my head when I'm writing. This is what my thought process looks like. We're at a WikiMedia summit; citing sources is on-brand.
 -->
 
 ---
 layout: default
 hideInToc: true
+transition: slide-up
 ---
 
-# Three layers of reading — and writing.
+# Three layers of reading and writing.
 
 | Layer | Reader asks | Where LLMs fall short |
 |---|---|---|
@@ -439,24 +484,7 @@ hideInToc: true
 </v-click>
 
 <!--
-"When you read a bad doc, you feel it at the outline layer first — there's no reason to keep reading." 90s.
--->
-
----
-layout: statement
-hideInToc: true
----
-
-<div v-motion :initial="{ y: 20, opacity: 0 }" :enter="{ y: 0, opacity: 1, transition: { type: 'spring', stiffness: 80, damping: 12 } }">
-
-"Ideas are the meat."
-
-<div class="text-sm mt-4 opacity-60">~ <em>Prashanth Rao</em></div>
-
-</div>
-
-<!--
-Let it sit. "Everything else is packaging."
+"When you read a bad doc, you feel it at the outline layer first; there's no reason to keep reading." 90s.
 -->
 
 ---
@@ -476,27 +504,28 @@ hideInToc: true
 layout: two-cols
 layoutClass: gap-16
 hideInToc: true
+transition: slide-up
 ---
 
-<v-clicks>
+<div class="mt-18 flex flex-col gap-8 text-lg">
 
-1. Empty summaries
-2. Overuse of lists
-3. Flat rhythm
-4. Wrong subjects
+<div v-click>1. Empty summaries</div>
+<div v-click>2. Overuse of lists</div>
+<div v-click>3. Flat rhythm</div>
+<div v-click>4. Wrong subjects</div>
 
-</v-clicks>
+</div>
 
 ::right::
 
-<v-clicks at="5">
+<div class="mt-18 flex flex-col gap-8 text-lg">
 
-5. Low information density
-6. Vagueness
-7. Demonstrative pronoun overload
-8. <span v-mark.underline="8">Fluency masking ignorance</span>
+<div v-click>5. Low information density</div>
+<div v-click>6. Vagueness</div>
+<div v-click>7. Demonstrative pronoun overload</div>
+<div v-click><span v-mark.underline="8">8. Fluency masking ignorance</span></div>
 
-</v-clicks>
+</div>
 
 <!--
 Walk each. For #8: "Correct sentences that explain nothing. The hardest to spot because they pass all the checks."
@@ -534,14 +563,31 @@ hideInToc: true
 
 # Somebody Wanted But So Then
 
-```{1|2|3|4|5}
+<div class="text-sm opacity-75 leading-relaxed max-w-3xl">
+This is a compact narrative scaffold Shreya Shankar recommends because it forces you to include motivation, friction, and consequence. It is popular because it works on more than stories: incidents, design docs, changelogs, postmortems, and PR descriptions all get clearer when the tension is explicit.
+</div>
+
+<div class="mt-10 max-w-3xl">
+
+````md magic-move {lines:true}
+```txt
+Somebody   ___
+Wanted     ___
+But        ___
+So         ___
+Then       ___
+```
+
+```txt {1|2|3|4|5}
 Somebody   We built a citation-fixing bot.
 Wanted     Automated, reliable citation repair.
 But        Edge cases broke 20% of inputs.
 So         We added a validation pass before writes.
 Then       Error rate dropped to under 2%.
 ```
+````
 
+</div>
 
 <!--
 "Any incident report. Any design doc. Any ADR. Any PR description. SWBST works."
@@ -555,6 +601,7 @@ hideInToc: true
 
 # Working with AI without losing the wheel
 
+<div class="mt-8">
 <v-clicks>
 
 - <carbon-chat class="inline mr-2 text-primary" /> **Narrate the story**: talk through structure, get a detailed outline back
@@ -562,6 +609,7 @@ hideInToc: true
 - <carbon-rotate-360 class="inline mr-2 text-primary" /> **Scoped rewrites during revision**: ask the model to follow specific patterns, not to author
 
 </v-clicks>
+</div>
 
 <!--
 "LLM at the edges. You at the center." 90s.
@@ -585,16 +633,53 @@ title: Designing Docs for Real Users
 ---
 layout: center
 hideInToc: true
+transition: slide-up
 ---
 
-# Four types. One user need each.
+<div class="max-w-4xl mx-auto text-left">
+  <div class="text-3xl font-semibold mb-6">Before I show the next slide, here is the useful part.</div>
+  <div class="text-lg opacity-75 leading-relaxed">
+    Diataxis is a way of looking at docs by asking two questions at once: is the reader trying to <em>learn</em> or <em>get something done</em>, and do they need <em>action</em> or <em>understanding</em>? The map is useful because it makes mixed-up docs visible.
+  </div>
+  <div class="text-base opacity-60 leading-relaxed mt-5">
+    When a tutorial starts explaining architecture, or a reference page starts behaving like a walkthrough, the problem is often not bad prose. The problem is that one page is trying to do multiple jobs.
+  </div>
+</div>
+
+<!--
+Explain the axes in plain language, then show the map cleanly.
+-->
+
+---
+layout: center
+hideInToc: true
+transition: slide-up
+---
+
+<img
+  src="/diataxis.png"
+  alt="Diataxis map"
+  class="h-full max-h-[78vh] w-full object-contain mx-auto"
+/>
+
+<!--
+Give them a beat to read the image without talking over it.
+-->
+
+---
+layout: center
+hideInToc: true
+transition: slide-up
+---
+
+# Four types. Each serves one user need.
 
 <div class="mt-6">
 <QuadrantGrid highlight="all" />
 </div>
 
 <v-click>
-<div class="text-base mt-6 text-center opacity-70">Most projects have all four. Most projects mix them all together.</div>
+<div class="text-base mt-6 text-center opacity-70">Most projects need all four. Most projects accidentally collapse them into one page.</div>
 </v-click>
 
 <!--
@@ -606,6 +691,7 @@ Exercise: "Think of a doc in your project. Which quadrant?" 60s.
 layout: two-cols
 layoutClass: gap-16
 hideInToc: true
+transition: slide-up
 ---
 
 <QuadrantGrid highlight="tutorials" />
@@ -616,11 +702,11 @@ hideInToc: true
 
 <v-clicks>
 
-- "Don't try to teach." (the counterintuitive core)
-- Ruthlessly minimise explanation
+- "Don't try to teach." The learner should discover by doing.
+- Ruthlessly minimise explanation while the hands are moving.
 - Use "we" language: "In this tutorial, we will..."
-- Perfect reliability: it must work every single time
-- Success = capability growth, not task completion
+- Perfect reliability: it must work every single time.
+- Success = capability growth, not just finishing the page.
 
 </v-clicks>
 
@@ -632,6 +718,7 @@ hideInToc: true
 layout: two-cols
 layoutClass: gap-16
 hideInToc: true
+transition: slide-up
 ---
 
 <QuadrantGrid highlight="how-to" />
@@ -642,11 +729,11 @@ hideInToc: true
 
 <v-clicks>
 
-- "Seek flow." (Diataxis verbatim)
-- Problem-centered, not tool-centered
-- Title precisely: "How to configure X for Y"
-- Link away explanatory content, don't embed it
-- Does not need to be complete. Needs to be useful.
+- "Seek flow." Keep the user moving toward a concrete goal.
+- Problem-centered, not tool-centered.
+- Title precisely: "How to configure X for Y".
+- Link out to background material instead of embedding all of it here.
+- It does not need to be complete. It needs to unblock the task.
 
 </v-clicks>
 
@@ -658,6 +745,7 @@ hideInToc: true
 layout: two-cols
 layoutClass: gap-16
 hideInToc: true
+transition: slide-up
 ---
 
 <QuadrantGrid highlight="explanation" />
@@ -674,11 +762,11 @@ hideInToc: true
 
 <v-clicks>
 
-- "Make connections." Beyond the immediate topic.
-- Provides context: the why, design rationale, history
-- Read away from active work, no urgency to act
-- *On Food and Cooking* by Harold McGee: cooking through history and science, no recipes
-- The most underinvested quadrant in most OSS projects
+- "Make connections." Go beyond the immediate task.
+- Provide context: the why, design rationale, history.
+- Best read when the user is trying to understand, not fix something in the next 30 seconds.
+- <em>On Food and Cooking</em> is useful here as an analogy: it teaches you how a domain works without turning into a recipe book.
+- This is the most underinvested quadrant in most OSS projects.
 
 </v-clicks>
 
@@ -702,11 +790,11 @@ hideInToc: true
 
 <v-clicks>
 
-- "Describe and only describe." (Diataxis verbatim)
-- Neutral, objective, no opinions
-- Mirror the product's structure
-- Adopt standard patterns so users find what they expect
-- Examples illustrate; they don't instruct
+- "Describe and only describe."
+- Neutral, objective, no opinions.
+- Mirror the product's structure.
+- Use standard patterns so users find what they expect.
+- Examples illustrate what exists; they do not become mini-tutorials.
 
 </v-clicks>
 
@@ -794,6 +882,10 @@ hideInToc: true
 
 # Three moves. No rewrite required.
 
+<div class="text-sm opacity-75 leading-relaxed max-w-3xl mb-6">
+This is the part I want people to leave with because it makes the framework feel usable on Monday morning. You do not need a full rewrite to improve docs. You need a better way to separate jobs.
+</div>
+
 <v-clicks>
 
 - <carbon-tag class="inline mr-2 text-primary" /> <span v-mark.underline="1">**Classify**</span>: read existing docs, label each one
@@ -814,41 +906,15 @@ hideInToc: true
 -->
 
 ---
-layout: section
-title: Growing the Practice
----
-
-<div v-motion :initial="{ y: -30, opacity: 0 }" :enter="{ y: 0, opacity: 1, transition: { type: 'spring', stiffness: 80, damping: 12 } }">
-
-# Growing the Practice
-
-</div>
-
-<!--
-"Quality and structure covered. Now the harder question: how do you get better at this, consistently, without waiting for permission?"
--->
-
----
-layout: statement
-hideInToc: true
----
-
-<div v-motion :initial="{ y: 20, opacity: 0 }" :enter="{ y: 0, opacity: 1, transition: { type: 'spring', stiffness: 80, damping: 12 } }">
-
-"Technical isn't binary."
-
-<div class="text-sm mt-4 opacity-60">~ <em>Janine Chan</em>, <em>Write the Docs Portland 2025</em></div>
-
-</div>
-
-<!--
-"'I'm not technical enough to write this.'" 5 seconds of silence. "Let me show you what that actually means."
--->
-
----
 layout: default
 hideInToc: true
 ---
+
+## Growing the Practice
+
+<div class="text-sm opacity-75 max-w-3xl leading-relaxed mb-8">
+This is the part of the workshop for anyone who has ever thought: "I can follow the docs, but I don't know if I'm technical enough to write them." Janine Chan's point is that this is not an identity problem. It is a habit problem.
+</div>
 
 <div class="text-sm italic mb-6 opacity-70">Seven habits of increasingly technical technical writers</div>
 
@@ -864,7 +930,7 @@ hideInToc: true
 
 </v-clicks>
 
-<div v-click class="text-sm mt-4 opacity-50">~ <em>Janine Chan</em>, <em>Write the Docs Portland 2025</em></div>
+<div v-click class="text-sm mt-4 opacity-50">~ <em>Janine Chan</em>, <em>Write the Docs Portland 2026</em></div>
 
 <!--
 Emphasize #3: "Not 'I don't understand X' ~ that's a feeling. 'What does this parameter control?' ~ that's a question you can answer."
@@ -890,12 +956,14 @@ hideInToc: true
 
 ::right::
 
-<div v-click="5" class="mt-8">
+<v-click>
+<div class="mt-8">
   <div class="text-xl font-bold leading-snug">
     "You don't know your docs are broken until someone tries to follow them."
   </div>
   <div class="text-sm mt-4 opacity-60">~ <em>Heather Zoppetti</em>, <em>Write the Docs</em></div>
 </div>
+</v-click>
 
 <!--
 "Real-user testing is the equivalent of having an actual knitter follow your pattern." 2 min.
@@ -947,13 +1015,15 @@ hideInToc: true
 <div class="text-base mt-4 opacity-80">Every domain taught you a reader and a set of constraints. That cross-domain empathy is rare.</div>
 </v-click>
 
+<v-click>
 <div class="mt-4 border-l-2 border-primary/40 pl-4 text-sm opacity-80">
 
 Started contributing to <a href="https://github.com/marimo-team/marimo" class="underline">marimo</a>'s docs while using it for data work.
-That writing got me into their community Slack, then a booth at PyCon India, then this room.
-No TW job title at any point, just clear writing about things I cared about.
+That writing got me into their community Slack, then a booth at PyCon India, and so on...
+No TW job title at any point prior, just clear writing and an affinity for documenting things I cared about.
 
 </div>
+</v-click>
 
 <!--
 Exercise: "What's one domain you've worked in ~ before or outside TW ~ where you were already doing technical writing and didn't call it that?" 90s.
@@ -986,16 +1056,13 @@ hideInToc: true
 - Docs are infrastructure. Advocacy is what builds on top.
 - When you write clearly about a project, you become the person who shapes how others understand it.
 - That's not just a writing role. It's a community role.
+- In Wiki spaces especially, good writing does not sit next to the project. It becomes part of how the project survives handoffs, volunteers, forks, and new contributors.
 
 </v-clicks>
 
 <v-click>
-<div class="mt-6 text-base opacity-80">
-
-- At an OSS event last year, I was holding a community booth for marimo.
-  The person who invited me to give this talk was in the audience.
-  The booth was just a printed one-pager explaining what marimo does.
-
+<div class="mt-6 text-base opacity-80 leading-relaxed">
+If you stay close to the docs long enough, you stop being "the person who wrote the guide" and start becoming the person others trust to explain what the project is, why it exists, and where it should go next.
 </div>
 </v-click>
 
@@ -1022,11 +1089,11 @@ hideInToc: true
 
 ::right::
 
-<div v-click="5">
+<v-after>
 
 ### Advocacy means:
 
-</div>
+</v-after>
 
 <v-clicks at="6">
 
@@ -1051,7 +1118,7 @@ hideInToc: true
 
 <div class="mt-4 text-sm opacity-70">
 
-<em>Prashanth Rao</em> on how putting your thinking in public brings people to you. This is the same reason I was at a marimo booth when the organiser of this workshop walked past.
+<em>Prashanth Rao</em> writes about how reading closely and writing publicly changes who finds you. That has been true for me too. A lot of this started with writing about tools I cared about before I had any formal reason to.
 
 </div>
 
@@ -1064,50 +1131,122 @@ Let it sit. The point is personal and tangible.
 -->
 
 ---
+layout: two-cols
+layoutClass: gap-10
+hideInToc: true
+---
+
+# A docs problem I cared enough to write down
+
+<div class="text-sm opacity-80 leading-relaxed mt-6">
+One of the clearest signs that I genuinely like this work is that I keep ending up writing about documentation structure even when nobody asked for a slide deck.
+</div>
+
+<div class="text-sm opacity-80 leading-relaxed mt-4">
+For CocoIndex, I wrote up a larger migration proposal around how the framework docs should evolve because the information architecture itself was becoming part of the product experience.
+</div>
+
+<div class="mt-6 text-xs opacity-60">
+Reference: cocoindex-io/cocoindex issue #1553
+</div>
+
+::right::
+
+<img
+  src="/cocoindex-docs-migration.png"
+  alt="CocoIndex docs migration issue screenshot"
+  class="rounded-lg border border-primary/20 shadow-lg mt-4 max-h-80 mx-auto"
+/>
+
+<!--
+This is the "I love docs enough to file structural issues about them" slide.
+-->
+
+---
+layout: default
+hideInToc: true
+---
+
+# 15-minute group exercise
+
+<div class="text-sm opacity-80 leading-relaxed max-w-4xl mt-4">
+Take one of the wiki projects presented at this program and sketch a docs site for it using Diataxis. Use any docs SSG you like: Sphinx, Read the Docs, MkDocs, Zola, or something similar. AI tools are fair game and expected.
+</div>
+
+<div class="grid grid-cols-3 gap-5 mt-8 text-left text-sm">
+  <div class="border border-primary/30 rounded-lg p-4">
+    <div class="font-semibold mb-2">Your goal</div>
+    Get a basic docs site running quickly enough that another participant can understand the structure.
+  </div>
+  <div class="border border-primary/30 rounded-lg p-4">
+    <div class="font-semibold mb-2">What to include</div>
+    Tutorials, how-to guides, reference, explanation, plus links to any relevant project resources.
+  </div>
+  <div class="border border-primary/30 rounded-lg p-4">
+    <div class="font-semibold mb-2">What I am looking for</div>
+    Not polish. Workflow. How fast you can turn messy project knowledge into a usable docs skeleton.
+  </div>
+</div>
+
+<div class="mt-8 text-sm opacity-65">
+This is intentionally more technical than the earlier activities: I want to see what your current docs + AI workflow looks like in practice.
+</div>
+
+<!--
+Short break + activity. Re-enter with examples from the room.
+-->
+
+---
 layout: default
 hideInToc: true
 ---
 
 # How I got here
 
-<div class="grid grid-cols-4 gap-3 mt-6 text-sm">
+<div class="text-sm opacity-75 leading-relaxed max-w-4xl mt-4">
+This is the part I care about saying carefully. None of this felt linear while it was happening. It mostly felt like showing up repeatedly for projects and communities I cared about, usually through writing first, and only later realising that people had actually been paying attention.
+</div>
+
+<div class="grid grid-cols-4 gap-4 mt-8 text-sm">
 
 <v-click>
-<div class="border border-primary/30 rounded-lg p-3 text-center">
+<div class="border border-primary/30 rounded-lg p-4 text-center h-full">
   <carbon-document class="text-primary text-xl mx-auto mb-1" />
   <div class="font-semibold">Docs PRs</div>
-  <div class="text-xs opacity-60 mt-1">marimo, CocoIndex</div>
+  <div class="text-xs opacity-60 mt-1">marimo, CocoIndex, fixes I wanted for myself</div>
 </div>
 </v-click>
 
 <v-click>
-<div class="border border-primary/30 rounded-lg p-3 text-center">
+<div class="border border-primary/30 rounded-lg p-4 text-center h-full">
   <carbon-group class="text-primary text-xl mx-auto mb-1" />
   <div class="font-semibold">Community</div>
-  <div class="text-xs opacity-60 mt-1">Slack, SciPy India</div>
+  <div class="text-xs opacity-60 mt-1">conversations, Slack, SciPy India</div>
 </div>
 </v-click>
 
 <v-click>
-<div class="border border-primary/30 rounded-lg p-3 text-center">
+<div class="border border-primary/30 rounded-lg p-4 text-center h-full">
   <carbon-presentation-file class="text-primary text-xl mx-auto mb-1" />
   <div class="font-semibold">Speaking</div>
-  <div class="text-xs opacity-60 mt-1">this room</div>
+  <div class="text-xs opacity-60 mt-1">the moment someone asked me to say this out loud</div>
 </div>
 </v-click>
 
 <v-click>
-<div class="border border-primary/30 rounded-lg p-3 text-center">
+<div class="border border-primary/30 rounded-lg p-4 text-center h-full">
   <carbon-edit class="text-primary text-xl mx-auto mb-1" />
   <div class="font-semibold">TW role</div>
-  <div class="text-xs opacity-60 mt-1">Deepnote</div>
+  <div class="text-xs opacity-60 mt-1">eventually, a title caught up</div>
 </div>
 </v-click>
 
 </div>
 
 <v-click>
-<div class="mt-6 text-sm opacity-60 text-center">No TW job title at the start. Just writing clearly about things I cared about.</div>
+<div class="mt-7 text-sm opacity-65 text-center max-w-3xl mx-auto">
+No technical-writing title at the start. Just reading a lot, writing where I felt friction, and discovering that careful public thinking has a way of travelling further than you expect.
+</div>
 </v-click>
 
 <!--
@@ -1123,7 +1262,7 @@ hideInToc: true
 
 <v-clicks>
 
-- "I've already noticed that I am slowly starting to <span v-mark.underline="1">atrophy my ability</span> to write code manually." — Benjamin Breen
+- "I've already noticed that I am slowly starting to <span v-mark.underline="1">atrophy my ability</span> to write code manually." -- Benjamin Breen
 - The same risk exists for writing. If you outsource the thinking, <span v-mark.underline="2">you lose the thinking.</span>
 - Writing is not just communication. It's <span v-mark.circle="3">how you know what you know.</span>
 
@@ -1162,9 +1301,9 @@ hideInToc: true
 
 <v-clicks>
 
-- <carbon-grid class="inline mr-2 text-primary" /> **A framework**: Diataxis (classify, separate, link)
-- <carbon-text-align-left class="inline mr-2 text-primary" /> **A structure**: SWBST for any technical narrative
-- <carbon-growth class="inline mr-2 text-primary" /> **A habit**: one from the seven, starting this week
+- <carbon-grid class="inline mr-2 text-primary" /> **A way to diagnose docs**: ask what job the page is actually doing before you rewrite it.
+- <carbon-text-align-left class="inline mr-2 text-primary" /> **A way to shape technical narrative**: use SWBST when the point, friction, or consequence feels muddy.
+- <carbon-growth class="inline mr-2 text-primary" /> **A way to stay human in the loop**: keep one part of the writing process that you still do from first principles.
 
 </v-clicks>
 
