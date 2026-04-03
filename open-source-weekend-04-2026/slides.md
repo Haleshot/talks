@@ -2,14 +2,6 @@
 theme: seriph
 layout: cover
 title: Lessons from Building a Devtool Community
-event: OpenSourceWeekend Gujarat 2026
-date: 2026-04-XX
-description: Reflections on building devtool community through dogfooding, teaching artifacts, contributor recognition, and consistent small habits as a marimo ambassador.
-tags:
-  - open-source
-  - community
-  - devrel
-  - marimo
 info: |
   Conference talk for OpenSourceWeekend Gujarat 2026 on how dogfooding,
   educational artifacts, and contributor recognition shape durable OSS
@@ -48,20 +40,21 @@ hideInToc: true
 
 <EventFrame blob="none" logo="bottom-right" grid="bottom-left" />
 
-<div class=”osw-content max-w-4xl mx-auto”>
-  <div class=”text-3xl leading-relaxed font-semibold”>
-    It started with using the tool properly.
+<div class="osw-content max-w-4xl mx-auto text-center">
+  <div class="text-4xl leading-tight font-semibold max-w-3xl mx-auto">
+    I did not set out to build a community.
   </div>
 
-  <div class=”mt-6 text-2xl leading-relaxed opacity-80”>
-    Contributing where I felt friction,
-    writing what I wished existed,
-    and leaving behind something **useful**.
+  <div class="mt-6 text-xl leading-relaxed opacity-80 max-w-3xl mx-auto">
+    I was trying to use the tool well, fix the rough edges I kept running into,
+    and leave behind something <strong>useful</strong> for the next person.
   </div>
 
   <v-click>
-    <div class=”mt-8 text-base opacity-68 max-w-3xl mx-auto”>
-      The community part came later: I used the tool, made contributions, wrote teaching material, and only after that did the broader community work grow around it.
+    <div class="mt-8 text-base opacity-68 max-w-3xl mx-auto">
+      That is why this talk starts so close to product use. The community part did not begin
+      with strategy. It began with paying attention, helping where I could, and watching that
+      slowly turn into something bigger.
     </div>
   </v-click>
 </div>
@@ -167,6 +160,33 @@ title: Dogfooding as a community instinct
   <div class="mt-5 text-lg max-w-3xl mx-auto opacity-72 text-center">
     Dogfooding sharpens your judgment about what a worthwhile contribution looks like.
   </div>
+</div>
+
+---
+layout: center
+hideInToc: true
+---
+
+<EventFrame blob="none" logo="bottom-right" grid="bottom-left" />
+
+<div class="osw-content max-w-4xl mx-auto text-center">
+  <div class="text-3xl leading-relaxed font-semibold max-w-3xl mx-auto">
+    So why am I starting with my own contributions in a talk about community?
+  </div>
+
+  <div class="mt-6 text-lg leading-relaxed opacity-78 max-w-3xl mx-auto">
+    Because this is where my judgment changed. Using the tool closely made it obvious
+    what was actually helping users, what was just busywork, and what kind of
+    contributions were worth investing in.
+  </div>
+
+  <v-click>
+    <div class="mt-8 text-sm opacity-68 max-w-3xl mx-auto">
+      The widget, the snippets, the Windows fixes, even the numbers on the next slide are not
+      there as a resume. They are there to show the kind of product contact the community work
+      grew out of.
+    </div>
+  </v-click>
 </div>
 
 ---
@@ -378,7 +398,7 @@ transition: slide-up
   </ul>
 </div>
 
-<div class=”mt-8 osw-cite”>
+<div class="mt-8 osw-cite">
   Marco Gorelli, “Stop browsing good first issues” (Quansight Labs, 2026)
 </div>
 
@@ -402,7 +422,7 @@ Greg Wilson, co-founder of Software Carpentry and author of *Teaching Tech Toget
 
 <v-click>
 <div class="mt-6 osw-card-light text-sm leading-relaxed max-w-2xl">
-  <strong>Show of hands:</strong> how many of you run a community, a meetup, or maintain something open source?
+  <strong>🙌 Show of hands:</strong> how many of you run a community, a meetup, or maintain something open source?
   <div class="mt-2 opacity-72">
     You're doing it voluntarily. Nobody is paying most of you for this. The people contributing to your project are choosing to spend their time. That's the context this quote lives in.
   </div>
@@ -438,14 +458,14 @@ hideInToc: true
 
 - People I had spotlighted or helped onboard started advocating independently: writing their own tutorials, presenting at meetups, bringing the tool into their teams.
 - In OSS, your product speaks for itself. You can do genuine outreach, but nothing compares to people advocating without being asked.
-- Parul Pandey (first woman Kaggle Grandmaster in India, previously at H2O.ai and Weights & Biases) [wrote about switching to marimo](https://pandeyparul.medium.com/why-im-making-the-switch-to-marimo-notebooks-6e2218b5c98d) and now shares all her data science work through it. Nobody asked her to.
+- Parul Pandey, the first woman Kaggle Grandmaster in India, [wrote about switching to marimo](https://pandeyparul.medium.com/why-im-making-the-switch-to-marimo-notebooks-6e2218b5c98d) and now shares her data science work through it. Nobody asked her to.
 - **Trust creates advocates.** Advocates create reach you cannot manufacture.
 
 </v-clicks>
 
 </div>
 
-<div v-click="6" class="mt-8 osw-outline-card text-sm leading-relaxed max-w-2xl">
+<div v-click="5" class="mt-8 osw-outline-card text-sm leading-relaxed max-w-2xl">
   I had outreach spreadsheets too. The people who moved the needle were the ones I had been paying attention to week after week.
 </div>
 
