@@ -136,9 +136,14 @@ transition: slide-up
 />
 <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/45 pointer-events-none"></div>
 
-# "Talk is cheap. Show me the code."
-
-~ <em>Linus Torvalds</em>, August 2000
+<div class="max-w-3xl">
+  <div class="text-4xl leading-tight font-semibold">
+    "Talk is cheap. Show me the code."
+  </div>
+  <div class="mt-4 text-lg opacity-85">
+    ~ <em>Linus Torvalds</em>, August 2000
+  </div>
+</div>
 
 <div class="mt-5 text-sm max-w-2xl opacity-72 leading-relaxed">
 He wrote this on the Linux kernel mailing list while pushing back on a proposal that was still mostly talk and confidence. In that moment, "show me the code" meant: stop telling me what you think should work and show me the version that has survived implementation, constraints, and contact with reality.
