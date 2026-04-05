@@ -38,9 +38,6 @@ Writing is thinking in public.
   Srihari Thyagarajan · WikiMedia Developer Skill Development Program India 2026
 </div>
 
-<!--
-This workshop is for anyone who has spent months building something and hasn't figured out how to talk about it yet. 45s.
--->
 
 ---
 layout: center
@@ -57,9 +54,6 @@ Documentation is not packaging. It's the product.
 </div>
 </v-click>
 
-<!--
-Direct address to these specific participants. They just demoed projects. This is the hook.
--->
 
 ---
 transition: fade-out
@@ -95,9 +89,6 @@ already a role. I just hadn't learned the vocabulary for it yet.
   <img src="/srihari.png" class="rounded-full w-40 h-40 object-cover shadow-xl border-2 border-gray-600" />
 </div>
 
-<!--
-I started where you are, building things in public, writing about them, and eventually getting invited to talk about the writing. That's the arc.
--->
 
 ---
 layout: two-cols
@@ -119,12 +110,9 @@ If you have a project, a README, a wiki page, or even one annoying doc in mind, 
 
 <Toc class="mt-2 text-base leading-loose" minDepth="1" maxDepth="1" />
 
-<!--
-Set expectations and get them to keep one real doc in mind.
--->
 
 ---
-layout: quote
+layout: default
 hideInToc: true
 transition: slide-up
 ---
@@ -136,7 +124,7 @@ transition: slide-up
 />
 <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/45 pointer-events-none"></div>
 
-<div class="max-w-3xl">
+<div class="relative z-10 max-w-3xl text-white pt-18">
   <div class="text-4xl leading-tight font-semibold">
     "Talk is cheap. Show me the code."
   </div>
@@ -153,9 +141,6 @@ He wrote this on the Linux kernel mailing list while pushing back on a proposal 
 That only made sense because code was still expensive. Writing it was the proof of seriousness.
 </div>
 
-<!--
-"This was the whole deal. Effort was legible. Code was expensive. Let it sit." 30s.
--->
 
 ---
 layout: section
@@ -168,9 +153,6 @@ title: The Stakes Have Shifted
 
 </div>
 
-<!--
-Why writing is now the scarce input.
--->
 
 ---
 layout: default
@@ -220,9 +202,6 @@ The point of Kailash Nadh's inversion is not that code stopped mattering. It is 
 </div>
 </v-click>
 
-<!--
-Pause after the inversion lands. Then connect it to provenance, review, and trust.
--->
 
 ---
 layout: two-cols
@@ -258,9 +237,6 @@ hideInToc: true
 
 </div>
 
-<!--
-"The right column is not the bad news. For this room, it's the best news you'll hear today." 90s.
--->
 
 ---
 layout: default
@@ -288,9 +264,6 @@ Slop did not begin with AI. We have always had filler, SEO sludge, and content f
 </div>
 </v-click>
 
-<!--
-The point is not that bad writing is new. It is that cheap plausibility changes the scale of the mess.
--->
 
 ---
 layout: quote
@@ -307,9 +280,6 @@ This comes from <em>Costless Sacrifice</em>: an essay about what happens when ou
 </div>
 </v-click>
 
-<!--
-"The baseline has moved. Writing is now the table stake, not the differentiator. But judgment? Verification? Ownership? Those are still scarce." 30s.
--->
 
 ---
 layout: default
@@ -349,9 +319,6 @@ hideInToc: true
 </div>
 </v-click>
 
-<!--
-"We automated the cheap part. The expensive part is still yours." 60s.
--->
 
 ---
 layout: default
@@ -369,9 +336,6 @@ hideInToc: true
 
 </v-clicks>
 
-<!--
-"You're not writing for a company. You're writing for a community that will outlast any single contributor." 60s.
--->
 
 ---
 layout: default
@@ -395,10 +359,6 @@ hideInToc: true
 </div>
 </v-click>
 
-<!--
-Bridge to Part 2. "The rest of this workshop is the how."
-Exercise: "Think of the last doc you touched. Which of these three did you actually do?" 60s.
--->
 
 ---
 layout: section
@@ -411,9 +371,6 @@ title: What Writing Actually Is
 
 </div>
 
-<!--
-Not grammar. Not style guides. The actual cognitive work.
--->
 
 ---
 layout: quote
@@ -436,9 +393,6 @@ That is the part I want to protect in an AI-heavy workflow: not the romance of s
 </div>
 </v-click>
 
-<!--
-"This is the whole workshop in five words." 30s.
--->
 
 ---
 layout: two-cols
@@ -459,10 +413,6 @@ transition: slide-up
 
 <Tweet id="2004354523876438301" scale="0.55" />
 
-<!--
-Brief. Let the tweet breathe.
-The references and quotes in this workshop aren't decoration -- they're what's genuinely in my head when I'm writing. This is what my thought process looks like. We're at a WikiMedia summit; citing sources is on-brand.
--->
 
 ---
 layout: default
@@ -488,9 +438,6 @@ transition: slide-up
 <div class="text-sm mt-1 opacity-50">~ <em>Shreya Shankar</em></div>
 </v-click>
 
-<!--
-"When you read a bad doc, you feel it at the outline layer first; there's no reason to keep reading." 90s.
--->
 
 ---
 layout: quote
@@ -501,9 +448,6 @@ hideInToc: true
 
 ~ <em>Shreya Shankar</em>
 
-<!--
-"The question is not: does this sound human? The question is: does this say something?" 30s.
--->
 
 ---
 layout: two-cols
@@ -532,10 +476,6 @@ transition: slide-up
 
 </div>
 
-<!--
-Walk each. For #8: "Correct sentences that explain nothing. The hardest to spot because they pass all the checks."
-Exercise: "Pick one. Find it in something you wrote recently." 3 min.
--->
 
 ---
 layout: default
@@ -557,9 +497,6 @@ hideInToc: true
 
 </v-clicks>
 
-<!--
-"Don't throw out the tools because they're also used badly. The tool is neutral." 60s.
--->
 
 ---
 layout: default
@@ -594,10 +531,6 @@ Then       Error rate dropped to under 2%.
 
 </div>
 
-<!--
-"Any incident report. Any design doc. Any ADR. Any PR description. SWBST works."
-Exercise: "Your project. 2 minutes. Write its SWBST right now." (Speaker waits.) 3 min with exercise.
--->
 
 ---
 layout: default
@@ -616,9 +549,6 @@ hideInToc: true
 </v-clicks>
 </div>
 
-<!--
-"LLM at the edges. You at the center." 90s.
--->
 
 ---
 layout: section
@@ -631,9 +561,6 @@ title: Designing Docs for Real Users
 
 </div>
 
-<!--
-"Writing quality is one thing. Writing the right kind of doc is another. Most doc problems aren't quality problems. They're type problems."
--->
 
 ---
 layout: center
@@ -651,9 +578,6 @@ transition: slide-up
   </div>
 </div>
 
-<!--
-Explain the axes in plain language, then show the map cleanly.
--->
 
 ---
 layout: center
@@ -667,9 +591,6 @@ transition: slide-up
   class="h-full max-h-[78vh] w-full object-contain mx-auto"
 />
 
-<!--
-Give them a beat to read the image without talking over it.
--->
 
 ---
 layout: center
@@ -687,10 +608,6 @@ transition: slide-up
 <div class="text-base mt-6 text-center opacity-70">Most projects need all four. Most projects accidentally collapse them into one page.</div>
 </v-click>
 
-<!--
-"This is your diagnostic framework. We'll go through each quadrant."
-Exercise: "Think of a doc in your project. Which quadrant?" 60s.
--->
 
 ---
 layout: two-cols
@@ -715,9 +632,6 @@ transition: slide-up
 
 </v-clicks>
 
-<!--
-"The paradox: the way to teach is not to explain. Explanation distracts from doing. The learner's hands need to move." 2 min.
--->
 
 ---
 layout: two-cols
@@ -742,9 +656,6 @@ transition: slide-up
 
 </v-clicks>
 
-<!--
-"The most written type. The most confused with tutorials." 90s.
--->
 
 ---
 layout: two-cols
@@ -778,9 +689,6 @@ transition: slide-up
 
 </div>
 
-<!--
-"Architecture docs. Design rationale. ADRs. The 'why we made this decision' that lives in nobody's head but the original author. This is what gets lost." 2 min.
--->
 
 ---
 layout: two-cols
@@ -804,9 +712,6 @@ hideInToc: true
 
 </v-clicks>
 
-<!--
-"Reference is a map. It doesn't tell you where to go. It tells you what's there." 90s.
--->
 
 ---
 layout: default
@@ -847,10 +752,6 @@ hideInToc: true
 
 </div>
 
-<!--
-"Concrete. Make them look at their own projects."
-Exercise: "Name one doc in your project that's confused about its type." 90s.
--->
 
 ---
 layout: default
@@ -877,9 +778,6 @@ hideInToc: true
 </div>
 </v-click>
 
-<!--
-"When someone says 'our docs are bad,' they usually mean 'our docs are confused about what they're trying to do.'" 2 min.
--->
 
 ---
 layout: default
@@ -907,9 +805,6 @@ This is the part I want people to leave with because it makes the framework feel
 </div>
 </v-click>
 
-<!--
-"Start with labeling. The labels create clarity before you write a single new word." 90s.
--->
 
 ---
 layout: default
@@ -938,10 +833,6 @@ This is the part of the workshop for anyone who has ever thought: "I can follow 
 
 <div v-click class="text-sm mt-4 opacity-50">~ <em>Janine Chan</em>, <em>Write the Docs Portland 2026</em></div>
 
-<!--
-Emphasize #3: "Not 'I don't understand X' ~ that's a feeling. 'What does this parameter control?' ~ that's a question you can answer."
-Exercise: "Pick two. Which two start this week?" 4 min.
--->
 
 ---
 layout: two-cols
@@ -971,9 +862,6 @@ hideInToc: true
 </div>
 </v-click>
 
-<!--
-"Real-user testing is the equivalent of having an actual knitter follow your pattern." 2 min.
--->
 
 ---
 layout: default
@@ -1031,9 +919,6 @@ No TW job title at any point prior, just clear writing and an affinity for docum
 </div>
 </v-click>
 
-<!--
-Exercise: "What's one domain you've worked in ~ before or outside TW ~ where you were already doing technical writing and didn't call it that?" 90s.
--->
 
 ---
 layout: section
@@ -1046,9 +931,6 @@ title: The Natural Extension
 
 </div>
 
-<!--
-"Writing well opens a door. This is what's behind it."
--->
 
 ---
 layout: default
@@ -1072,9 +954,6 @@ If you stay close to the docs long enough, you stop being "the person who wrote 
 </div>
 </v-click>
 
-<!--
-"This is the through-line from your work here today to something larger." 60s.
--->
 
 ---
 layout: two-cols
@@ -1110,9 +989,6 @@ hideInToc: true
 
 </v-clicks>
 
-<!--
-"This is not a separate career. It's an expansion of the same skill." 90s.
--->
 
 ---
 layout: two-cols
@@ -1132,9 +1008,6 @@ hideInToc: true
 
 <Tweet id="2004028850758615548" scale="0.55" />
 
-<!--
-Let it sit. The point is personal and tangible.
--->
 
 ---
 layout: two-cols
@@ -1164,9 +1037,6 @@ Reference: cocoindex-io/cocoindex issue #1553
   class="rounded-lg border border-primary/20 shadow-lg mt-4 max-h-80 mx-auto"
 />
 
-<!--
-This is the "I love docs enough to file structural issues about them" slide.
--->
 
 ---
 layout: default
@@ -1198,9 +1068,6 @@ Take one of the wiki projects presented at this program and sketch a docs site f
 This is intentionally more technical than the earlier activities: I want to see what your current docs + AI workflow looks like in practice.
 </div>
 
-<!--
-Short break + activity. Re-enter with examples from the room.
--->
 
 ---
 layout: default
@@ -1255,9 +1122,6 @@ No technical-writing title at the start. Just reading a lot, writing where I fel
 </div>
 </v-click>
 
-<!--
-"The point: writing led to community, which led to advocacy, which led to this room. The path is non-linear but the skill is consistent."
--->
 
 ---
 layout: default
@@ -1281,9 +1145,6 @@ hideInToc: true
 </div>
 </v-click>
 
-<!--
-"The cognitive debt argument: every time you skip the draft and go straight to the output, you borrow from your future thinking capacity." 60s.
--->
 
 ---
 layout: quote
@@ -1294,9 +1155,6 @@ hideInToc: true
 
 ~ <em>Benjamin Breen</em>, <em>Res Obscura</em>
 
-<!--
-5-10 seconds of silence. "Not the output. Not the recognition. Not the career outcome. The act of thinking clearly in public." 30s.
--->
 
 ---
 layout: default
@@ -1313,9 +1171,6 @@ hideInToc: true
 
 </v-clicks>
 
-<!--
-"Six outcomes promised. Three anchors. If you do nothing else, do these three." 60s.
--->
 
 ---
 layout: end
@@ -1329,7 +1184,3 @@ Questions?
 <div class="mt-6 text-sm opacity-60">
   GitHub: @Haleshot · Twitter: @hari_leo03
 </div>
-
-<!--
-If it's quiet: "What's one doc from your project that you'll look at differently after today?"
--->
