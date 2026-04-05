@@ -125,7 +125,13 @@ transition: slide-up
 <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/45 pointer-events-none"></div>
 
 <div class="mt-5 text-sm max-w-2xl opacity-72 leading-relaxed">
-Linus Torvalds wrote, "Talk is cheap. Show me the code." He wrote this on the Linux kernel mailing list in August 2000 while pushing back on a proposal that was still mostly talk and confidence. In that moment, "show me the code" meant: stop telling me what you think should work and show me the version that has survived implementation, constraints, and contact with reality.
+  <div class="text-xl leading-tight font-semibold mb-3 text-white opacity-100">
+    "Talk is cheap. Show me the code."
+  </div>
+  <div class="mb-4 text-sm text-white opacity-85">
+    ~ <em>Linus Torvalds</em>, August 2000
+  </div>
+  He wrote this on the Linux kernel mailing list while pushing back on a proposal that was still mostly talk and confidence. In that moment, "show me the code" meant: stop telling me what you think should work and show me the version that has survived implementation, constraints, and contact with reality.
 </div>
 
 <div class="mt-4 text-sm max-w-2xl opacity-60 leading-relaxed">
