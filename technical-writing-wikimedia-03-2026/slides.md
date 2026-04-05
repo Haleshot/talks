@@ -108,7 +108,7 @@ If you have a project, a README, a wiki page, or even one annoying doc in mind, 
 
 ::right::
 
-<Toc class="mt-2 text-base leading-loose" minDepth="1" maxDepth="1" />
+<Toc class="mt-8 text-base leading-loose" minDepth="1" maxDepth="1" />
 
 
 ---
@@ -176,7 +176,7 @@ The point of Kailash Nadh's inversion is not that code stopped mattering. It is 
 
 <v-click at="6">
 <div class="mt-3 text-xs opacity-60 max-w-3xl">
-  He talks about this kind of work elsewhere too, including performance and large-scale systems conversations on Perfology. The recurring theme is the same: the valuable part is not raw output, but the thinking that makes systems legible and reviewable.
+  He has made the same point in other contexts too, including a Perfology talk on performance and large-scale systems. The recurring theme is the same: the valuable part is not raw output, but the thinking that makes systems legible and reviewable.
 </div>
 </v-click>
 
