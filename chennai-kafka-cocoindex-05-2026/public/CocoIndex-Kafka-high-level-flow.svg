@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" font-family="Inter, system-ui, -apple-system, sans-serif" role="img" aria-label="A local data/ folder of CSV files (products.csv, employees.csv) is watched live by CocoIndex, which publishes each row as a JSON message keyed by the row's primary key to a Kafka topic on StreamNative">
+  <defs>
+    <marker id="arrow-coral4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#BE5133"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="480" fill="#FBF6E8"/>
+  <text x="600" y="44" text-anchor="middle" fill="#2A121B" font-size="22" font-weight="800">
+    Live <tspan fill="#BE5133" font-style="italic">CSV → Kafka</tspan>, in ~60 lines of Python
+  </text>
+  <g transform="translate(1060,28)">
+    <rect x="0" y="0" width="80" height="28" rx="14" fill="#FBF6E8" stroke="#16A534" stroke-width="1.5"/>
+    <circle cx="16" cy="14" r="5" fill="#16A534">
+      <animate attributeName="opacity" values="1;0.25;1" dur="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="16" cy="14" r="5" fill="#16A534" opacity="0.4">
+      <animate attributeName="r" values="5;12;5" dur="1.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="48" y="19" text-anchor="middle" fill="#16A534" font-size="12" font-weight="800" letter-spacing="2">LIVE</text>
+  </g>
+  <text x="200" y="98" text-anchor="middle" fill="#532638" font-size="11" font-weight="800" letter-spacing="3">./data/</text>
+  <g transform="translate(40,114)">
+    <rect width="320" height="128" rx="10" fill="#FCF3D8" stroke="#532638" stroke-width="2"/>
+    <text x="14" y="22" fill="#532638" font-size="11" font-weight="800" letter-spacing="1">products.csv</text>
+    <line x1="0" y1="30" x2="320" y2="30" stroke="#532638" stroke-width="1" opacity="0.25"/>
+    <text x="14" y="50" fill="#2A121B" font-size="11" font-family="ui-monospace, SFMono-Regular, monospace" opacity="0.55">sku, name, price</text>
+    <text x="14" y="72" fill="#2A121B" font-size="11" font-family="ui-monospace, SFMono-Regular, monospace" font-weight="600">SKU001, Wireless Mouse, 29.99</text>
+    <text x="14" y="92" fill="#2A121B" font-size="11" font-family="ui-monospace, SFMono-Regular, monospace" font-weight="600">SKU002, Mech. Keyboard, 89.99</text>
+    <text x="14" y="112" fill="#2A121B" font-size="11" font-family="ui-monospace, SFMono-Regular, monospace" font-weight="600">SKU003, USB-C Hub, 45.00</text>
+    <rect x="6" y="80" width="308" height="16" rx="3" fill="#16A534" opacity="0">
+      <animate attributeName="opacity" values="0;0.35;0.35;0;0" keyTimes="0;0.08;0.22;0.32;1" dur="5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="306" y="92" text-anchor="end" fill="#16A534" font-size="9" font-weight="800" letter-spacing="2" opacity="0">
+      EDIT
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.08;0.22;0.32;1" dur="5s" repeatCount="indefinite"/>
+    </text>
+  </g>
+  <g transform="translate(40,258)">
+    <rect width="320" height="100" rx="10" fill="#FCF3D8" stroke="#532638" stroke-width="2"/>
+    <text x="14" y="22" fill="#532638" font-size="11" font-weight="800" letter-spacing="1">employees.csv</text>
+    <line x1="0" y1="30" x2="320" y2="30" stroke="#532638" stroke-width="1" opacity="0.25"/>
+    <text x="14" y="50" fill="#2A121B" font-size="11" font-family="ui-monospace, SFMono-Regular, monospace" opacity="0.55">emp_id, first_name, ...</text>
+    <text x="14" y="72" fill="#2A121B" font-size="11" font-family="ui-monospace, SFMono-Regular, monospace" font-weight="600">E101, Alice, Engineering</text>
+    <text x="14" y="92" fill="#2A121B" font-size="11" font-family="ui-monospace, SFMono-Regular, monospace" font-weight="600">E102, Bob, Marketing</text>
+  </g>
+  <g stroke="#BE5133" stroke-width="2.5" fill="none" marker-end="url(#arrow-coral4)">
+    <path d="M 360 180 C 410 180, 440 220, 478 232"/>
+    <path d="M 360 308 C 410 308, 440 252, 478 244"/>
+  </g>
+  <g transform="translate(480,196)">
+    <rect width="220" height="86" rx="12" fill="#2A121B"/>
+    <text x="110" y="24" text-anchor="middle" fill="#E59A63" font-size="10" font-weight="800" letter-spacing="3">LIVE WATCH · DIFF</text>
+    <text x="110" y="52" text-anchor="middle" fill="#FCF3D8" font-size="22" font-weight="800">CocoIndex</text>
+    <text x="110" y="72" text-anchor="middle" fill="#FCF3D8" font-size="10" opacity="0.78">declare_target_state(key, value)</text>
+  </g>
+  <g stroke="#BE5133" stroke-width="2.5" fill="none" marker-end="url(#arrow-coral4)">
+    <path d="M 700 239 L 798 239"/>
+  </g>
+  <g transform="translate(708,216)">
+    <rect width="84" height="22" rx="11" fill="#FBF6E8" stroke="#BE5133" stroke-width="1.5"/>
+    <text x="42" y="16" text-anchor="middle" fill="#BE5133" font-size="11" font-weight="800">JSON</text>
+  </g>
+  <text x="750" y="270" text-anchor="middle" fill="#532638" font-size="10" font-weight="700" letter-spacing="2" opacity="0.7">UPSERT · DELETE · NO-OP</text>
+  <circle r="6" fill="#16A534">
+    <animateMotion dur="2s" repeatCount="indefinite" path="M 700 239 L 790 239"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.9;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="6" fill="#16A534">
+    <animateMotion dur="2s" begin="0.7s" repeatCount="indefinite" path="M 700 239 L 790 239"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.9;1" dur="2s" begin="0.7s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="6" fill="#16A534">
+    <animateMotion dur="2s" begin="1.4s" repeatCount="indefinite" path="M 700 239 L 790 239"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.9;1" dur="2s" begin="1.4s" repeatCount="indefinite"/>
+  </circle>
+  <g transform="translate(800,114)">
+    <rect width="360" height="244" rx="12" fill="#2A121B"/>
+    <text x="180" y="26" text-anchor="middle" fill="#E59A63" font-size="10" font-weight="800" letter-spacing="3">KAFKA TOPIC · cocoindex-csv-rows</text>
+    <g transform="translate(16,42)">
+      <rect width="328" height="38" rx="6" fill="#3a1d2c"/>
+      <text x="12" y="15" fill="#E59A63" font-size="10" font-weight="800">key: SKU002</text>
+      <text x="12" y="30" fill="#FCF3D8" font-size="9" font-family="ui-monospace, SFMono-Regular, monospace">{"sku":"SKU002","name":"Mech. Keyboard",...}</text>
+      <rect width="328" height="38" rx="6" fill="#16A534" opacity="0">
+        <animate attributeName="opacity" values="0;0;0.45;0;0" keyTimes="0;0.35;0.45;0.6;1" dur="5s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <g transform="translate(16,88)">
+      <rect width="328" height="38" rx="6" fill="#3a1d2c"/>
+      <text x="12" y="15" fill="#E59A63" font-size="10" font-weight="800">key: SKU001</text>
+      <text x="12" y="30" fill="#FCF3D8" font-size="9" font-family="ui-monospace, SFMono-Regular, monospace">{"sku":"SKU001","name":"Wireless Mouse",...}</text>
+    </g>
+    <g transform="translate(16,134)">
+      <rect width="328" height="38" rx="6" fill="#3a1d2c"/>
+      <text x="12" y="15" fill="#E59A63" font-size="10" font-weight="800">key: SKU003</text>
+      <text x="12" y="30" fill="#FCF3D8" font-size="9" font-family="ui-monospace, SFMono-Regular, monospace">{"sku":"SKU003","name":"USB-C Hub",...}</text>
+    </g>
+    <g transform="translate(16,180)">
+      <rect width="328" height="38" rx="6" fill="#3a1d2c"/>
+      <text x="12" y="15" fill="#E59A63" font-size="10" font-weight="800">key: E101</text>
+      <text x="12" y="30" fill="#FCF3D8" font-size="9" font-family="ui-monospace, SFMono-Regular, monospace">{"emp_id":"E101","first_name":"Alice",...}</text>
+    </g>
+  </g>
+  <text x="600" y="448" text-anchor="middle" fill="#532638" font-size="13" font-style="italic" opacity="0.85">
+    edit a cell → 1 message · add a row → 1 message · delete a file → 1 tombstone per row
+  </text>
+</svg>

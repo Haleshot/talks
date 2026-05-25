@@ -1,0 +1,584 @@
+/*
+ * CocoIndex x Kafka meetup deck. Stitch-inspired theme overrides.
+ * Base: @slidev/theme-seriph (light mode)
+ * Palette pulled from CocoIndex's editorial-cream design system.
+ */
+
+:root {
+  --coco-cream: #FBF6E8;
+  --coco-cream-soft: #FDFCF6;
+  --coco-paper: #FCF3D8;
+  --coco-ink: #2A121B;
+  --coco-plum: #532638;
+  --coco-terracotta: #BE5133;
+  --coco-pink: #FB6A76;
+  --coco-sage: #16A534;
+  --coco-muted: #8B6E70;
+}
+
+/* ── Global background + serif/sans balance ── */
+.slidev-layout {
+  background-color: var(--coco-cream) !important;
+  color: var(--coco-ink);
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  color: var(--coco-ink) !important;
+  font-family: 'GT Sectra', 'Tiempos Headline', 'Recoleta', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.slidev-layout h1 em,
+.slidev-layout h2 em,
+.slidev-layout .accent {
+  color: var(--coco-terracotta);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.slidev-layout .accent-pink {
+  color: var(--coco-pink);
+  font-style: italic;
+}
+
+.slidev-layout .accent-sage {
+  color: var(--coco-sage);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.slidev-layout p,
+.slidev-layout li {
+  color: var(--coco-plum);
+}
+
+.slidev-layout a {
+  color: var(--coco-terracotta);
+  text-decoration: none;
+  border-bottom: 1px dashed currentColor;
+}
+
+/* ── Cover slide ── */
+.slidev-layout.cover {
+  background: linear-gradient(135deg, var(--coco-cream-soft) 30%, var(--coco-paper) 100%) !important;
+  text-align: left !important;
+  padding: 0 !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.slidev-layout.cover h1 {
+  font-size: 3.8rem;
+  line-height: 1.02;
+  margin: 0;
+  color: var(--coco-ink) !important;
+  position: relative;
+  z-index: 1;
+}
+
+.coco-cover-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 17vh 80px 0 80px;
+  max-width: 900px;
+  z-index: 1;
+}
+
+.coco-cover-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--coco-terracotta);
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(190, 81, 51, 0.3);
+  width: fit-content;
+}
+
+.coco-cover-kicker-sep {
+  opacity: 0.45;
+}
+
+.coco-cover-sub {
+  margin-top: 22px;
+  font-family: 'GT Sectra', 'Tiempos Headline', Georgia, serif;
+  font-style: italic;
+  font-size: 1.45rem;
+  line-height: 1.4;
+  color: var(--coco-plum);
+  max-width: 640px;
+}
+
+.coco-cover-presenter {
+  position: absolute;
+  bottom: 56px;
+  left: 80px;
+  z-index: 1;
+}
+
+.coco-cover-presenter-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  color: var(--coco-muted);
+}
+
+.coco-cover-presenter-name {
+  margin-top: 6px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--coco-ink);
+}
+
+.coco-cover-mark {
+  position: absolute;
+  bottom: 56px;
+  right: 60px;
+  width: 92px;
+  height: 92px;
+  border-radius: 16px;
+  opacity: 1;
+  z-index: 1;
+  box-shadow: 0 4px 16px rgba(42, 18, 27, 0.12);
+}
+
+/* ── Section divider ── */
+.slidev-layout.section {
+  background: var(--coco-cream-soft) !important;
+}
+
+.slidev-layout.section h1 {
+  color: var(--coco-plum) !important;
+  font-size: 3rem;
+}
+
+/* ── Quote layout ── */
+.slidev-layout.quote {
+  background: var(--coco-cream) !important;
+}
+
+.slidev-layout.quote blockquote {
+  border-left: 4px solid var(--coco-terracotta);
+}
+
+/* ── End slide ── */
+.slidev-layout.end {
+  background: linear-gradient(135deg, var(--coco-cream-soft) 50%, var(--coco-paper) 100%) !important;
+  color: var(--coco-ink) !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+.coco-thanks-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 48px 70px 40px 70px;
+}
+
+.coco-thanks-header {
+  flex-shrink: 0;
+}
+
+.slidev-layout.end .coco-thanks-header h1 {
+  color: var(--coco-plum) !important;
+  font-size: 3.4rem;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.coco-thanks-sub {
+  margin-top: 12px;
+  font-family: 'GT Sectra', 'Tiempos Headline', Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--coco-plum) !important;
+  max-width: 640px;
+}
+
+.coco-thanks-spacer {
+  flex: 1;
+  min-height: 12px;
+}
+
+.coco-thanks-mark {
+  position: absolute;
+  top: 44px;
+  right: 56px;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  opacity: 0.85;
+  z-index: 1;
+}
+
+.coco-thanks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  width: 100%;
+}
+
+.coco-thanks-card {
+  background: var(--coco-cream-soft);
+  border: 1px solid rgba(42, 18, 27, 0.1);
+  border-radius: 12px;
+  padding: 14px 16px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.coco-thanks-card .coco-tag-terracotta,
+.coco-thanks-card .coco-tag-sage,
+.coco-thanks-card .coco-tag-plum {
+  align-self: flex-start;
+}
+
+.coco-thanks-link {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  color: var(--coco-ink) !important;
+  letter-spacing: 0.01em;
+  word-break: break-all;
+}
+
+.coco-thanks-qr {
+  margin-top: 2px;
+  width: 92px;
+  height: 92px;
+  border: 1px solid rgba(83, 38, 56, 0.18);
+  border-radius: 8px;
+  padding: 5px;
+  background: #fff;
+  align-self: center;
+}
+
+.coco-thanks-qr img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── About me image frame ── */
+.coco-aboutme-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 56px;
+  align-items: center;
+  height: 100%;
+}
+
+.coco-aboutme-img-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.coco-aboutme-img-frame {
+  width: 220px;
+  height: 220px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--coco-cream-soft);
+  border: 1px solid rgba(42, 18, 27, 0.12);
+  box-shadow: 0 8px 24px rgba(42, 18, 27, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coco-aboutme-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.coco-aboutme-caption {
+  margin-top: 14px;
+  text-align: center;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  color: var(--coco-muted);
+  text-transform: uppercase;
+}
+
+.coco-aboutme-tagline {
+  margin-top: 6px;
+  text-align: center;
+  font-family: 'GT Sectra', Georgia, serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--coco-plum);
+  max-width: 220px;
+  line-height: 1.35;
+}
+
+/* ── Pattern row (for declare_target_state significance) ── */
+.coco-patterns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.coco-pattern-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--coco-cream-soft);
+  border: 1px solid rgba(83, 38, 56, 0.2);
+  font-size: 0.8rem;
+  color: var(--coco-plum);
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.02em;
+}
+
+.coco-pattern-chip .equals {
+  color: var(--coco-terracotta);
+  font-weight: 700;
+}
+
+/* ── Soft card ── */
+.coco-card {
+  background: var(--coco-cream-soft);
+  border: 1px solid rgba(42, 18, 27, 0.12);
+  border-radius: 14px;
+  padding: 16px 22px;
+  box-shadow: 0 1px 0 rgba(42, 18, 27, 0.04);
+}
+
+.coco-pill {
+  display: inline-block;
+  background: var(--coco-paper);
+  color: var(--coco-plum);
+  border: 1px solid rgba(83, 38, 56, 0.25);
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.78em;
+  letter-spacing: 0.04em;
+  font-family: 'Fira Code', ui-monospace, monospace;
+}
+
+.coco-pill-live {
+  background: var(--coco-cream-soft);
+  color: var(--coco-sage);
+  border-color: var(--coco-sage);
+  font-weight: 700;
+}
+
+.coco-pill-live::before {
+  content: '●';
+  margin-right: 6px;
+  color: var(--coco-sage);
+}
+
+.coco-tag-terracotta {
+  background: rgba(190, 81, 51, 0.1);
+  color: var(--coco-terracotta);
+  border: 1px solid rgba(190, 81, 51, 0.3);
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-family: 'Fira Code', ui-monospace, monospace;
+  font-size: 0.78em;
+}
+
+.coco-tag-sage {
+  background: rgba(22, 165, 52, 0.1);
+  color: var(--coco-sage);
+  border: 1px solid rgba(22, 165, 52, 0.3);
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-family: 'Fira Code', ui-monospace, monospace;
+  font-size: 0.78em;
+}
+
+.coco-tag-plum {
+  background: rgba(83, 38, 56, 0.08);
+  color: var(--coco-plum);
+  border: 1px solid rgba(83, 38, 56, 0.25);
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-family: 'Fira Code', ui-monospace, monospace;
+  font-size: 0.78em;
+}
+
+/* ── Decorative dashed flow line ── */
+.coco-dashed {
+  border-top: 1px dashed rgba(83, 38, 56, 0.35);
+  margin: 12px 0;
+}
+
+/* ── Faint corner mark ── */
+.coco-mark-tr {
+  position: absolute;
+  top: 22px;
+  right: 28px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7em;
+  letter-spacing: 0.18em;
+  color: var(--coco-muted);
+  opacity: 0.65;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.coco-mark-bl {
+  position: absolute;
+  bottom: 22px;
+  left: 28px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7em;
+  letter-spacing: 0.18em;
+  color: var(--coco-muted);
+  opacity: 0.55;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Code blocks ── */
+.slidev-layout pre,
+.slidev-layout code {
+  font-family: 'Fira Code', ui-monospace, monospace;
+}
+
+.slidev-layout pre {
+  background: var(--coco-cream-soft) !important;
+  border: 1px solid rgba(42, 18, 27, 0.1);
+  border-radius: 10px;
+}
+
+/* ── Diagram framing ── */
+.coco-diagram {
+  background: var(--coco-cream);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 1px 0 rgba(42, 18, 27, 0.05);
+}
+
+/* ── Footnote / attribution ── */
+.coco-foot {
+  font-size: 0.72em;
+  color: var(--coco-muted);
+  letter-spacing: 0.02em;
+}
+
+/* Hide Slidev's built-in "Goto..." slide list. It is easy to trigger
+   accidentally with the `g` key during rehearsal and looks like a broken TOC. */
+#slidev-goto-dialog {
+  display: none !important;
+}
+
+/* ── Persistent footer mark ── */
+.coco-footer-mark {
+  position: absolute;
+  bottom: 14px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.75;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 6px;
+}
+
+.coco-footer-text {
+  position: absolute;
+  bottom: 18px;
+  left: 28px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.62em;
+  letter-spacing: 0.16em;
+  color: var(--coco-muted);
+  opacity: 0.55;
+  z-index: 1;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+/* Don't show the persistent footer on cover/section/end. */
+.slidev-layout.cover .coco-footer-mark,
+.slidev-layout.cover .coco-footer-text,
+.slidev-layout.section .coco-footer-mark,
+.slidev-layout.section .coco-footer-text,
+.slidev-layout.end .coco-footer-mark,
+.slidev-layout.end .coco-footer-text {
+  display: none;
+}
+
+/* ── Agenda list ── */
+.coco-agenda {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px 28px;
+  align-items: baseline;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.coco-agenda .num {
+  font-family: 'GT Sectra', Georgia, serif;
+  font-size: 1.6rem;
+  color: var(--coco-terracotta);
+  letter-spacing: 0.02em;
+  padding-top: 2px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.coco-agenda .item {
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--coco-ink);
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(83, 38, 56, 0.18);
+}
+
+.coco-agenda .item .sub {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--coco-muted);
+  margin-top: 4px;
+  font-style: italic;
+  letter-spacing: 0.005em;
+}
+
+.coco-agenda > div:nth-last-child(-n+2) .item,
+.coco-agenda > div:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+/* ── CocoIndex one-liner card ── */
+.coco-explainer {
+  background: var(--coco-cream-soft);
+  border-left: 4px solid var(--coco-terracotta);
+  padding: 18px 24px;
+  border-radius: 8px;
+  font-size: 1.05em;
+  line-height: 1.55;
+  color: var(--coco-ink);
+}
+
+.coco-explainer strong {
+  color: var(--coco-plum);
+}

@@ -1,0 +1,16 @@
+{
+  "name": "claude-cocoindex-kafka-meetup",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open slides.md",
+    "build": "slidev build slides.md",
+    "export": "slidev export slides.md"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.49.0",
+    "@slidev/theme-seriph": "latest",
+    "@iconify-json/carbon": "latest",
+    "@iconify-json/simple-icons": "latest",
+    "playwright-chromium": "latest"
+  }
+}

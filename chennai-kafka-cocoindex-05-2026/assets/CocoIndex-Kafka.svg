@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" font-family="Inter, system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow-coral" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#BE5133"/>
+    </marker>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FB6A76"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="760" fill="#FBF6E8"/>
+
+  <!-- TITLE -->
+  <text x="600" y="48" text-anchor="middle" fill="#2A121B" font-size="26" font-weight="800">
+    Kafka: <tspan fill="#BE5133" font-style="italic">message in</tspan>  →  <tspan fill="#BE5133" font-style="italic">message out</tspan>
+  </text>
+  <text x="600" y="74" text-anchor="middle" fill="#532638" font-size="14" opacity="0.75">
+    structured data rides the rail. unstructured data lives in a parallel universe.
+  </text>
+
+  <!-- ===== TOP LANE: STRUCTURED — ON THE RAIL ===== -->
+  <text x="60" y="118" fill="#16A534" font-size="12" font-weight="800" letter-spacing="3">STRUCTURED  ·  ON THE RAIL</text>
+
+  <!-- structured source pills -->
+  <g font-size="14" fill="#2A121B" font-weight="600">
+    <g transform="translate(60,140)">
+      <rect width="140" height="40" rx="20" fill="#FCF3D8" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">orders</text>
+    </g>
+    <g transform="translate(60,192)">
+      <rect width="140" height="40" rx="20" fill="#FCF3D8" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">clicks</text>
+    </g>
+    <g transform="translate(60,244)">
+      <rect width="140" height="40" rx="20" fill="#FCF3D8" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">IoT telemetry</text>
+    </g>
+    <g transform="translate(60,296)">
+      <rect width="140" height="40" rx="20" fill="#FCF3D8" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">Postgres CDC</text>
+    </g>
+  </g>
+
+  <!-- clean arrows IN -->
+  <g stroke="#BE5133" stroke-width="2.5" fill="none" marker-end="url(#arrow-coral)">
+    <path d="M 200 160 C 320 160, 380 200, 458 218"/>
+    <path d="M 200 212 C 320 212, 380 224, 458 230"/>
+    <path d="M 200 264 C 320 264, 380 252, 458 244"/>
+    <path d="M 200 316 C 320 316, 380 280, 458 256"/>
+  </g>
+
+  <!-- KAFKA pipe -->
+  <g transform="translate(460,200)">
+    <rect width="280" height="80" rx="40" fill="#2A121B"/>
+    <text x="140" y="35" text-anchor="middle" fill="#E59A63" font-size="11" font-weight="700" letter-spacing="3" opacity="0.85">TOPIC LOG</text>
+    <text x="140" y="62" text-anchor="middle" fill="#FCF3D8" font-size="28" font-weight="800" letter-spacing="2">KAFKA</text>
+  </g>
+
+  <!-- clean arrows OUT -->
+  <g stroke="#BE5133" stroke-width="2.5" fill="none" marker-end="url(#arrow-coral)">
+    <path d="M 742 218 C 820 218, 880 160, 998 160"/>
+    <path d="M 742 230 C 820 230, 880 212, 998 212"/>
+    <path d="M 742 244 C 820 244, 880 264, 998 264"/>
+    <path d="M 742 256 C 820 256, 880 316, 998 316"/>
+  </g>
+
+  <!-- consumer pills -->
+  <g font-size="14" fill="#2A121B" font-weight="600">
+    <g transform="translate(1000,140)">
+      <rect width="140" height="40" rx="20" fill="#E59A63" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">Flink / ksqlDB</text>
+    </g>
+    <g transform="translate(1000,192)">
+      <rect width="140" height="40" rx="20" fill="#E59A63" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">vector store</text>
+    </g>
+    <g transform="translate(1000,244)">
+      <rect width="140" height="40" rx="20" fill="#E59A63" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">search index</text>
+    </g>
+    <g transform="translate(1000,296)">
+      <rect width="140" height="40" rx="20" fill="#E59A63" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">agent runtime</text>
+    </g>
+  </g>
+
+  <!-- ===== DIVIDER ===== -->
+  <line x1="40" y1="402" x2="1160" y2="402" stroke="#532638" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.45"/>
+  <g transform="translate(600,402)">
+    <rect x="-100" y="-12" width="200" height="24" rx="12" fill="#FBF6E8"/>
+    <text y="5" text-anchor="middle" fill="#532638" font-size="11" font-weight="800" letter-spacing="4" opacity="0.85">PARALLEL UNIVERSE</text>
+  </g>
+
+  <!-- ===== BOTTOM LANE: UNSTRUCTURED — STUCK IN THE TANGLE ===== -->
+  <text x="60" y="448" fill="#FB6A76" font-size="12" font-weight="800" letter-spacing="3">UNSTRUCTURED  ·  STUCK IN THE TANGLE</text>
+
+  <!-- unstructured source pills -->
+  <g font-size="14" fill="#2A121B" font-weight="600">
+    <g transform="translate(60,470)">
+      <rect width="140" height="40" rx="20" fill="#FCF3D8" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">meeting notes</text>
+    </g>
+    <g transform="translate(60,522)">
+      <rect width="140" height="40" rx="20" fill="#FCF3D8" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">codebase</text>
+    </g>
+    <g transform="translate(60,574)">
+      <rect width="140" height="40" rx="20" fill="#FCF3D8" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">PDFs / files</text>
+    </g>
+    <g transform="translate(60,626)">
+      <rect width="140" height="40" rx="20" fill="#FCF3D8" stroke="#532638" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle">wikis / docs</text>
+    </g>
+  </g>
+
+  <!-- broken dashed arrows into tangle -->
+  <g stroke="#FB6A76" stroke-width="2" fill="none" stroke-dasharray="7 5" marker-end="url(#arrow-pink)">
+    <path d="M 200 490 C 280 490, 320 520, 378 545"/>
+    <path d="M 200 542 C 270 542, 320 552, 378 558"/>
+    <path d="M 200 594 C 270 594, 320 580, 378 575"/>
+    <path d="M 200 646 C 270 646, 320 605, 378 590"/>
+  </g>
+
+  <!-- THE TANGLE -->
+  <g transform="translate(380,455)">
+    <rect width="460" height="200" rx="14" fill="#FB6A76" fill-opacity="0.10" stroke="#FB6A76" stroke-width="2" stroke-dasharray="8 5"/>
+    <text x="230" y="28" text-anchor="middle" fill="#FB6A76" font-size="11" font-weight="800" letter-spacing="3">VENDOR WEBHOOKS · NIGHTLY BATCH · ONE-OFF ETL</text>
+
+    <!-- chaotic chips -->
+    <g font-size="12" fill="#2A121B" font-weight="600">
+      <g transform="translate(24,50)">
+        <rect width="130" height="30" rx="15" fill="#FBF6E8" stroke="#532638" stroke-width="1.5"/>
+        <text x="65" y="20" text-anchor="middle">SaaS webhook</text>
+      </g>
+      <g transform="translate(166,50)">
+        <rect width="124" height="30" rx="15" fill="#FBF6E8" stroke="#532638" stroke-width="1.5"/>
+        <text x="62" y="20" text-anchor="middle">cron + scp</text>
+      </g>
+      <g transform="translate(302,50)">
+        <rect width="134" height="30" rx="15" fill="#FBF6E8" stroke="#532638" stroke-width="1.5"/>
+        <text x="67" y="20" text-anchor="middle">custom polling</text>
+      </g>
+      <g transform="translate(40,100)">
+        <rect width="140" height="30" rx="15" fill="#FBF6E8" stroke="#532638" stroke-width="1.5"/>
+        <text x="70" y="20" text-anchor="middle">brittle ETL script</text>
+      </g>
+      <g transform="translate(190,100)">
+        <rect width="120" height="30" rx="15" fill="#FBF6E8" stroke="#532638" stroke-width="1.5"/>
+        <text x="60" y="20" text-anchor="middle">manual export</text>
+      </g>
+      <g transform="translate(320,100)">
+        <rect width="118" height="30" rx="15" fill="#FBF6E8" stroke="#532638" stroke-width="1.5"/>
+        <text x="59" y="20" text-anchor="middle">"works on Tom's laptop"</text>
+      </g>
+    </g>
+
+    <!-- tangled spaghetti lines -->
+    <g stroke="#FB6A76" stroke-width="1.6" fill="none" opacity="0.7">
+      <path d="M 28 156 C 110 175, 220 135, 300 162 S 410 178, 444 152"/>
+      <path d="M 50 168 C 140 188, 240 152, 320 178 S 420 162, 446 175"/>
+      <path d="M 36 182 C 120 152, 200 188, 280 165 S 380 152, 440 168"/>
+    </g>
+  </g>
+
+  <!-- the BIG X -->
+  <g transform="translate(900,555)">
+    <circle r="40" fill="#FB6A76" fill-opacity="0.14" stroke="#FB6A76" stroke-width="2.5"/>
+    <path d="M -16 -16 L 16 16 M 16 -16 L -16 16" stroke="#FB6A76" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <text x="900" y="618" text-anchor="middle" fill="#532638" font-size="13" font-style="italic" font-weight="600">never reaches Kafka cleanly</text>
+
+  <!-- ghost arrow that fades trying to reach Kafka -->
+  <g stroke="#FB6A76" stroke-width="2" fill="none" stroke-dasharray="3 6" opacity="0.55">
+    <path d="M 855 555 C 920 540, 970 520, 998 500"/>
+  </g>
+
+  <!-- footer label tying both lanes -->
+  <g transform="translate(600,720)">
+    <rect x="-360" y="-22" width="720" height="40" rx="20" fill="#2A121B"/>
+    <text y="5" text-anchor="middle" fill="#FCF3D8" font-size="13" font-weight="600" letter-spacing="0.5">
+      <tspan fill="#E59A63" font-weight="800">CocoIndex</tspan> turns the bottom lane into the top lane — unstructured CDC, straight onto Kafka.
+    </text>
+  </g>
+</svg>
