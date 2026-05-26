@@ -6,15 +6,6 @@ info: |
   A Kafka target connector for the unstructured world. Talk for the Chennai Apache Kafka meetup
   hosted by Confluent. We walk through CocoIndex's new Kafka target connector via a live
   CSV-to-Kafka demo, then unpack the declare_target_state mental model that makes it work.
-event: Chennai Apache Kafka Meetup (hosted by Confluent)
-date: May 2026
-description: A look at CocoIndex's new Kafka target connector and the declare_target_state producer API, walked through a live CSV-to-Kafka demo.
-tags:
-  - Kafka
-  - CocoIndex
-  - Data Engineering
-  - Python
-draft: true
 colorSchema: light
 drawings:
   persist: false
@@ -219,8 +210,8 @@ title: The plan
 
 <div class="num">05</div>
 <div class="item">
-  Live mode in one flag
-  <span class="sub">Same code, no separate streaming path.</span>
+  Live mode, then a live run
+  <span class="sub">One flag flips batch to live. Then we watch it land on a real topic.</span>
 </div>
 
 </div>
@@ -234,7 +225,7 @@ Beat three is the pairing, why CocoIndex specifically, behind a Kafka producer, 
 
 Beat four is the demo. About 60 lines of Python that watches a folder of CSVs and publishes change events to a topic. I'll break it into three moves: producer setup, the per-file processor, and the wiring.
 
-Beat five is live mode. The same code goes from one-shot reconciliation to a continuously running pipeline with one keyword argument and one CLI flag, and I want you to see how small that diff is.
+Beat five is live mode. The same code goes from one-shot reconciliation to a continuously running pipeline with one keyword argument and one CLI flag, and then I'll tab out and run it for real: edit a CSV cell and watch a single message land on a live topic.
 
 If we're running long, the demo's the part to lean on. The framing still works even if I skip it.
 
@@ -1075,7 +1066,7 @@ Keys hash to partitions via Kafka's default partitioner. Same key, same partitio
 </div>
 
 <!--
-This is what you'd actually see if I ran the demo live. Six scenarios.
+This is the menu for the live run I'm about to do. Six scenarios, and I'll show you a couple of them for real in a second.
 
 Edit one cell. The processor runs on just that file, the delta is just that row, exactly one message hits the topic. The other rows stay silent, the other CSV stays silent.
 
@@ -1092,6 +1083,103 @@ Restart the pipeline. Nothing replays. The state store remembers every key it's 
 The footnote's for the Kafka folks: keys hash to partitions via the default partitioner, so same key, same partition. Log compaction works exactly like it does for any producer, key-based consumers behave normally. Nothing weird under the hood.
 
 Timing: 75s
+-->
+
+---
+layout: center
+title: Live demo
+---
+
+<div class="coco-demo-badge">▶ LIVE DEMO</div>
+
+# Local CSV → live watcher → <span class="accent">Kafka topic</span>
+
+<div class="mt-8 grid grid-cols-3 gap-5 max-w-5xl mx-auto text-left text-sm">
+
+<div class="coco-card">
+  <div class="coco-tag-terracotta">BROKER</div>
+  <div class="mt-3 font-mono text-xs">local-kafka · :9092</div>
+  <div class="text-xs opacity-75 mt-2">One Docker container, one topic. The thing everything lands on.</div>
+</div>
+
+<div class="coco-card">
+  <div class="coco-tag-sage">CONSUMER</div>
+  <div class="mt-3 font-mono text-xs">kafka-console-consumer</div>
+  <div class="text-xs opacity-75 mt-2">Parked at the end of the topic. Silent until a record arrives.</div>
+</div>
+
+<div class="coco-card">
+  <div class="coco-tag-plum">WATCHER</div>
+  <div class="mt-3 font-mono text-xs">cocoindex update -L</div>
+  <div class="text-xs opacity-75 mt-2">Scans once, then sits on <em>Watching for changes…</em></div>
+</div>
+
+</div>
+
+<div class="mt-8 text-sm max-w-3xl mx-auto" style="color: var(--coco-plum);">
+About as small as it gets: one broker, one topic, a few rows of CSV. I'm keeping it tiny so you can actually watch it happen. The same idea holds at any size, because I just change a file, and CocoIndex works out what's different and sends only that.
+</div>
+
+<!--
+Okay, slides down for a minute. Let me tab over to my terminal and spin this up live, it'll be quick.
+
+Quick tour of my setup so you know what you're looking at. Three terminals. The first is just Docker running a little Kafka broker on my laptop, it's called local-kafka, on port 9092. The second is a console consumer pointed at our topic. It's going to look frozen, and that's fine, it's just parked at the end of the topic waiting for something new to arrive. The third is CocoIndex in live mode, cocoindex update -L. It does one scan of the data folder when it starts, then prints "Watching for changes" and sits there.
+
+Now the fun part. I'll open products.csv, add a row, and save. Watch the CocoIndex window, it'll say it reprocessed one file. Watch the consumer, one JSON message pops out. Then I'll delete that row and you'll see the delete go through too.
+
+And keep an eye on what I'm not doing here. I'm never calling a send function, never pushing a message. I'm literally editing a file and hitting save. CocoIndex notices the change and handles the rest.
+
+If anything goes sideways with the live setup, no stress, the next slide has the exact output, so I'll just walk you through it.
+
+Timing: 150s
+-->
+
+---
+title: What just happened
+---
+
+# I didn't send a message.<br/>I <span class="accent">edited state</span>.
+
+<div class="mt-6 grid grid-cols-2 gap-6 max-w-5xl text-left text-sm">
+
+<div>
+  <div><span class="coco-tag-plum">cocoindex update -L</span></div>
+
+```text
+✅ process_csv: 1 total | 1 reprocessed
+⏳ Ready | Watching for changes...
+```
+
+  <div class="text-xs opacity-75 mt-2">One file changed, one function reran. Every other row was a no-op.</div>
+</div>
+
+<div>
+  <div><span class="coco-tag-sage">kafka-console-consumer</span></div>
+
+```json
+{"sku": "SKU999", "name": "Test Item",
+ "category": "Test", "price": "1.23"}
+```
+
+  <div class="text-xs opacity-75 mt-2">One record on the topic. The offset moved by one.</div>
+</div>
+
+</div>
+
+<div class="mt-8 coco-card max-w-3xl">
+  <div class="text-sm">I never called <code>send</code>. I edited a CSV cell. CocoIndex diffed the desired state against what it had already declared for that key, and the producer emitted the single message that changed. The unchanged rows: nothing on the wire.</div>
+</div>
+
+<!--
+Back to slides. So what did we just watch, and why am I making a big deal of it?
+
+Two windows. On the left, CocoIndex told us it reprocessed exactly one file, the one I touched. Everything else it skipped, because nothing about those rows changed. On the right, the Kafka consumer, and one message showed up. That's the row I edited.
+
+Now this line, "I didn't send a message, I edited state." Here's what I mean by it. At no point did I write code that says "send this message to Kafka." I changed what I wanted that row to look like, in the CSV, and saved. CocoIndex was already holding what it had published for that key, compared it to the new version, saw one difference, and produced one message to cover it. If I'd saved the file without actually changing anything, nothing would've gone out at all.
+
+That's the declare_target_state idea from earlier, except now you've seen it run on a real topic. Same code as the batch version, one flag to go live, and I never had to keep track of what to send.
+
+Timing: 45s
 -->
 
 ---
@@ -1140,7 +1228,7 @@ cocoindex update -L main.py
 </div>
 
 <div class="mt-10 coco-foot">
-Blog post and full source: <a href="https://github.com/cocoindex-io/cocoindex">github.com/cocoindex-io/cocoindex</a>
+Blog post and full source: <a href="https://cocoindex.io/blogs/csv-to-kafka-live/">https://cocoindex.io/blogs/csv-to-kafka-live/</a>
 </div>
 
 <!--
