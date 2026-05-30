@@ -203,15 +203,22 @@ function isUpcoming(month, year) {
 function buildTalk(folder) {
   const folderPath = join(rootDir, folder);
   const talkBasePath = `${basePath}${folder}/`;
+  const hasLockfile = existsSync(join(folderPath, 'package-lock.json'));
 
   console.log(`\n📦 Building: ${folder}`);
   console.log(`   Base path: ${talkBasePath}`);
 
   try {
-    // Install dependencies
-    execSync('npm install', {
+    // Install dependencies without downloading browsers needed only for export.
+    execSync(hasLockfile ? 'npm ci' : 'npm install', {
       cwd: folderPath,
-      stdio: 'inherit'
+      stdio: 'inherit',
+      env: {
+        ...process.env,
+        PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1',
+        npm_config_fund: 'false',
+        npm_config_audit: 'false',
+      },
     });
 
     // Build with correct base path
