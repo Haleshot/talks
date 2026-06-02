@@ -2,6 +2,15 @@
 theme: seriph
 layout: cover
 title: Lessons from Building a Devtool Community
+event: Open Source Weekend · Gandhinagar
+date: Apr 2026
+description: How dogfooding, educational artifacts, and contributor recognition shape durable OSS communities around developer tools.
+tags:
+  - Open Source
+  - Community
+  - DevTools
+  - CocoIndex
+linkedinUrl: https://www.linkedin.com/posts/srihari-thyagarajan_gave-a-talk-at-open-source-weekend-in-gandhinagar-activity-7449675382221348864-ob8z
 info: |
   Conference talk for OpenSourceWeekend Gujarat 2026 on how dogfooding,
   educational artifacts, and contributor recognition shape durable OSS

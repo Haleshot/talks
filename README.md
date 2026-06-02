@@ -31,6 +31,8 @@ These fields are supported:
 
 If they are omitted, the site falls back to the folder name, detected title, and local slide deck URL.
 
+The landing page also renders each deck's cover slide as a thumbnail (via `slidev export`) and tints each card with the deck's `themeConfig.primary` colour. Decks that can't be exported get a branded placeholder, so a cover always shows.
+
 ## Running a presentation
 
 Most presentations use [Slidev](https://sli.dev/). To run one locally:

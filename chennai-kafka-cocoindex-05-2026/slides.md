@@ -2,6 +2,15 @@
 theme: seriph
 layout: cover
 title: Declare State, Not Messages
+event: Apache Kafka Meetup · Chennai
+date: May 2026
+description: CocoIndex's new Kafka target connector for the unstructured world. A live CSV-to-Kafka demo, then the declare_target_state model behind it.
+tags:
+  - Kafka
+  - CocoIndex
+  - Streaming
+  - Connectors
+linkedinUrl: https://www.linkedin.com/posts/srihari-thyagarajan_spoke-at-the-confluents-apache-kafka-meetup-activity-7466703765769777152-dQnv
 info: |
   A Kafka target connector for the unstructured world. Talk for the Chennai Apache Kafka meetup
   hosted by Confluent. We walk through CocoIndex's new Kafka target connector via a live

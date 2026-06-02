@@ -12,6 +12,9 @@
       document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&display=swap" rel="stylesheet">
   <style>
 {{STYLES}}
   </style>
@@ -41,22 +44,36 @@
     </header>
 
     <main class="container">
-      <section class="intro">
-        <h1>Talks</h1>
-        <p class="subtitle">
+      <section class="hero">
+        <p class="kicker reveal-up">Speaking &middot; Workshops &middot; Conference decks</p>
+        <h1 class="hero-title reveal-up">Talks</h1>
+        <p class="subtitle reveal-up">
           Workshops, meetup talks, and conference decks, with links to slides and related posts when they exist.
         </p>
       </section>
 
-      <section class="talks-list" aria-label="Talks archive">
+      <section class="featured" aria-label="Latest talk">
+{{FEATURED}}
+      </section>
+
+      <section class="archive" aria-label="Talks archive">
+        <div class="archive-head reveal-up">
+          <h2 class="archive-title">Archive</h2>
+          <div class="filters" role="group" aria-label="Filter by topic">
+{{FILTERS}}
+          </div>
+        </div>
+        <div class="talks-list">
 {{TALKS}}
+        </div>
+        <p class="no-results" hidden>No talks match that topic yet.</p>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-note">
-          <a href="https://github.com/Haleshot/talks" target="_blank" rel="noopener noreferrer">Open Source ➜ CC BY 4.0 · Code MIT</a>
+          <a href="https://github.com/Haleshot/talks" target="_blank" rel="noopener noreferrer">Open Source &#10138; CC BY 4.0 &middot; Code MIT</a>
         </div>
         <div class="links">
           <a href="https://github.com/haleshot" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -74,16 +91,103 @@
     </footer>
   </div>
   <script>
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Theme toggle
     (function() {
       var button = document.getElementById('theme-toggle');
       if (!button) return;
-
       button.addEventListener('click', function() {
         var html = document.documentElement;
         var current = html.getAttribute('data-theme') || 'light';
         var next = current === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
+      });
+    })();
+
+    // Scroll reveal
+    (function() {
+      var items = document.querySelectorAll('.reveal-up');
+      if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        items.forEach(function(el) { el.classList.add('active'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      items.forEach(function(el, i) {
+        if (i < 6 && !el.style.transitionDelay) el.style.transitionDelay = (i * 60) + 'ms';
+        observer.observe(el);
+      });
+    })();
+
+    // Glow + magnetic + 3D tilt pointer effects
+    (function() {
+      if (prefersReducedMotion) return;
+      document.querySelectorAll('.glow-card').forEach(function(card) {
+        card.addEventListener('pointermove', function(e) {
+          var rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width) * 100 + '%');
+          card.style.setProperty('--mouse-y', ((e.clientY - rect.top) / rect.height) * 100 + '%');
+        });
+      });
+      document.querySelectorAll('.tilt').forEach(function(card) {
+        card.addEventListener('pointermove', function(e) {
+          if (e.pointerType === 'touch') return;
+          var rect = card.getBoundingClientRect();
+          var px = (e.clientX - rect.left) / rect.width - 0.5;
+          var py = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = 'perspective(900px) rotateX(' + (-py * 3).toFixed(2) + 'deg) rotateY(' + (px * 3).toFixed(2) + 'deg) translateY(-2px)';
+        });
+        card.addEventListener('pointerleave', function() { card.style.transform = ''; });
+      });
+      document.querySelectorAll('.magnetic-wrap').forEach(function(wrap) {
+        wrap.addEventListener('pointermove', function(e) {
+          var rect = wrap.getBoundingClientRect();
+          wrap.style.transform = 'translate(' + (e.clientX - rect.left - rect.width / 2) * 0.2 + 'px, ' + (e.clientY - rect.top - rect.height / 2) * 0.2 + 'px)';
+        });
+        wrap.addEventListener('pointerleave', function() { wrap.style.transform = ''; });
+      });
+    })();
+
+    // Topic filtering
+    (function() {
+      var chips = document.querySelectorAll('.filter-chip');
+      if (!chips.length) return;
+      var cards = document.querySelectorAll('.talks-list .talk-card');
+      var groups = document.querySelectorAll('.talks-list .year-group');
+      var featured = document.querySelector('.featured');
+      var noResults = document.querySelector('.no-results');
+
+      function apply(filter) {
+        var shown = 0;
+        // The featured highlight is a "latest" pin, so it only shows in the default view.
+        if (featured) featured.classList.toggle('is-hidden', filter !== 'all');
+        cards.forEach(function(card) {
+          var tags = (card.getAttribute('data-tags') || '').split(' ');
+          var match = filter === 'all' || tags.indexOf(filter) !== -1;
+          card.classList.toggle('is-hidden', !match);
+          if (match) shown++;
+        });
+        groups.forEach(function(group) {
+          var visible = group.querySelectorAll('.talk-card:not(.is-hidden)').length;
+          group.classList.toggle('is-hidden', visible === 0);
+        });
+        if (noResults) noResults.hidden = shown !== 0;
+      }
+
+      chips.forEach(function(chip) {
+        chip.addEventListener('click', function() {
+          chips.forEach(function(c) { c.classList.remove('is-active'); });
+          chip.classList.add('is-active');
+          apply(chip.getAttribute('data-filter'));
+        });
       });
     })();
   </script>

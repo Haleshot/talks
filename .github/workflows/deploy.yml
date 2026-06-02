@@ -29,6 +29,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      # Headless Chromium needs these to render the deck cover slides during build.
+      - name: Install Playwright system dependencies
+        run: npx --yes playwright@latest install-deps chromium
+
       - name: Build all presentations
         run: node scripts/build-all.js
         env:

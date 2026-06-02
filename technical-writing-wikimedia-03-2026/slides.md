@@ -2,6 +2,15 @@
 theme: seriph
 layout: cover
 title: Technical Writing in the Age of AI
+event: Wikimedia DSDP · India 2026
+date: Mar 2026
+description: A 90-minute workshop on writing quality in the AI era, the Diátaxis documentation framework, and community advocacy as an extension of technical writing.
+tags:
+  - Technical Writing
+  - Documentation
+  - Diátaxis
+  - AI
+linkedinUrl: https://www.linkedin.com/feed/update/urn:li:activity:7446445124877975554/
 info: |
   90-minute workshop for WikiMedia Developer Skill Development Program India 2026.
   Covers writing quality in the AI era, Diátaxis documentation architecture,
