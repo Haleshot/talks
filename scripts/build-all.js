@@ -9,6 +9,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, '..');
 const distDir = join(rootDir, 'dist');
 const basePath = process.env.BASE_PATH || '/talks/';
+const installTimeoutMs = 10 * 60 * 1000;
+const buildTimeoutMs = 5 * 60 * 1000;
+const exportTimeoutMs = 60 * 1000;
 
 // Pattern: name-name-MM-YYYY (at least 2 parts before month-year)
 const talkFolderPattern = /^.+-\d{2}-\d{4}$/;
@@ -212,13 +215,14 @@ function buildTalk(folder) {
   console.log(`   Base path: ${talkBasePath}`);
 
   try {
-    // Let playwright-chromium fetch its browser so we can export real cover slides.
-    // Decks without playwright fall back to a branded placeholder cover.
+    // Browser downloads can hang in CI; cover export falls back if no browser is available.
     execSync(hasLockfile ? 'npm ci' : 'npm install', {
       cwd: folderPath,
       stdio: 'inherit',
+      timeout: installTimeoutMs,
       env: {
         ...process.env,
+        PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1',
         npm_config_fund: 'false',
         npm_config_audit: 'false',
       },
@@ -227,7 +231,8 @@ function buildTalk(folder) {
     // Build with correct base path
     execSync(`npx slidev build --base ${talkBasePath}`, {
       cwd: folderPath,
-      stdio: 'inherit'
+      stdio: 'inherit',
+      timeout: buildTimeoutMs,
     });
 
     // Copy built files to main dist
@@ -260,6 +265,7 @@ function exportCover(folder, folderPath) {
     execSync(`npx slidev export slides.md --format png --range 1 --output ${join(tmpDir, 'c')}`, {
       cwd: folderPath,
       stdio: 'pipe',
+      timeout: exportTimeoutMs,
     });
     const rendered = join(tmpDir, 'c', '1.png');
     if (existsSync(rendered)) {
