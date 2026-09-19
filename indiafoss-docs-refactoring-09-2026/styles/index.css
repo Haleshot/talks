@@ -1,0 +1,147 @@
+/*
+ * IndiaFOSS 2026, "Refactoring documentation without breaking it".
+ * Light, print-like palette. Indigo (Material indigo, the Zensical site's primary)
+ * for links and the one thing being pointed at; a deep orange only for broken links.
+ */
+
+:root {
+  --paper: #fbfaf6;
+  --ink: #1c1f26;
+  --muted: #5b6170;
+  --rule: #d5d3cc;
+  --indigo: #3f51b5;
+  --broken: #d9480f;
+  --slidev-theme-primary: #3f51b5;
+}
+
+.slidev-layout {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+}
+
+.slidev-layout h1,
+.slidev-layout h2 {
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.slidev-layout h1 { font-size: 2rem; line-height: 1.15; }
+.slidev-layout.cover h1 { font-size: 2.7rem; line-height: 1.1; }
+.slidev-layout.section h1 { font-size: 2.4rem; }
+
+.slidev-layout a {
+  color: var(--indigo);
+  border-bottom: 1px solid rgba(63, 81, 181, 0.35);
+  text-decoration: none;
+}
+
+.slidev-layout code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.slidev-layout :not(pre) > code {
+  background: #efeee8;
+  color: var(--ink);
+  padding: 0.05em 0.3em;
+  border-radius: 2px;
+  font-size: 0.86em;
+}
+
+.slidev-layout pre {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+
+.slidev-layout blockquote {
+  border-left: 2px solid var(--indigo);
+  padding-left: 1rem;
+  color: var(--ink);
+  font-style: normal;
+}
+
+.slidev-layout table { font-size: 0.9rem; }
+.slidev-layout th { text-align: left; font-weight: 600; border-bottom: 1px solid var(--ink); }
+.slidev-layout td { border-bottom: 1px solid var(--rule); vertical-align: top; }
+
+/* Plain text helpers. No pills, no cards. */
+.muted { color: var(--muted); }
+.small { font-size: 0.85rem; line-height: 1.5; }
+.rule { border-top: 1px solid var(--rule); }
+.mono { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+.stale { color: var(--broken); text-decoration: underline wavy var(--broken); text-underline-offset: 0.2em; }
+.target { color: var(--indigo); }
+
+.dated { display: grid; grid-template-columns: 6.5rem 1fr; column-gap: 1.25rem; row-gap: 1rem; }
+.dated .when { color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; padding-top: 0.15rem; }
+
+.slidev-layout ul.tight li + li { margin-top: 0.45rem; }
+.slidev-layout ol.takeaways { padding-left: 1.4rem; }
+.slidev-layout ol.takeaways li + li { margin-top: 1rem; }
+.slidev-layout ol.takeaways li { line-height: 1.5; }
+
+.cite { color: var(--muted); font-size: 0.78rem; }
+
+/* The Slidev "go to slide" autocomplete list should sit off-screen with its input
+   (-top-20). In the 0.49 client it hangs below the input and shows as a stray list
+   on the right of every slide. Hide it until the goto dialog is actually open. */
+.fixed.-top-20 .autocomplete-list { display: none !important; }
+
+.code-sm pre, .code-sm pre code { font-size: 0.7rem !important; line-height: 1.4 !important; }
+
+/* Seriph's two-cols-header stretches the header row; pin it to its content. */
+.slidev-layout.two-cols-header {
+  grid-template-rows: max-content 1fr !important;
+  align-content: start;
+}
+.slidev-layout.two-cols-header .col-left,
+.slidev-layout.two-cols-header .col-right { padding-top: 0.5rem; }
+
+/* Seriph fades the paragraph right after a heading; opt out where it is body text. */
+.slidev-layout h1 + p.ink { opacity: 1 !important; color: var(--ink); }
+
+
+/* Slide 2: the three link-repair PRs. */
+.prlist { border-top: 1px solid var(--rule); }
+.prrow {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1.5rem;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.prrow > a { border-bottom: 0; }
+
+/* The URL check on the proposal-references slide. */
+.urlcheck > div {
+  display: grid;
+  grid-template-columns: 22rem 1fr;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.urlcheck > div:first-child { border-top: 1px solid var(--rule); }
+.urlcheck .ok { color: var(--muted); }
+.urlcheck .bad { color: var(--broken); font-family: 'JetBrains Mono', monospace; }
+
+
+/* Cover: the title, and the anchor that title would generate. */
+.cover-block { max-width: 47rem; }
+.slidev-layout.cover .cover-block h1 { margin-bottom: 0; }
+.cover-anchor {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin-top: 1.7rem !important;
+  opacity: 1 !important;
+}
+.cover-sub {
+  margin-top: 2.5rem;
+  max-width: 33rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.cover-by { margin-top: 3.5rem; font-size: 0.85rem; color: var(--ink); }
