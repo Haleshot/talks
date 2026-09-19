@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 // A screenshot frame. Without `src` it renders a labelled placeholder so a draft
 // stays review-safe. `raw` shows the image at 1:1 pixels, cropped by `pos`, which
 // is how a wide screenshot of a diff stays legible on a projector.
@@ -13,6 +15,13 @@ const props = withDefaults(
   }>(),
   { caption: '', src: '', height: '', raw: false, pos: 'left top' },
 )
+
+// `src` arrives as a prop, so Vite can't rewrite it at build time the way it
+// does a literal src="/x.png". Resolve it against the deployed base ourselves,
+// otherwise every screenshot 404s once the deck is hosted under a subpath.
+const src = computed(() =>
+  props.src ? import.meta.env.BASE_URL + props.src.replace(/^\//, '') : '',
+)
 </script>
 
 <template>
@@ -20,7 +29,7 @@ const props = withDefaults(
     <div class="shot-window">
       <img
         v-if="props.src"
-        :src="props.src"
+        :src="src"
         :alt="props.label"
         class="shot-img"
         :style="props.raw
