@@ -37,7 +37,7 @@ class: text-left
 What happens to a link when you rename the heading it points at, and why the editor should be the one to notice.
 </p>
 
-<p class="cover-by">Srihari Thyagarajan</p>
+<div class="cover-by">Srihari Thyagarajan</div>
 
 </div>
 
@@ -130,7 +130,7 @@ layout: quote
 
 # "Refactoring is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior."
 
-<p class="cite mt-3">Martin Fowler, refactoring.com</p>
+<p class="cite mt-4">~ Martin Fowler, <a href="https://refactoring.com/">refactoring.com</a></p>
 
 <v-click>
 <p class="mt-8 max-w-3xl">
@@ -139,17 +139,24 @@ Documentation has an external behaviour too, and it's a small, precise one: a re
 </v-click>
 
 <v-click>
-<p class="mt-4 max-w-3xl muted">
-Tim Berners-Lee, writing about this in 1998: "URIs don't change: people change them." Rename a heading and you've changed one, whether or not you meant to.
+<p class="mt-7 max-w-3xl">
+"URIs don't change: people change them."
+</p>
+<p class="cite mt-2">~ Tim Berners-Lee, <em>Cool URIs don't change</em>, 1998</p>
+</v-click>
+
+<v-click>
+<p class="mt-5 max-w-3xl muted">
+Rename a heading and you've changed one, whether or not you meant to.
 </p>
 </v-click>
 
 <!--
-This is the definition everyone quotes, and the part I want is the last clause: without changing its external behaviour.
+Read the Fowler line out, then stop on the last four words: without changing its external behaviour. That clause is the whole reason this slide is here, so let it sit for a second before moving on.
 
-Documentation has an external behaviour too, it's just much smaller than a program's. Someone clicks a link and ends up where it said they would. That's the contract. Renaming a heading, moving a page, splitting one page into two, all of that is meant to leave the contract alone.
+Then make it ours. Documentation has an external behaviour too, it's just much smaller than a program's. Someone clicks a link and ends up where it said they would. That's the contract, and renaming a heading, moving a page or splitting one page into two is all meant to leave it alone.
 
-The Berners-Lee line is from Cool URIs Don't Change, which is nearly thirty years old and still the clearest thing written about this. URIs don't change, people change them. When you rename a heading, you're the person changing it, because the anchor comes from the heading text. The edit and the breakage are the same keystroke.
+The Berners-Lee line is the one to land slowly, because it's short enough that people will actually remember it. URIs don't change, people change them. Pause, then turn it on the room: when you rename a heading, you're the person changing it. You don't get to opt out, because the anchor is generated from the heading text. The edit and the breakage are the same keystroke.
 -->
 
 ---
@@ -285,7 +292,7 @@ Six pages linked to source files on the <code>v1</code> branch. The branch was d
 </p>
 
 <p class="small muted mt-2">
-Found by the nightly link check, which is the only reason anyone noticed.
+Caught by the nightly lychee run I'd added to that repo a few months earlier.
 </p>
 
 <ShotSlot class="mt-3" src="/cocoindex-1959-diff.png" raw pos="-280px -290px"
@@ -297,7 +304,9 @@ Both of these shipped.
 
 Fluree on the left. mdBook rewrites your markdown links from .md to .html, except a README, which becomes index.html. So a link to getting-started/README.md is correct in the repo and dead on the published site. I found the first one by clicking it on the landing page, then built the book locally and ran a link checker, and that turned up more. The fix in that diff is linking to the directory instead.
 
-CocoIndex on the right, and I like this one because nobody made a mistake in the docs at all. Six pages linked to source files on the v1 branch. That branch was deleted after its work landed on main. The markdown never changed. The thing underneath it did, and the nightly check is the only reason we found out.
+CocoIndex on the right, and I like this one because nobody made a mistake in the docs at all. Six pages linked to source files on the v1 branch. That branch was deleted after its work landed on main. The markdown never changed. The thing underneath it did.
+
+The reason I spotted it is the nightly cron in the lychee workflow I'd added to that repo months earlier, which is the third PR from the opening slide. If anyone asks: that run reported the broken links but still exited green, because the workflow only treats one specific exit code as a failure, so it never opened the issue it was supposed to. The net was there. It just had a hole in it.
 -->
 
 ---
@@ -306,7 +315,7 @@ CocoIndex on the right, and I like this one because nobody made a mistake in the
 
 <table class="mt-8 w-full">
 <thead>
-<tr><th class="w-1/2 pb-2">Renaming a function in an IDE</th><th class="pb-2">Renaming a heading in a Markdown editor</th></tr>
+<tr><th class="w-1/2 pb-2">Renaming a function in an IDE</th><th class="pb-2">Renaming a heading in a vanilla Markdown editor</th></tr>
 </thead>
 <tbody>
 <tr><td class="py-3 pr-6">Find references, before you touch anything</td><td class="py-3"><code>grep</code>, and hope everyone spelt it the same way</td></tr>
@@ -317,7 +326,7 @@ CocoIndex on the right, and I like this one because nobody made a mistake in the
 
 <v-click>
 <p class="mt-10 max-w-3xl">
-None of this is new. The Language Server Protocol made "rename" and "find references" something any editor could ask a server for, back in 2016, and Padmashree's talk in this devroom makes the case for bringing that to DocC. The protocol has been sitting there for a decade. What Markdown never got was anyone deciding that a heading is a symbol worth tracking.
+None of this is new. The Language Server Protocol made "rename" and "find references" something any editor could ask a server for, back in 2016, and Padmashree's talk makes the case for bringing that to DocC. The protocol has been sitting there for a decade. What Markdown never got was anyone deciding that a heading is a symbol worth tracking.
 </p>
 </v-click>
 
@@ -326,7 +335,7 @@ Nothing in the left column is exotic. It's been in every serious IDE for twenty 
 
 Same edit on the right, same class of risk, and we just live with it.
 
-And the left column isn't even IDE-specific any more. Since 2016 the Language Server Protocol has made rename and find-references something any editor can ask a server about, which is why you get them in VS Code and in Neovim and everywhere else. Padmashree's talk in this devroom makes that case for DocC. So the protocol has been there for a decade. What Markdown never got was anyone deciding a heading is a symbol worth tracking.
+And the left column isn't even IDE-specific any more. Since 2016 the Language Server Protocol has made rename and find-references something any editor can ask a server about, which is why you get them in VS Code and in Neovim and everywhere else. Padmashree's talk makes that case for DocC. So the protocol has been there for a decade. What Markdown never got was anyone deciding a heading is a symbol worth tracking.
 -->
 
 ---
@@ -354,10 +363,6 @@ layoutClass: gap-10
   label="Find All References on a heading"
   caption="A heading, and the pages that depend on it" />
 
-<p v-click="4" class="small muted mt-6">
-Editor integrations live in <a href="https://github.com/zensical/studio">zensical/studio</a> under MIT. The free edition stays free; project-wide refactoring needs Studio Pro from 5 November.
-</p>
-
 <!--
 So what does it look like when the editor does understand your project?
 
@@ -365,7 +370,7 @@ This is Zensical Studio, from the Material for MkDocs people. The reason it can 
 
 Three things. It underlines a bad link while you're typing it, and their docs have a good phrase for why that matters: instead of waiting for a QA process to flag it. It'll show you every use of a heading, which is the find-references I was asking for a minute ago. And rename carries the links with it.
 
-One practical note if you go and install it. The integrations are on GitHub under MIT, the free edition stays free, and project-wide refactoring becomes a Pro feature from the fifth of November.
+Keep this in your back pocket in case someone asks, since we're at a FOSS conference. The editor integrations are on GitHub under MIT, but Studio itself is under its own EULA rather than an open licence. The free edition stays free, and project-wide refactoring becomes a Pro feature from the fifth of November.
 -->
 
 ---
@@ -424,7 +429,7 @@ class: code-sm
 ```
 
 <p class="small">
-The shape of the one in <a href="https://github.com/cocoindex-io/cocoindex/pull/1425">cocoindex#1425</a> (I'll happily push <a href="https://lychee.cli.rs/">lychee</a> on anyone who'll listen). It doesn't prevent the break. It shortens the window where something's broken and nobody knows.
+The shape of the one in <a href="https://github.com/cocoindex-io/cocoindex/pull/1425">cocoindex#1425</a> (I recommend <a href="https://lychee.cli.rs/">lychee</a> to anyone who'll listen). It doesn't prevent the break. It shortens the window where something's broken and nobody knows.
 </p>
 
 </div>
@@ -436,7 +441,7 @@ An editor can only reason about the project that's open in front of it. Headings
 
 The right column stays CI's job. Your editor can't know that a URL on someone else's site died last week. It can't know that a branch on GitHub got deleted, which is exactly what happened to us. And the links coming into your docs from other people's blog posts and READMEs, you can't fix those from your side at all. Keeping your URLs stable is the only thing protecting them, and redirects when you can't.
 
-The snippet is the shape of what I put into CocoIndex. lychee, on docs pull requests and once a night, opening an issue if the nightly run finds something. About forty lines, and I'll recommend it to anyone who stands still long enough.
+The snippet is the shape of what I put into CocoIndex. lychee, on docs pull requests and once a night, opening an issue if the nightly run finds something. About forty lines, and I recommend it to anyone maintaining docs.
 -->
 
 ---
@@ -486,11 +491,11 @@ layout: center
 </div>
 
 <p class="mt-10 small">
-Three of us run this devroom, and we're trying to get a Write the Docs India chapter going. Grab whichever one of us you find first.
+Three of us run this devroom, and we're working on getting a Write the Docs India chapter off the ground. Come and talk to any of us if you'd like to be part of it.
 </p>
 
 <!--
 That's me, and the three PRs are linked on the slides if you want to see what the fixes actually looked like.
 
-The last line is the real ask. Three of us run this devroom and we're trying to get a Write the Docs chapter going here, so come and talk to whichever one of us you find first.
+The last line is the real ask. Three of us run this devroom, and we're working on getting a Write the Docs chapter off the ground here. If that's something you want to be part of, any of us are around for the rest of the day.
 -->
