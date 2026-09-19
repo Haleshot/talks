@@ -1,0 +1,17 @@
+{
+  "name": "indiafoss-docs-refactoring-09-2026",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.49.0",
+    "@slidev/theme-seriph": "latest",
+    "@iconify-json/carbon": "latest"
+  },
+  "devDependencies": {
+    "playwright-chromium": "latest"
+  }
+}
