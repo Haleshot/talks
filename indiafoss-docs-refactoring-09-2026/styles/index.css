@@ -144,4 +144,4 @@
   line-height: 1.65;
   color: var(--muted);
 }
-.cover-by { margin-top: 3.5rem; font-size: 0.85rem; color: var(--ink); }
+.cover-by { position: absolute; left: 3.5rem; bottom: 2.6rem; font-size: 0.85rem; color: var(--ink); }
