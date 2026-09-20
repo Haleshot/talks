@@ -125,15 +125,19 @@ The last line is the one I care about. A few of us are trying to get a Write the
 -->
 
 ---
-layout: quote
+layout: default
 ---
 
-# "Refactoring is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior."
+# The definition I'm borrowing
 
-<p class="cite mt-4">~ Martin Fowler, <a href="https://refactoring.com/">refactoring.com</a></p>
+<blockquote class="bigquote mt-7 max-w-4xl">
+"Refactoring is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior."
+</blockquote>
+
+<p class="cite mt-3">~ Martin Fowler, <a href="https://refactoring.com/">refactoring.com</a></p>
 
 <v-click>
-<p class="mt-8 max-w-3xl">
+<p class="mt-7 max-w-3xl">
 Documentation has an external behaviour too, and it's a small, precise one: a reader clicks a link and lands where it points. Rename a heading, move a page, split a topic, and that behaviour is supposed to survive.
 </p>
 </v-click>
@@ -169,15 +173,23 @@ layoutClass: gap-10
 ::left::
 
 <p class="small mt-1">
-The <a href="https://www.writethedocs.org/guide/docs-as-code/">Write the Docs guide</a> defines docs-as-code as "writing documentation with the same tools as code", and then lists them: issue trackers, version control, plain-text markup, code reviews, automated tests.
+The <a href="https://www.writethedocs.org/guide/docs-as-code/">Write the Docs guide</a> defines it as "writing documentation with the same tools as code", and lists them:
 </p>
 
-<p class="small mt-4">
-Look at what's on that list. Everything <em>around</em> the file got the upgrade. The file itself stayed plain text, and so did the thing you edit it in.
+<ul class="tight small mt-3">
+  <li>Issue trackers</li>
+  <li>Version control</li>
+  <li>Plain-text markup</li>
+  <li>Code reviews</li>
+  <li>Automated tests</li>
+</ul>
+
+<p class="small mt-5">
+Everything <em>around</em> the file got the upgrade. The file, and the thing you edit it in, did not.
 </p>
 
 <v-click>
-<p class="small mt-6">
+<p class="small mt-5">
 An IDE knows a function has six call sites. A Markdown editor has no idea a heading has <span v-mark.underline="{ at: 1, color: '#d9480f' }">six incoming links</span>.
 </p>
 </v-click>
@@ -189,9 +201,13 @@ An IDE knows a function has six call sites. A Markdown editor has no idea a head
 <pre class="mt-3 small" style="padding: 0.9rem 1rem; white-space: pre-wrap;">See the <span class="target">[setup guide](guide/setup.md#getting-started)</span>
 for the full steps.</pre>
 
-<p class="small mt-3 muted">
-A string. It doesn't resolve <code>guide/setup.md</code> to a file on disk, and it doesn't resolve <code>#getting-started</code> to a heading inside that file. The first thing in your whole toolchain that resolves either one is the site build.
-</p>
+<p class="small mt-3">A string, and nothing more.</p>
+
+<ul class="tight small mt-2 muted">
+  <li><code>guide/setup.md</code> is never resolved to a file on disk</li>
+  <li><code>#getting-started</code> is never matched to a heading inside it</li>
+  <li>The first thing that resolves either one is the site build</li>
+</ul>
 
 <!--
 Docs-as-code won, and I'm glad it did. Our docs live in Git, they go through review, they build in CI, they ship versioned.
@@ -202,11 +218,13 @@ On the right is what your editor sees when you write a link. It's a string. It d
 -->
 
 ---
-layout: two-cols
+layout: two-cols-header
 layoutClass: gap-8
 ---
 
 # Rename a heading. The link doesn't follow.
+
+::left::
 
 ````md magic-move
 ```md
@@ -246,7 +264,7 @@ Three pages point at the old anchor. Nothing in the diff says so, because the di
 
 ::right::
 
-<div class="h-full flex items-center">
+<div class="h-full flex items-center pt-2">
   <LinkGraph :step="$clicks" />
 </div>
 
@@ -325,9 +343,11 @@ The reason I spotted it is the nightly cron in the lychee workflow I'd added to 
 </table>
 
 <v-click>
-<p class="mt-10 max-w-3xl">
-None of this is new. The Language Server Protocol made "rename" and "find references" something any editor could ask a server for, back in 2016, and Padmashree's talk makes the case for bringing that to DocC. The protocol has been sitting there for a decade. What Markdown never got was anyone deciding that a heading is a symbol worth tracking.
-</p>
+<ul class="tight mt-10 max-w-3xl">
+  <li>None of this is new. The Language Server Protocol gave every editor "rename" and "find references" back in 2016.</li>
+  <li>Padmashree's talk makes the case for bringing that to DocC.</li>
+  <li>What Markdown never got was anyone deciding a heading is a symbol worth tracking.</li>
+</ul>
 </v-click>
 
 <!--
@@ -374,12 +394,16 @@ Keep this in your back pocket in case someone asks, since we're at a FOSS confer
 -->
 
 ---
-layout: center
----
 
-<div class="flex flex-col items-center">
-  <img src="/studio_bulk_repair_links.webp" alt="Zensical Studio listing every broken link after three files were moved, then repairing them" class="max-h-[400px] max-w-full border border-[#d5d3cc]" />
-  <p class="small muted mt-3 max-w-3xl text-center">Three files moved. Every link that pointed at them, listed and then repaired.<br><span class="cite">Recording from zensical.org/studio</span></p>
+# The same repair, inside the editor
+
+<p class="small mt-1 max-w-3xl">
+Three files moved. Every link that pointed at them, listed in the Problems panel and repaired in one action.
+</p>
+
+<div class="flex flex-col items-center mt-5">
+  <img src="/studio_bulk_repair_links.webp" alt="Zensical Studio listing every broken link after three files were moved, then repairing them" class="max-h-[330px] max-w-full border border-[#d5d3cc]" />
+  <p class="cite mt-2">Recording from zensical.org/studio</p>
 </div>
 
 <!--
@@ -452,9 +476,14 @@ The snippet is the shape of what I put into CocoIndex. lychee, on docs pull requ
 
 <v-clicks>
 
-<li>Treat structural edits as refactors. Renaming a heading, moving a page, splitting a topic: the thing that can break is a link, and the person who finds out is a reader.</li>
-<li>Put a link checker in your docs CI (lychee's GitHub action, if you want a specific one). It won't catch anything before you push, but nothing else is catching it at all.</li>
-<li>Ask more of your editor. Diagnostics while you type, find-references on a heading, and a rename that carries the links with it. If your toolchain can't do that yet, it's a reasonable thing to go and ask for.</li>
+<li><strong>Structural edits are refactors.</strong>
+<div class="sub">Rename a heading, move a page, split a topic. What breaks is a link, and a reader finds it before you do.</div></li>
+
+<li><strong>Put a link checker in your docs CI.</strong>
+<div class="sub">lychee's GitHub action, if you want a specific one. It catches nothing before you push, but nothing else catches it at all.</div></li>
+
+<li><strong>Ask more of your editor.</strong>
+<div class="sub">Diagnostics as you type, find-references on a heading, a rename that carries the links with it. If your toolchain can't, go and ask for it.</div></li>
 
 </v-clicks>
 
