@@ -145,3 +145,19 @@
   color: var(--muted);
 }
 .cover-by { position: absolute; left: 3.5rem; bottom: 2.6rem; font-size: 0.85rem; color: var(--ink); }
+
+/* A quote that is the slide's content but not its heading. */
+.bigquote {
+  background: none !important;
+  font-size: 1.55rem;
+  line-height: 1.32;
+  border-left: 2px solid var(--indigo);
+  padding-left: 1.2rem;
+  margin: 0;
+  color: var(--ink);
+  font-style: normal;
+}
+
+/* Takeaways: the claim on one line, the detail under it. */
+.takeaways li strong { font-weight: 600; }
+.takeaways .sub { font-size: 0.85rem; line-height: 1.5; color: var(--muted); margin-top: 0.3rem; }
