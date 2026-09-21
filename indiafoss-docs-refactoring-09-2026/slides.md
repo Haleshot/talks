@@ -276,6 +276,8 @@ I rename a heading. Getting started becomes Quickstart, because Quickstart is a 
 The anchor is generated from the heading text, so renaming the heading renamed the anchor. And those three pages on the right are still pointing at the old one. My diff is one line in setup.md. Nothing in it mentions index, faq or tutorial, so there's nothing for a reviewer to catch either.
 
 If the page had moved as well, those are 404s. If it only got renamed, it's quieter and honestly worse: the reader lands at the top of a long page and has to go hunting for the thing you promised them.
+
+(Optional, if the room is warm: xkcd 1172, "every change breaks someone's workflow". Somebody out there bookmarked that anchor. Cut this if you're running long.)
 -->
 
 ---
@@ -331,7 +333,11 @@ The reason I spotted it is the nightly cron in the lychee workflow I'd added to 
 
 # The same rename, in two editors
 
-<table class="mt-8 w-full">
+<p class="small mt-1 max-w-3xl">
+The left column is not aspirational. It is what every code editor has done for twenty years, for every language anyone takes seriously.
+</p>
+
+<table class="mt-6 w-full">
 <thead>
 <tr><th class="w-1/2 pb-2">Renaming a function in an IDE</th><th class="pb-2">Renaming a heading in a vanilla Markdown editor</th></tr>
 </thead>
@@ -346,7 +352,7 @@ The reason I spotted it is the nightly cron in the lychee workflow I'd added to 
 <ul class="tight mt-10 max-w-3xl">
   <li>None of this is new. The Language Server Protocol gave every editor "rename" and "find references" back in 2016.</li>
   <li>Padmashree's talk makes the case for bringing that to DocC.</li>
-  <li>What Markdown never got was anyone deciding a heading is a symbol worth tracking.</li>
+  <li>Markdown got one in 2022, and it has stayed remarkably obscure ever since.</li>
 </ul>
 </v-click>
 
@@ -355,7 +361,9 @@ Nothing in the left column is exotic. It's been in every serious IDE for twenty 
 
 Same edit on the right, same class of risk, and we just live with it.
 
-And the left column isn't even IDE-specific any more. Since 2016 the Language Server Protocol has made rename and find-references something any editor can ask a server about, which is why you get them in VS Code and in Neovim and everywhere else. Padmashree's talk makes that case for DocC. So the protocol has been there for a decade. What Markdown never got was anyone deciding a heading is a symbol worth tracking.
+And the left column isn't even IDE-specific any more. Since 2016 the Language Server Protocol has made rename and find-references something any editor can ask a server about, which is why you get them in VS Code and in Neovim and everywhere else. Padmashree's talk makes that case for DocC. So the protocol has been there for a decade, and Markdown did get a server of its own in 2022. It just never made any noise.
+
+Worth being honest about how I know: I had this talk built around a proprietary tool, and somebody sent me the FOSS one after reading the abstract. Which is roughly how the whole ecosystem works.
 -->
 
 ---
@@ -363,80 +371,87 @@ layout: two-cols-header
 layoutClass: gap-10
 ---
 
-# An editor that knows what a heading is
+# Marksman
 
 <p class="small ink">
-<a href="https://zensical.org/studio/">Zensical Studio</a> is a VS Code extension from the people who make Material for MkDocs. It reads Python Markdown and your project config the way MkDocs does, so it knows which anchor a heading is going to produce. I'm using it because it's the one that exists today, not because you need this particular one.
+An LSP server for Markdown. MIT licensed, one self-contained binary, and it speaks to whatever you already edit in: VS Code, Neovim, Helix, Emacs, Vim, Sublime, Kakoune.
 </p>
 
 ::left::
 
 <ul class="tight small mt-2">
-  <li v-click="1">A link to a file or anchor that doesn't exist gets underlined as you type, and listed in the Problems panel, "instead of waiting for a QA process to flag it".</li>
-  <li v-click="2">Find every use of a heading, so you know what depends on it <em>before</em> you rename it.</li>
-  <li v-click="3">Rename a heading, or move a file, and the incoming links are updated with it.</li>
+  <li v-click="1">Find references on a heading, with a code lens showing how many there are, so you know what depends on it before you touch it.</li>
+  <li v-click="2">Rename that heading and the incoming links follow, anchors included.</li>
+  <li v-click="3">Diagnostics for links pointing at a file that isn't there.</li>
+  <li v-click="4">Completion, hover and go-to-definition, for inline, reference and wiki links alike.</li>
 </ul>
 
 ::right::
 
-<ShotSlot class="mt-2" src="/zensical_inspect_references.png"
-  label="Find All References on a heading"
-  caption="A heading, and the pages that depend on it" />
+<div v-click="2" class="h-[250px] flex items-center">
+  <LinkGraph fixed />
+</div>
+
+<p v-click="2" class="small muted mt-1">
+The same three files from earlier. Marksman changed them as part of the rename, in one edit.
+</p>
 
 <!--
-So what does it look like when the editor does understand your project?
+So what does it look like when an editor does understand the project?
 
-This is Zensical Studio, from the Material for MkDocs people. The reason it can do any of this is the boring part: it parses Python Markdown and reads your mkdocs.yml, so it knows which anchor a given heading is going to generate. That's exactly the bit my editor was missing.
+This is Marksman. It's an LSP server for Markdown, it's MIT, it's one binary you drop on your path, and because it's a language server it works in basically anything. That last part matters in this room more than it would anywhere else.
 
-Three things. It underlines a bad link while you're typing it, and their docs have a good phrase for why that matters: instead of waiting for a QA process to flag it. It'll show you every use of a heading, which is the find-references I was asking for a minute ago. And rename carries the links with it.
+Three things. It finds every reference to a heading and puts the count above it, so you can see what depends on something before you break it. It renames, and the links come along. And it warns you about links to files that don't exist.
 
-Keep this in your back pocket in case someone asks, since we're at a FOSS conference. The editor integrations are on GitHub under MIT, but Studio itself is under its own EULA rather than an open licence. The free edition stays free, and project-wide refactoring becomes a Pro feature from the fifth of November.
+The diagram on the right is the one from earlier, after the rename. Same three files, except now they point at the heading that actually exists. I ran this against a real workspace rather than drawing it hopefully: the server rewrites the heading and all three anchors in a single edit.
+
+One gotcha the docs are clear about but everybody hits anyway: Marksman needs a project root, which means a .git directory or a .marksman.toml file. Without one it drops to single-file mode and none of the cross-file work happens.
 -->
 
 ---
 
-# The same repair, inside the editor
+# The same rename, in an actual editor
 
 <p class="small mt-1 max-w-3xl">
-Three files moved. Every link that pointed at them, listed in the Problems panel and repaired in one action.
+The links in the other two files update as part of the same rename, without anyone opening them.
 </p>
 
-<div class="flex flex-col items-center mt-5">
-  <img src="/studio_bulk_repair_links.webp" alt="Zensical Studio listing every broken link after three files were moved, then repairing them" class="max-h-[330px] max-w-full border border-[#d5d3cc]" />
-  <p class="cite mt-2">Recording from zensical.org/studio</p>
+<div class="flex flex-col items-center mt-4">
+  <img src="/marksman-rename.gif" alt="Marksman renaming a heading in Neovim, with the links to it updating across files" class="max-h-[335px] max-w-full border border-[#d5d3cc]" />
+  <p class="cite mt-2">Recording from the Marksman repo, MIT like the rest of it</p>
 </div>
 
 <!--
-This is the CocoIndex situation, caught in the editor instead of by a nightly job.
+Same thing in a real editor rather than a protocol dump. It's Neovim because it's their recording, but this is a language server, so it looks much the same wherever you run it.
 
-Three files get moved. Everything that pointed at them is now wrong, and instead of finding that out tomorrow morning in an issue, it's sitting in the Problems panel with a fix attached.
+Two renames here. The first is the document title, top left, and when it lands the wiki links in the other two panes follow. The second is further in: a reference link label on line 91, and its definition down at line 99 changes with it.
 
-That afternoon I spent on the v1 branch PR is this.
+Both times the point is the same. You edit one thing, and the things that depended on it keep up. Nobody goes looking.
 -->
 
 ---
 class: code-sm
 ---
 
-# What an editor can see, and what it can't
+# What it catches, and what it doesn't
 
 <div class="grid grid-cols-2 gap-10 mt-7">
 
 <div>
-<p class="small muted">Inside your project</p>
+<p class="small muted">Marksman catches</p>
 <ul class="tight small mt-2">
-  <li>Headings, anchors and files it can resolve</li>
-  <li>Links that broke because you just moved something</li>
-  <li>All of it while you type, before the commit</li>
+  <li>A link to a file that isn't there</li>
+  <li>Everything that depends on a heading, before you rename it</li>
+  <li>The rename itself, anchors and all</li>
 </ul>
 </div>
 
 <div>
-<p class="small muted">Outside it, still CI's job</p>
+<p class="small muted">It still doesn't</p>
 <ul class="tight small mt-2">
-  <li>Every external URL you link to</li>
-  <li>A branch someone deleted on GitHub, which is #1959 exactly</li>
-  <li>Other people's links <em>into</em> your docs. Only stable URLs and redirects protect those.</li>
+  <li>Flag an inline link to a heading that's gone. Wiki links get the warning; inline ones are still waiting on someone to write it</li>
+  <li>Follow a file when you move it, which is both of the 404s from earlier. The paid editors do this today, which is most of what you're paying them for</li>
+  <li>Say anything about images or alt text (markdownlint will, pointed at the same folder)</li>
 </ul>
 </div>
 
@@ -453,19 +468,21 @@ class: code-sm
 ```
 
 <p class="small">
-The shape of the one in <a href="https://github.com/cocoindex-io/cocoindex/pull/1425">cocoindex#1425</a> (I recommend <a href="https://lychee.cli.rs/">lychee</a> to anyone who'll listen). It doesn't prevent the break. It shortens the window where something's broken and nobody knows.
+Which is why <a href="https://github.com/cocoindex-io/cocoindex/pull/1425">cocoindex#1425</a> stays. <a href="https://lychee.cli.rs/">lychee</a> walks the tree and checks every target it finds, including the ones no editor can see.
 </p>
 
 </div>
 
 <!--
-Where the line sits.
+Here's the honest boundary, and I went and tested this rather than reading a feature table.
 
-An editor can only reason about the project that's open in front of it. Headings, anchors, files, anything it can resolve on disk. That's a big chunk of the problem and it's the chunk that's invisible to us right now.
+The left column works today. The right column is where it runs out, and the first one is almost funny: an inline link to a heading that no longer exists is the exact failure this whole talk is about, and it's the one thing Marksman stays quiet about. Wiki links get flagged, inline ones don't. There's an open issue if anyone in here fancies a weekend.
 
-The right column stays CI's job. Your editor can't know that a URL on someone else's site died last week. It can't know that a branch on GitHub got deleted, which is exactly what happened to us. And the links coming into your docs from other people's blog posts and READMEs, you can't fix those from your side at all. Keeping your URLs stable is the only thing protecting them, and redirects when you can't.
+The second one matters more for the PRs I showed you. Move or rename a file and links to it stay where they were, which is both of my 404s. This is the part the commercial editors have and the free ones don't, so if it's the thing standing between you and sane docs, that's where the money goes.
 
-The snippet is the shape of what I put into CocoIndex. lychee, on docs pull requests and once a night, opening an issue if the nightly run finds something. About forty lines, and I recommend it to anyone maintaining docs.
+lychee stays in CI regardless. Nothing in your editor is ever going to know that somebody deleted a branch on GitHub.
+
+And lychee stays in CI regardless, because nothing in your editor will ever know that a branch on GitHub got deleted.
 -->
 
 ---
@@ -483,7 +500,10 @@ The snippet is the shape of what I put into CocoIndex. lychee, on docs pull requ
 <div class="sub">lychee's GitHub action, if you want a specific one. It catches nothing before you push, but nothing else catches it at all.</div></li>
 
 <li><strong>Ask more of your editor.</strong>
-<div class="sub">Diagnostics as you type, find-references on a heading, a rename that carries the links with it. If your toolchain can't, go and ask for it.</div></li>
+<div class="sub">Diagnostics while you type, find-references on a heading, a rename that carries the links with it. If your editor and your site generator can't manage it between them, that's worth raising with whoever maintains either.</div></li>
+
+<li><strong>Links are just the easiest one to show you.</strong>
+<div class="sub">Moving an image breaks a path the same way. So does renaming a concept across the prose, and nothing offers you rename-symbol for words. markdownlint and Vale cover some of it. Most of it nobody has built yet.</div></li>
 
 </v-clicks>
 
@@ -496,7 +516,9 @@ The first is a way of thinking. If you're renaming a heading or reorganising a s
 
 The second is the one you can do this afternoon. A link checker in CI is one file.
 
-The third is the one I actually want. Ask your tooling to understand your project. Diagnostics as you type, find references on a heading, rename that takes the links with it. Some of this exists today, most of it doesn't, and the more of us who ask for it, the faster that changes.
+Three is the one you can act on this afternoon. If you want the specific recommendation, it's Marksman, it's MIT, and the only trap is that it needs a .git or a .marksman.toml at the project root or it silently does nothing. But the point is the capability, not that particular binary.
+
+Four is the one I want you to leave with. Links are the part I can demo in ten minutes, but they're not the whole problem. Move an image and you've broken a path in exactly the same way. Rename a concept across your docs and you're doing a rename refactor with find-and-replace, because nobody offers you rename-symbol for prose. markdownlint will catch a missing alt text, Vale will hold you to a term once you've picked it. Most of the rest doesn't exist yet, and it won't until enough of us go and ask for it.
 -->
 
 ---
@@ -520,11 +542,11 @@ layout: center
 </div>
 
 <p class="mt-10 small">
-Three of us run this devroom, and we're working on getting a Write the Docs India chapter off the ground. Come and talk to any of us if you'd like to be part of it.
+Write the Docs India is starting to move again, and this devroom is part of that. If you'd like a hand in it (a talk, a venue, or just showing up), come and say hello to me or either of the other two devroom managers.
 </p>
 
 <!--
 That's me, and the three PRs are linked on the slides if you want to see what the fixes actually looked like.
 
-The last line is the real ask. Three of us run this devroom, and we're working on getting a Write the Docs chapter off the ground here. If that's something you want to be part of, any of us are around for the rest of the day.
+The last line is the real ask. The chapter is only just getting going again, so there is a lot of room and not much competition. Say hello to me or to either of the other two of us running the devroom, any time today.
 -->
