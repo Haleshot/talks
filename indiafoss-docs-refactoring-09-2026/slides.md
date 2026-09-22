@@ -39,7 +39,6 @@ What happens to a link when you rename the heading it points at, and why the edi
 
 <div class="cover-by">
   <div class="cover-by-name">Srihari Thyagarajan</div>
-  <div class="cover-by-role">Technical Writer at Deepnote</div>
 </div>
 
 </div>
@@ -339,7 +338,7 @@ class: code-sm
 
 ::left::
 
-<p class="small"><strong>Fluree DB</strong>, built with mdBook. <a href="https://github.com/fluree/db/pull/1376" class="cite">fluree/db#1376</a></p>
+<p class="small"><strong>Fluree DB</strong>, built with mdBook.</p>
 
 <p class="small mt-2">
 mdBook rewrites <code>.md</code> links to <code>.html</code>, but publishes a <code>README.md</code> as <code>index.html</code>. Correct in the repo, dead on the site. The fix is to link to the directory.
@@ -354,11 +353,11 @@ Found by clicking it. Building the book locally and running a checker turned up 
 + [CLI reference](cli/)
 ```
 
-<p class="cite mt-1">One of eleven lines on that landing page</p>
+<p class="cite mt-1"><a href="https://github.com/fluree/db/pull/1376">One of eleven lines on that landing page</a></p>
 
 ::right::
 
-<p class="small"><strong>CocoIndex</strong>, links into GitHub. <a href="https://github.com/cocoindex-io/cocoindex/pull/1959" class="cite">cocoindex#1959</a></p>
+<p class="small"><strong>CocoIndex</strong>, links into GitHub.</p>
 
 <p class="small mt-2">
 Six pages linked to source files on the <code>v1</code> branch. The branch was deleted once that work became <code>main</code>. Nobody edited the docs; the thing they pointed at stopped existing.
@@ -373,7 +372,7 @@ Caught by the nightly lychee run I'd added to that repo a few months earlier.
 + .../cocoindex/blob/main/python/.../_target.py
 ```
 
-<p class="cite mt-1">The same edit, six files deep</p>
+<p class="cite mt-1"><a href="https://github.com/cocoindex-io/cocoindex/pull/1959">The same edit, six files deep</a></p>
 
 <!--
 Both of these shipped.
@@ -612,7 +611,7 @@ There is no Marksman for this. Somebody should write one.
 </ol>
 
 <p v-click class="mt-9 max-w-3xl">
-And a question back, because some of you are running things I've never heard of: what do you use for this? I'd love to hear about it afterwards.
+And a question back, because some of you are running things I've never heard of: what do you use for this? I'd love to hear about it afterwards!!
 </p>
 
 <!--
