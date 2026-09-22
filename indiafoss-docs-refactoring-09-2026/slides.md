@@ -164,6 +164,52 @@ The Berners-Lee line is the one to land slowly, because it's short enough that p
 -->
 
 ---
+layout: two-cols
+layoutClass: gap-10
+---
+
+# It has a name, and a literature
+
+<p class="ink small mt-6">
+"Link rot is the phenomenon of hyperlinks tending over time to cease to point to their originally targeted file, web page, or server."
+</p>
+
+<p class="cite mt-2">~ Wikipedia, which would know</p>
+
+<p class="small mt-6">
+Pew went back in 2023 and checked a sample of pages that existed in 2013. More than a third of them had simply gone.
+</p>
+
+<p class="small mt-4">
+It is not only other people's websites, either. Over half of all Wikipedia articles now carry at least one reference pointing at something that no longer exists.
+</p>
+
+<p class="cite mt-4">Pew Research Center, May 2024</p>
+
+::right::
+
+<div class="h-full flex flex-col justify-center">
+
+<LinkRot />
+
+<p class="small mt-5 max-w-xs">
+A hundred pages that were live in 2013. The orange ones were gone by 2023.
+</p>
+
+</div>
+
+<!--
+This is the part where I zoom out for fifteen seconds, because otherwise you could reasonably think this is a problem with my three pull requests rather than a problem with the web.
+
+Link rot is the actual term, it has been studied since the nineties, and the numbers are worse than anyone expects. Pew took a sample of pages that existed in 2013, went back ten years later, and thirty-eight per cent of them were gone. That's the grid.
+
+The line I find hardest to ignore is the Wikipedia one. More than half of all Wikipedia articles have at least one dead link in their references. That is the single most maintained body of writing on the internet, and the citations still rot.
+
+So when I say a renamed heading breaks links, I am describing the small, local, entirely preventable end of something much larger.
+-->
+
+
+---
 layout: two-cols-header
 layoutClass: gap-10
 ---
@@ -283,6 +329,7 @@ If the page had moved as well, those are 404s. If it only got renamed, it's quie
 ---
 layout: two-cols-header
 layoutClass: gap-8
+class: code-sm
 ---
 
 # Two of the 404s, and what moved underneath them
@@ -299,9 +346,12 @@ mdBook rewrites <code>.md</code> links to <code>.html</code>, but publishes a <c
 Found by clicking it. Building the book locally and running a checker turned up the rest.
 </p>
 
-<ShotSlot class="mt-3" src="/fluree-1376-diff.png" raw pos="-336px -58px"
-  label="The Fluree DB docs landing page diff" height="11rem"
-  caption="README.md links replaced with directory links, across the docs landing page" />
+```diff
+- [CLI reference](cli/README.md)
++ [CLI reference](cli/)
+```
+
+<p class="cite mt-1">One of eleven lines on that landing page</p>
 
 ::right::
 
@@ -315,9 +365,12 @@ Six pages linked to source files on the <code>v1</code> branch. The branch was d
 Caught by the nightly lychee run I'd added to that repo a few months earlier.
 </p>
 
-<ShotSlot class="mt-3" src="/cocoindex-1959-diff.png" raw pos="-280px -290px"
-  label="The CocoIndex v1 link repair diff" height="11rem"
-  caption="blob/v1 and tree/v1 rewritten to main, six files" />
+```diff
+- .../cocoindex/blob/v1/python/.../_target.py
++ .../cocoindex/blob/main/python/.../_target.py
+```
+
+<p class="cite mt-1">The same edit, six files deep</p>
 
 <!--
 Both of these shipped.
@@ -450,7 +503,7 @@ class: code-sm
 <p class="small muted">It still doesn't</p>
 <ul class="tight small mt-2">
   <li>Flag an inline link to a heading that's gone. Wiki links get the warning; inline ones are still waiting on someone to write it</li>
-  <li>Follow a file when you move it, which is both of the 404s from earlier. The paid editors do this today, which is most of what you're paying them for</li>
+  <li>Follow a file when you move it, which is both of the 404s from earlier. <a href="https://zensical.org/studio/">Zensical Studio</a> does this today, though the refactoring half is paid and not open source</li>
   <li>Say anything about images or alt text (markdownlint will, pointed at the same folder)</li>
 </ul>
 </div>
@@ -486,6 +539,55 @@ And lychee stays in CI regardless, because nothing in your editor will ever know
 -->
 
 ---
+class: code-sm
+---
+
+# One that has nothing to do with links
+
+<p class="small mt-1 max-w-3xl">
+You rename a concept. Not a heading, not a file: the word itself, the one your product calls a thing.
+</p>
+
+<div class="grid grid-cols-[0.95fr_1.05fr] gap-10 mt-6 items-start">
+
+<div>
+
+```diff
+- the workspace settings
++ the project settings
+```
+
+<p class="small mt-3">
+Find and replace gets you most of the way, and then leaves you the plural, the possessive, the one inside a code sample, and the one in an image's alt text.
+</p>
+
+</div>
+
+<div>
+
+<p class="small">
+This is a rename refactor with none of the tooling. No editor offers you rename-symbol for prose, because prose has no symbols.
+</p>
+
+<p class="small mt-4">
+<a href="https://github.com/vale-cli/vale">Vale</a> is the closest thing, and it works the other way round: you tell it which word won, and it holds you to that everywhere, forever. MIT, and there's a language server for it too.
+</p>
+
+</div>
+
+</div>
+
+<!--
+I promised you this wasn't only about links, so here's the one I hit most often, and it's fifteen seconds.
+
+You rename a concept. Workspace becomes project. It's the same refactor: something got renamed and everything referring to it should follow. Except now there's nothing to follow, because prose has no symbols. Find and replace gets you the easy ones and leaves you the plurals, the possessives, the one buried in a code sample, the one in alt text that nobody will ever read but a screen reader.
+
+Vale is the nearest thing to help, and notice it solves the opposite half of the problem: it can't do the rename for you, but once you've decided which word won, it will not let you drift back. That's still worth a lot.
+
+There is no Marksman for this. Somebody should write one.
+-->
+
+---
 
 # If you maintain docs for a project
 
@@ -502,12 +604,13 @@ And lychee stays in CI regardless, because nothing in your editor will ever know
 <li><strong>Ask more of your editor.</strong>
 <div class="sub">Diagnostics while you type, find-references on a heading, a rename that carries the links with it. If your editor and your site generator can't manage it between them, that's worth raising with whoever maintains either.</div></li>
 
-<li><strong>Links are just the easiest one to show you.</strong>
-<div class="sub">Moving an image breaks a path the same way. So does renaming a concept across the prose, and nothing offers you rename-symbol for words. markdownlint and Vale cover some of it. Most of it nobody has built yet.</div></li>
-
 </v-clicks>
 
 </ol>
+
+<p v-click class="mt-9 max-w-3xl">
+And a question I would genuinely like answered: what are you using? Anything open that does this well, I want to hear about it.
+</p>
 
 <!--
 Three things.
@@ -518,7 +621,7 @@ The second is the one you can do this afternoon. A link checker in CI is one fil
 
 Three is the one you can act on this afternoon. If you want the specific recommendation, it's Marksman, it's MIT, and the only trap is that it needs a .git or a .marksman.toml at the project root or it silently does nothing. But the point is the capability, not that particular binary.
 
-Four is the one I want you to leave with. Links are the part I can demo in ten minutes, but they're not the whole problem. Move an image and you've broken a path in exactly the same way. Rename a concept across your docs and you're doing a rename refactor with find-and-replace, because nobody offers you rename-symbol for prose. markdownlint will catch a missing alt text, Vale will hold you to a term once you've picked it. Most of the rest doesn't exist yet, and it won't until enough of us go and ask for it.
+And then hand the room the question, because half of you are running something I've never heard of. That's the bit I want out of the Q&A.
 -->
 
 ---
