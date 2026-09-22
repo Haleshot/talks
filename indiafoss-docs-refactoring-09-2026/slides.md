@@ -158,11 +158,13 @@ Rename a heading and you've changed one, whether or not you meant to.
 </v-click>
 
 <!--
-Read the Fowler line out, then stop on the last four words: without changing its external behaviour. That clause is the whole reason this slide is here, so let it sit for a second before moving on.
+This is Martin Fowler's definition of refactoring, and it's the last four words I care about: without changing its external behaviour.
 
-Then make it ours. Documentation has an external behaviour too, it's just much smaller than a program's. Someone clicks a link and ends up where it said they would. That's the contract, and renaming a heading, moving a page or splitting one page into two is all meant to leave it alone.
+Documentation has an external behaviour too, it's just much smaller than a program's. Someone clicks a link and ends up where it said they would. That's the contract, and renaming a heading, moving a page or splitting one page into two is all meant to leave it alone.
 
-The Berners-Lee line is the one to land slowly, because it's short enough that people will actually remember it. URIs don't change, people change them. Pause, then turn it on the room: when you rename a heading, you're the person changing it. You don't get to opt out, because the anchor is generated from the heading text. The edit and the breakage are the same keystroke.
+The second one is Tim Berners-Lee, nearly thirty years ago. URIs don't change; people change them.
+
+And when you rename a heading, you are the person changing it. You don't really get a say, because the anchor is generated from the heading text. The edit and the breakage are the same keystroke.
 -->
 
 ---
@@ -201,7 +203,7 @@ A hundred pages that were live in 2013. The orange ones were gone by 2023.
 </div>
 
 <!--
-This is the part where I zoom out for fifteen seconds, because otherwise you could reasonably think this is a problem with my three pull requests rather than a problem with the web.
+You'd be forgiven for thinking this is a problem with my three pull requests rather than a problem with the web. It isn't.
 
 Link rot is the actual term, it has been studied since the nineties, and the numbers are worse than anyone expects. Pew took a sample of pages that existed in 2013, went back ten years later, and thirty-eight per cent of them were gone. That's the grid.
 
@@ -325,7 +327,7 @@ The anchor is generated from the heading text, so renaming the heading renamed t
 
 If the page had moved as well, those are 404s. If it only got renamed, it's quieter and honestly worse: the reader lands at the top of a long page and has to go hunting for the thing you promised them.
 
-(Optional, if the room is warm: xkcd 1172, "every change breaks someone's workflow". Somebody out there bookmarked that anchor. Cut this if you're running long.)
+There's an xkcd for this, 1172, where every change breaks someone's workflow. Somebody out there bookmarked that anchor, and you will never meet them.
 -->
 
 ---
@@ -477,7 +479,7 @@ The links in the other two files update as part of the same rename, without anyo
 </div>
 
 <!--
-Same thing in a real editor rather than a protocol dump. It's Neovim because it's their recording, but this is a language server, so it looks much the same wherever you run it.
+Here it is in a real editor. It's Neovim because it's their recording, but this is a language server, so it looks much the same wherever you run it.
 
 Two renames here. The first is the document title, top left, and when it lands the wiki links in the other two panes follow. The second is further in: a reference link label on line 91, and its definition down at line 99 changes with it.
 
@@ -535,9 +537,7 @@ The left column works today. The right column is where it runs out, and the firs
 
 The second one matters more for the PRs I showed you. Move or rename a file and links to it stay where they were, which is both of my 404s. This is the part the commercial editors have and the free ones don't, so if it's the thing standing between you and sane docs, that's where the money goes.
 
-lychee stays in CI regardless. Nothing in your editor is ever going to know that somebody deleted a branch on GitHub.
-
-And lychee stays in CI regardless, because nothing in your editor will ever know that a branch on GitHub got deleted.
+And lychee stays in CI regardless, because nothing in your editor is ever going to know that somebody deleted a branch on GitHub.
 -->
 
 ---
@@ -580,7 +580,7 @@ This is a rename refactor with none of the tooling. No editor offers you rename-
 </div>
 
 <!--
-I promised you this wasn't only about links, so here's the one I hit most often, and it's fifteen seconds.
+I promised you this wasn't only about links, so here's the one I hit most often.
 
 You rename a concept. Workspace becomes project. It's the same refactor: something got renamed and everything referring to it should follow. Except now there's nothing to follow, because prose has no symbols. Find and replace gets you the easy ones and leaves you the plurals, the possessives, the one buried in a code sample, the one in alt text that nobody will ever read but a screen reader.
 
@@ -619,11 +619,11 @@ Three things.
 
 The first is a way of thinking. If you're renaming a heading or reorganising a section, you're refactoring, and the thing that can break is a link. Give it the care you'd give a rename in code.
 
-The second is the one you can do this afternoon. A link checker in CI is one file.
+The second is the one you can do this afternoon. A link checker in CI is one file, and every docs repo should have one.
 
-Three is the one you can act on this afternoon. If you want the specific recommendation, it's Marksman, it's MIT, and the only trap is that it needs a .git or a .marksman.toml at the project root or it silently does nothing. But the point is the capability, not that particular binary.
+The third is the one I actually want. If you'd like the specific recommendation it's Marksman, it's MIT, and the only trap is that it needs a .git or a .marksman.toml at the project root or it quietly does nothing. But the point is the capability, not that particular binary.
 
-Then hand the room the question. Some of them are running something none of us have heard of, and that's the bit I'd actually like out of the Q&A.
+And then the question, which I mean seriously. Some of you are running something none of us have heard of, and I would rather spend the Q&A hearing about that than answering me.
 -->
 
 ---
