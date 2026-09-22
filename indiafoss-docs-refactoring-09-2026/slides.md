@@ -37,7 +37,9 @@ class: text-left
 What happens to a link when you rename the heading it points at, and why the editor should be the one to notice.
 </p>
 
-<div class="cover-by">Srihari Thyagarajan</div>
+<div class="cover-by">
+  <div class="cover-by-name">Srihari Thyagarajan</div>
+</div>
 
 </div>
 
@@ -104,7 +106,7 @@ layoutClass: gap-10
 # About me
 
 <ul class="tight mt-8 leading-relaxed">
-  <li>Technical writer at <a href="https://deepnote.com">Deepnote</a>. I did docs and education work at <a href="https://marimo.io">marimo</a> before that.</li>
+  <li>Technical writer at <a href="https://deepnote.com">Deepnote</a>. Docs, education and developer advocacy at <a href="https://marimo.io">marimo</a> before that.</li>
   <li>Most of my open-source work is documentation, mainly on marimo and <a href="https://github.com/cocoindex-io/cocoindex">CocoIndex</a>, plus whatever broken page I end up on.</li>
   <li>Co-organizer of <a href="https://scipy-india.github.io/">SciPy India</a>, and I ran community booths at PyCon India and IndiaFOSS last year.</li>
   <li>One of the people trying to get a <a href="https://www.writethedocs.org/">Write the Docs</a> India chapter going. This devroom is part of that.</li>
@@ -156,12 +158,60 @@ Rename a heading and you've changed one, whether or not you meant to.
 </v-click>
 
 <!--
-Read the Fowler line out, then stop on the last four words: without changing its external behaviour. That clause is the whole reason this slide is here, so let it sit for a second before moving on.
+This is Martin Fowler's definition of refactoring, and it's the last four words I care about: without changing its external behaviour.
 
-Then make it ours. Documentation has an external behaviour too, it's just much smaller than a program's. Someone clicks a link and ends up where it said they would. That's the contract, and renaming a heading, moving a page or splitting one page into two is all meant to leave it alone.
+Documentation has an external behaviour too, it's just much smaller than a program's. Someone clicks a link and ends up where it said they would. That's the contract, and renaming a heading, moving a page or splitting one page into two is all meant to leave it alone.
 
-The Berners-Lee line is the one to land slowly, because it's short enough that people will actually remember it. URIs don't change, people change them. Pause, then turn it on the room: when you rename a heading, you're the person changing it. You don't get to opt out, because the anchor is generated from the heading text. The edit and the breakage are the same keystroke.
+The second one is Tim Berners-Lee, nearly thirty years ago. URIs don't change; people change them.
+
+And when you rename a heading, you are the person changing it. You don't really get a say, because the anchor is generated from the heading text. The edit and the breakage are the same keystroke.
 -->
+
+---
+layout: two-cols
+layoutClass: gap-10
+---
+
+# It has a name, and a literature
+
+<p class="ink small mt-6">
+"Link rot is the phenomenon of hyperlinks tending over time to cease to point to their originally targeted file, web page, or server."
+</p>
+
+<p class="cite mt-2">~ Wikipedia, which would know</p>
+
+<p class="small mt-6">
+Pew went back in 2023 and checked a sample of pages that existed in 2013. More than a third of them were gone.
+</p>
+
+<p class="small mt-4">
+It is not only other people's websites, either. Over half of all Wikipedia articles now carry at least one reference pointing at something that no longer exists.
+</p>
+
+<p class="cite mt-4">Pew Research Center, May 2024</p>
+
+::right::
+
+<div class="h-full flex flex-col justify-center">
+
+<LinkRot />
+
+<p class="small mt-5 max-w-xs">
+A hundred pages that were live in 2013. The orange ones were gone by 2023.
+</p>
+
+</div>
+
+<!--
+You'd be forgiven for thinking this is a problem with my three pull requests rather than a problem with the web. It isn't.
+
+Link rot is the actual term, it has been studied since the nineties, and the numbers are worse than anyone expects. Pew took a sample of pages that existed in 2013, went back ten years later, and thirty-eight per cent of them were gone. That's the grid.
+
+The line I find hardest to ignore is the Wikipedia one. More than half of all Wikipedia articles have at least one dead link in their references. That is the single most maintained body of writing on the internet, and the citations still rot.
+
+So when I say a renamed heading breaks links, I am describing the small, local, entirely preventable end of something much larger.
+-->
+
 
 ---
 layout: two-cols-header
@@ -277,19 +327,20 @@ The anchor is generated from the heading text, so renaming the heading renamed t
 
 If the page had moved as well, those are 404s. If it only got renamed, it's quieter and honestly worse: the reader lands at the top of a long page and has to go hunting for the thing you promised them.
 
-(Optional, if the room is warm: xkcd 1172, "every change breaks someone's workflow". Somebody out there bookmarked that anchor. Cut this if you're running long.)
+There's an xkcd for this, 1172, where every change breaks someone's workflow. Somebody out there bookmarked that anchor, and you will never meet them.
 -->
 
 ---
 layout: two-cols-header
 layoutClass: gap-8
+class: code-sm
 ---
 
 # Two of the 404s, and what moved underneath them
 
 ::left::
 
-<p class="small"><strong>Fluree DB</strong>, built with mdBook. <a href="https://github.com/fluree/db/pull/1376" class="cite">fluree/db#1376</a></p>
+<p class="small"><strong>Fluree DB</strong>, built with mdBook.</p>
 
 <p class="small mt-2">
 mdBook rewrites <code>.md</code> links to <code>.html</code>, but publishes a <code>README.md</code> as <code>index.html</code>. Correct in the repo, dead on the site. The fix is to link to the directory.
@@ -299,13 +350,16 @@ mdBook rewrites <code>.md</code> links to <code>.html</code>, but publishes a <c
 Found by clicking it. Building the book locally and running a checker turned up the rest.
 </p>
 
-<ShotSlot class="mt-3" src="/fluree-1376-diff.png" raw pos="-336px -58px"
-  label="The Fluree DB docs landing page diff" height="11rem"
-  caption="README.md links replaced with directory links, across the docs landing page" />
+```diff
+- [CLI reference](cli/README.md)
++ [CLI reference](cli/)
+```
+
+<p class="cite mt-1"><a href="https://github.com/fluree/db/pull/1376">One of eleven lines on that landing page</a></p>
 
 ::right::
 
-<p class="small"><strong>CocoIndex</strong>, links into GitHub. <a href="https://github.com/cocoindex-io/cocoindex/pull/1959" class="cite">cocoindex#1959</a></p>
+<p class="small"><strong>CocoIndex</strong>, links into GitHub.</p>
 
 <p class="small mt-2">
 Six pages linked to source files on the <code>v1</code> branch. The branch was deleted once that work became <code>main</code>. Nobody edited the docs; the thing they pointed at stopped existing.
@@ -315,9 +369,12 @@ Six pages linked to source files on the <code>v1</code> branch. The branch was d
 Caught by the nightly lychee run I'd added to that repo a few months earlier.
 </p>
 
-<ShotSlot class="mt-3" src="/cocoindex-1959-diff.png" raw pos="-280px -290px"
-  label="The CocoIndex v1 link repair diff" height="11rem"
-  caption="blob/v1 and tree/v1 rewritten to main, six files" />
+```diff
+- .../cocoindex/blob/v1/python/.../_target.py
++ .../cocoindex/blob/main/python/.../_target.py
+```
+
+<p class="cite mt-1"><a href="https://github.com/cocoindex-io/cocoindex/pull/1959">The same edit, six files deep</a></p>
 
 <!--
 Both of these shipped.
@@ -374,7 +431,7 @@ layoutClass: gap-10
 # Marksman
 
 <p class="small ink">
-An LSP server for Markdown. MIT licensed, one self-contained binary, and it speaks to whatever you already edit in: VS Code, Neovim, Helix, Emacs, Vim, Sublime, Kakoune.
+An LSP server for Markdown. MIT licensed, one self-contained binary, and it plugs into whatever you already edit in: VS Code, Neovim, Helix, Emacs, Vim, Sublime, Kakoune.
 </p>
 
 ::left::
@@ -418,11 +475,11 @@ The links in the other two files update as part of the same rename, without anyo
 
 <div class="flex flex-col items-center mt-4">
   <img src="/marksman-rename.gif" alt="Marksman renaming a heading in Neovim, with the links to it updating across files" class="max-h-[335px] max-w-full border border-[#d5d3cc]" />
-  <p class="cite mt-2">Recording from the Marksman repo, MIT like the rest of it</p>
+  <p class="cite mt-2">From the Marksman repo</p>
 </div>
 
 <!--
-Same thing in a real editor rather than a protocol dump. It's Neovim because it's their recording, but this is a language server, so it looks much the same wherever you run it.
+Here it is in a real editor. It's Neovim because it's their recording, but this is a language server, so it looks much the same wherever you run it.
 
 Two renames here. The first is the document title, top left, and when it lands the wiki links in the other two panes follow. The second is further in: a reference link label on line 91, and its definition down at line 99 changes with it.
 
@@ -450,7 +507,7 @@ class: code-sm
 <p class="small muted">It still doesn't</p>
 <ul class="tight small mt-2">
   <li>Flag an inline link to a heading that's gone. Wiki links get the warning; inline ones are still waiting on someone to write it</li>
-  <li>Follow a file when you move it, which is both of the 404s from earlier. The paid editors do this today, which is most of what you're paying them for</li>
+  <li>Follow a file when you move it, which is both of the 404s from earlier. <a href="https://zensical.org/studio/">Zensical Studio</a> does this today (though the refactoring half is paid, and not open source)</li>
   <li>Say anything about images or alt text (markdownlint will, pointed at the same folder)</li>
 </ul>
 </div>
@@ -480,9 +537,56 @@ The left column works today. The right column is where it runs out, and the firs
 
 The second one matters more for the PRs I showed you. Move or rename a file and links to it stay where they were, which is both of my 404s. This is the part the commercial editors have and the free ones don't, so if it's the thing standing between you and sane docs, that's where the money goes.
 
-lychee stays in CI regardless. Nothing in your editor is ever going to know that somebody deleted a branch on GitHub.
+And lychee stays in CI regardless, because nothing in your editor is ever going to know that somebody deleted a branch on GitHub.
+-->
 
-And lychee stays in CI regardless, because nothing in your editor will ever know that a branch on GitHub got deleted.
+---
+class: code-sm
+---
+
+# One that has nothing to do with links
+
+<p class="small mt-1 max-w-3xl">
+You rename a concept. Not a heading, not a file: the word itself, the one your product uses for the thing.
+</p>
+
+<div class="grid grid-cols-[0.95fr_1.05fr] gap-10 mt-6 items-start">
+
+<div>
+
+```diff
+- the workspace settings
++ the project settings
+```
+
+<p class="small mt-3">
+Find and replace gets you most of the way, and then leaves you the plural, the possessive, the one inside a code sample, and the one in an image's alt text.
+</p>
+
+</div>
+
+<div>
+
+<p class="small">
+This is a rename refactor with none of the tooling. No editor offers you rename-symbol for prose, because prose has no symbols.
+</p>
+
+<p class="small mt-4">
+<a href="https://github.com/vale-cli/vale">Vale</a> is the closest thing, and it works the other way round. It can't do the rename for you, but once you've settled on a word it won't let you drift back to the old one. MIT, with a language server of its own.
+</p>
+
+</div>
+
+</div>
+
+<!--
+I promised you this wasn't only about links, so here's the one I hit most often.
+
+You rename a concept. Workspace becomes project. It's the same refactor: something got renamed and everything referring to it should follow. Except now there's nothing to follow, because prose has no symbols. Find and replace gets you the easy ones and leaves you the plurals, the possessives, the one buried in a code sample, the one in alt text that nobody will ever read but a screen reader.
+
+Vale is the nearest thing to help, and notice it solves the opposite half of the problem: it can't do the rename for you, but once you've settled on a word it won't let you slide back to the old one. That's still worth a lot.
+
+There is no Marksman for this. Somebody should write one.
 -->
 
 ---
@@ -502,23 +606,24 @@ And lychee stays in CI regardless, because nothing in your editor will ever know
 <li><strong>Ask more of your editor.</strong>
 <div class="sub">Diagnostics while you type, find-references on a heading, a rename that carries the links with it. If your editor and your site generator can't manage it between them, that's worth raising with whoever maintains either.</div></li>
 
-<li><strong>Links are just the easiest one to show you.</strong>
-<div class="sub">Moving an image breaks a path the same way. So does renaming a concept across the prose, and nothing offers you rename-symbol for words. markdownlint and Vale cover some of it. Most of it nobody has built yet.</div></li>
-
 </v-clicks>
 
 </ol>
+
+<p v-click class="mt-9 max-w-3xl">
+And a question back, because some of you are running things I've never heard of: what do you use for this? I'd love to hear about it afterwards!!
+</p>
 
 <!--
 Three things.
 
 The first is a way of thinking. If you're renaming a heading or reorganising a section, you're refactoring, and the thing that can break is a link. Give it the care you'd give a rename in code.
 
-The second is the one you can do this afternoon. A link checker in CI is one file.
+The second is the one you can do this afternoon. A link checker in CI is one file, and every docs repo should have one.
 
-Three is the one you can act on this afternoon. If you want the specific recommendation, it's Marksman, it's MIT, and the only trap is that it needs a .git or a .marksman.toml at the project root or it silently does nothing. But the point is the capability, not that particular binary.
+The third is the one I actually want. If you'd like the specific recommendation it's Marksman, it's MIT, and the only trap is that it needs a .git or a .marksman.toml at the project root or it quietly does nothing. But the point is the capability, not that particular binary.
 
-Four is the one I want you to leave with. Links are the part I can demo in ten minutes, but they're not the whole problem. Move an image and you've broken a path in exactly the same way. Rename a concept across your docs and you're doing a rename refactor with find-and-replace, because nobody offers you rename-symbol for prose. markdownlint will catch a missing alt text, Vale will hold you to a term once you've picked it. Most of the rest doesn't exist yet, and it won't until enough of us go and ask for it.
+And then the question, which I mean seriously. Some of you are running something none of us have heard of, and I would rather spend the Q&A hearing about that than answering me.
 -->
 
 ---

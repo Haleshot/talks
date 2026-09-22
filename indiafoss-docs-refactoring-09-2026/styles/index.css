@@ -144,7 +144,15 @@
   line-height: 1.65;
   color: var(--muted);
 }
-.cover-by { position: absolute; left: 3.5rem; bottom: 2.6rem; font-size: 0.85rem; color: var(--ink); }
+.cover-by { position: absolute; left: 3.5rem; bottom: 2.5rem; }
+.cover-by::before {
+  content: "";
+  display: block;
+  width: 1.7rem;
+  border-top: 2px solid var(--indigo);
+  margin-bottom: 0.6rem;
+}
+.cover-by-name { font-size: 1.05rem; font-weight: 600; color: var(--ink); letter-spacing: -0.005em; }
 
 /* A quote that is the slide's content but not its heading. */
 .bigquote {

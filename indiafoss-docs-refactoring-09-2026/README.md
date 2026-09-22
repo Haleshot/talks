@@ -3,7 +3,7 @@
 Slidev deck for IndiaFOSS 2026, Documentation & Technical Writing devroom.
 
 - Title: Refactoring documentation without breaking it
-- Format: lightning talk, 13 slides, about 10 minutes by the notes
+- Format: lightning talk, 15 slides, about 10 minutes by the notes
 - Proposal: https://fossunited.org/c/indiafoss/2026/cfp/6dpd2lbkma
 
 ## Check before you present
@@ -32,17 +32,14 @@ Re-run it before the talk. A six-month-old release is exactly the sort of thing 
 - The cover shows the title with the anchor that title would generate sitting under it. It is the whole argument in one grey line, and the opening note points at it.
 - `global-bottom.vue` puts the IndiaFOSS 2026 and Write the Docs India logos in the bottom-right corner of every slide. Change the size or corner there.
 - `components/LinkGraph.vue` is inline SVG on the rename slide: three pages linking to one heading, following the slide's clicks. Right-angle connectors, masked labels, one accent, per the diagram-design skill's connector rules.
-- `components/ShotSlot.vue` frames a screenshot. Pass `raw` with `pos` to show it at 1:1 pixels instead of shrinking it, which is the only way a wide GitHub diff stays readable on a projector. If you swap either screenshot, re-tune `pos` by exporting and looking.
+- `components/LinkRot.vue` is the hundred-square grid on the link rot slide. Thirty-eight are marked gone, which is the Pew figure, not a guess.
+- The two PR diffs are rendered as `diff` code blocks rather than screenshots. The screenshots were 1919x1001 at 72dpi, so at 1:1 in a 980px canvas they got upscaled roughly twice on a projector and looked soft. Code blocks stay sharp at any size and say the same thing.
 
 ## Assets in `public/`
 
 | File | Used on |
 |---|---|
 | `indiafoss-2026.svg`, `write-the-docs-india.svg` | the footer, every slide |
-| `fluree-1376-diff.png` | the 404s slide, left, cropped to the README-link change |
-| `cocoindex-1959-diff.png` | the 404s slide, right, cropped to the `blob/v1` → `blob/main` hunk |
-| `zensical_inspect_references.png` | the Zensical slide |
-| `studio_bulk_repair_links.webp` | the bulk-repair recording slide |
 | `srihari.png`, `qr-code.png` | about, and the closing slide |
 
 ## Commands
