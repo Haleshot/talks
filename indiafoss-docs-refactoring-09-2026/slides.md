@@ -37,7 +37,10 @@ class: text-left
 What happens to a link when you rename the heading it points at, and why the editor should be the one to notice.
 </p>
 
-<div class="cover-by">Srihari Thyagarajan</div>
+<div class="cover-by">
+  <div class="cover-by-name">Srihari Thyagarajan</div>
+  <div class="cover-by-role">Technical Writer at Deepnote</div>
+</div>
 
 </div>
 
@@ -104,7 +107,7 @@ layoutClass: gap-10
 # About me
 
 <ul class="tight mt-8 leading-relaxed">
-  <li>Technical writer at <a href="https://deepnote.com">Deepnote</a>. I did docs and education work at <a href="https://marimo.io">marimo</a> before that.</li>
+  <li>Technical writer at <a href="https://deepnote.com">Deepnote</a>. Docs, education and developer advocacy at <a href="https://marimo.io">marimo</a> before that.</li>
   <li>Most of my open-source work is documentation, mainly on marimo and <a href="https://github.com/cocoindex-io/cocoindex">CocoIndex</a>, plus whatever broken page I end up on.</li>
   <li>Co-organizer of <a href="https://scipy-india.github.io/">SciPy India</a>, and I ran community booths at PyCon India and IndiaFOSS last year.</li>
   <li>One of the people trying to get a <a href="https://www.writethedocs.org/">Write the Docs</a> India chapter going. This devroom is part of that.</li>
@@ -177,7 +180,7 @@ layoutClass: gap-10
 <p class="cite mt-2">~ Wikipedia, which would know</p>
 
 <p class="small mt-6">
-Pew went back in 2023 and checked a sample of pages that existed in 2013. More than a third of them had simply gone.
+Pew went back in 2023 and checked a sample of pages that existed in 2013. More than a third of them were gone.
 </p>
 
 <p class="small mt-4">
@@ -427,7 +430,7 @@ layoutClass: gap-10
 # Marksman
 
 <p class="small ink">
-An LSP server for Markdown. MIT licensed, one self-contained binary, and it speaks to whatever you already edit in: VS Code, Neovim, Helix, Emacs, Vim, Sublime, Kakoune.
+An LSP server for Markdown. MIT licensed, one self-contained binary, and it plugs into whatever you already edit in: VS Code, Neovim, Helix, Emacs, Vim, Sublime, Kakoune.
 </p>
 
 ::left::
@@ -471,7 +474,7 @@ The links in the other two files update as part of the same rename, without anyo
 
 <div class="flex flex-col items-center mt-4">
   <img src="/marksman-rename.gif" alt="Marksman renaming a heading in Neovim, with the links to it updating across files" class="max-h-[335px] max-w-full border border-[#d5d3cc]" />
-  <p class="cite mt-2">Recording from the Marksman repo, MIT like the rest of it</p>
+  <p class="cite mt-2">From the Marksman repo</p>
 </div>
 
 <!--
@@ -503,7 +506,7 @@ class: code-sm
 <p class="small muted">It still doesn't</p>
 <ul class="tight small mt-2">
   <li>Flag an inline link to a heading that's gone. Wiki links get the warning; inline ones are still waiting on someone to write it</li>
-  <li>Follow a file when you move it, which is both of the 404s from earlier. <a href="https://zensical.org/studio/">Zensical Studio</a> does this today, though the refactoring half is paid and not open source</li>
+  <li>Follow a file when you move it, which is both of the 404s from earlier. <a href="https://zensical.org/studio/">Zensical Studio</a> does this today (though the refactoring half is paid, and not open source)</li>
   <li>Say anything about images or alt text (markdownlint will, pointed at the same folder)</li>
 </ul>
 </div>
@@ -545,7 +548,7 @@ class: code-sm
 # One that has nothing to do with links
 
 <p class="small mt-1 max-w-3xl">
-You rename a concept. Not a heading, not a file: the word itself, the one your product calls a thing.
+You rename a concept. Not a heading, not a file: the word itself, the one your product uses for the thing.
 </p>
 
 <div class="grid grid-cols-[0.95fr_1.05fr] gap-10 mt-6 items-start">
@@ -570,7 +573,7 @@ This is a rename refactor with none of the tooling. No editor offers you rename-
 </p>
 
 <p class="small mt-4">
-<a href="https://github.com/vale-cli/vale">Vale</a> is the closest thing, and it works the other way round: you tell it which word won, and it holds you to that everywhere, forever. MIT, and there's a language server for it too.
+<a href="https://github.com/vale-cli/vale">Vale</a> is the closest thing, and it works the other way round. It can't do the rename for you, but once you've settled on a word it won't let you drift back to the old one. MIT, with a language server of its own.
 </p>
 
 </div>
@@ -582,7 +585,7 @@ I promised you this wasn't only about links, so here's the one I hit most often,
 
 You rename a concept. Workspace becomes project. It's the same refactor: something got renamed and everything referring to it should follow. Except now there's nothing to follow, because prose has no symbols. Find and replace gets you the easy ones and leaves you the plurals, the possessives, the one buried in a code sample, the one in alt text that nobody will ever read but a screen reader.
 
-Vale is the nearest thing to help, and notice it solves the opposite half of the problem: it can't do the rename for you, but once you've decided which word won, it will not let you drift back. That's still worth a lot.
+Vale is the nearest thing to help, and notice it solves the opposite half of the problem: it can't do the rename for you, but once you've settled on a word it won't let you slide back to the old one. That's still worth a lot.
 
 There is no Marksman for this. Somebody should write one.
 -->
@@ -609,7 +612,7 @@ There is no Marksman for this. Somebody should write one.
 </ol>
 
 <p v-click class="mt-9 max-w-3xl">
-And a question I would genuinely like answered: what are you using? Anything open that does this well, I want to hear about it.
+And a question back, because some of you are running things I've never heard of: what do you use for this? I'd love to hear about it afterwards.
 </p>
 
 <!--
@@ -621,7 +624,7 @@ The second is the one you can do this afternoon. A link checker in CI is one fil
 
 Three is the one you can act on this afternoon. If you want the specific recommendation, it's Marksman, it's MIT, and the only trap is that it needs a .git or a .marksman.toml at the project root or it silently does nothing. But the point is the capability, not that particular binary.
 
-And then hand the room the question, because half of you are running something I've never heard of. That's the bit I want out of the Q&A.
+Then hand the room the question. Some of them are running something none of us have heard of, and that's the bit I'd actually like out of the Q&A.
 -->
 
 ---
