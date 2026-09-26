@@ -106,8 +106,8 @@ layoutClass: gap-10
 # About me
 
 <ul class="tight mt-8 leading-relaxed">
-  <li>Technical writer at <a href="https://deepnote.com">Deepnote</a>. Docs, education and developer advocacy at <a href="https://marimo.io">marimo</a> before that.</li>
-  <li>Most of my open-source work is documentation, mainly on marimo and <a href="https://github.com/cocoindex-io/cocoindex">CocoIndex</a>, plus whatever broken page I end up on.</li>
+  <li>Technical writer at <a href="https://deepnote.com">Deepnote</a>, and at <a href="https://marimo.io">marimo</a> before that, where I did docs, education and developer advocacy.</li>
+  <li>Documentation is most of what I write, at work and outside it: Deepnote, marimo, <a href="https://github.com/cocoindex-io/cocoindex">CocoIndex</a>, and whatever broken page I end up on.</li>
   <li>Co-organizer of <a href="https://scipy-india.github.io/">SciPy India</a>, and I ran community booths at PyCon India and IndiaFOSS last year.</li>
   <li>One of the people trying to get a <a href="https://www.writethedocs.org/">Write the Docs</a> India chapter going. This devroom is part of that.</li>
 </ul>
@@ -130,7 +130,7 @@ The last line is the one I care about. A few of us are trying to get a Write the
 layout: default
 ---
 
-# The definition I'm borrowing
+# What refactoring means
 
 <blockquote class="bigquote mt-7 max-w-4xl">
 "Refactoring is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior."
@@ -172,16 +172,16 @@ layout: two-cols
 layoutClass: gap-10
 ---
 
-# It has a name, and a literature
+# Link rot
 
 <p class="ink small mt-6">
 "Link rot is the phenomenon of hyperlinks tending over time to cease to point to their originally targeted file, web page, or server."
 </p>
 
-<p class="cite mt-2">~ Wikipedia, which would know</p>
+<p class="cite mt-2">~ Wikipedia</p>
 
 <p class="small mt-6">
-Pew went back in 2023 and checked a sample of pages that existed in 2013. More than a third of them were gone.
+The Pew Research Center took a sample of pages that existed in 2013 and went back to check them ten years later. More than a third had gone.
 </p>
 
 <p class="small mt-4">
@@ -205,7 +205,7 @@ A hundred pages that were live in 2013. The orange ones were gone by 2023.
 <!--
 You'd be forgiven for thinking this is a problem with my three pull requests rather than a problem with the web. It isn't.
 
-Link rot is the actual term, it has been studied since the nineties, and the numbers are worse than anyone expects. Pew took a sample of pages that existed in 2013, went back ten years later, and thirty-eight per cent of them were gone. That's the grid.
+Link rot is the term for it, people have been studying it since the nineties, and the numbers are worse than anyone expects. The Pew Research Center took a sample of pages that existed in 2013, went back ten years later, and thirty-eight per cent of them were gone. That's what the grid is.
 
 The line I find hardest to ignore is the Wikipedia one. More than half of all Wikipedia articles have at least one dead link in their references. That is the single most maintained body of writing on the internet, and the citations still rot.
 
@@ -338,12 +338,16 @@ class: code-sm
 
 # Two of the 404s, and what moved underneath them
 
+<p class="small mt-1 max-w-4xl">
+Two I actually had to fix. In neither case did anyone mistype anything.
+</p>
+
 ::left::
 
 <p class="small"><strong>Fluree DB</strong>, built with mdBook.</p>
 
 <p class="small mt-2">
-mdBook rewrites <code>.md</code> links to <code>.html</code>, but publishes a <code>README.md</code> as <code>index.html</code>. Correct in the repo, dead on the site. The fix is to link to the directory.
+mdBook rewrites <code>.md</code> links to <code>.html</code>, but publishes a <code>README.md</code> as <code>index.html</code>. So the link opens fine in the repo and 404s on the published site. The fix is to point at the directory instead.
 </p>
 
 <p class="small muted mt-2">
@@ -391,7 +395,7 @@ The reason I spotted it is the nightly cron in the lychee workflow I'd added to 
 # The same rename, in two editors
 
 <p class="small mt-1 max-w-3xl">
-The left column is not aspirational. It is what every code editor has done for twenty years, for every language anyone takes seriously.
+If you've ever right-clicked a class in IntelliJ and picked Refactor, you have used the left column.
 </p>
 
 <table class="mt-6 w-full">
@@ -406,15 +410,15 @@ The left column is not aspirational. It is what every code editor has done for t
 </table>
 
 <v-click>
-<ul class="tight mt-10 max-w-3xl">
+<ul class="tight mt-8 max-w-3xl">
   <li>None of this is new. The Language Server Protocol gave every editor "rename" and "find references" back in 2016.</li>
   <li>Padmashree's talk makes the case for bringing that to DocC.</li>
-  <li>Markdown got one in 2022, and it has stayed remarkably obscure ever since.</li>
+  <li>Markdown got a language server of its own in 2022, and it has stayed remarkably obscure ever since.</li>
 </ul>
 </v-click>
 
 <!--
-Nothing in the left column is exotic. It's been in every serious IDE for twenty years, and none of us would put up with a language where renaming a function meant grepping for the old name and hoping for the best.
+I learned what refactoring meant writing Java, and mostly from IntelliJ telling me to. You right-click a class, you pick Refactor, you pick Rename, and the IDE goes and fixes every place that referred to it. That's the left column, and it's been there for twenty years. None of us would accept a language where renaming a function meant grepping for the old name and hoping.
 
 Same edit on the right, same class of risk, and we just live with it.
 
@@ -431,16 +435,16 @@ layoutClass: gap-10
 # Marksman
 
 <p class="small ink">
-An LSP server for Markdown. MIT licensed, one self-contained binary, and it plugs into whatever you already edit in: VS Code, Neovim, Helix, Emacs, Vim, Sublime, Kakoune.
+A language server for Markdown, MIT licensed, that plugs into whatever you already edit in: VS Code, Neovim, Helix, Emacs, Vim, Sublime, Kakoune.
 </p>
 
 ::left::
 
 <ul class="tight small mt-2">
-  <li v-click="1">Find references on a heading, with a code lens showing how many there are, so you know what depends on it before you touch it.</li>
-  <li v-click="2">Rename that heading and the incoming links follow, anchors included.</li>
-  <li v-click="3">Diagnostics for links pointing at a file that isn't there.</li>
-  <li v-click="4">Completion, hover and go-to-definition, for inline, reference and wiki links alike.</li>
+  <li v-click="1">Ask what links to a heading and it shows you, with the count sitting above the heading while you write.</li>
+  <li v-click="2">Rename that heading and every one of those links updates with it, anchors included.</li>
+  <li v-click="3">A link to a file that isn't there gets underlined as you type, the way a compiler underlines a typo.</li>
+  <li v-click="4">Autocomplete for link targets, hover to preview one, and jump to whatever a link points at.</li>
 </ul>
 
 ::right::
@@ -456,9 +460,9 @@ The same three files from earlier. Marksman changed them as part of the rename, 
 <!--
 So what does it look like when an editor does understand the project?
 
-This is Marksman. It's an LSP server for Markdown, it's MIT, it's one binary you drop on your path, and because it's a language server it works in basically anything. That last part matters in this room more than it would anywhere else.
+This is Marksman. It's a language server for Markdown, it's MIT, and because it's a language server it works in basically anything you already use. That last part matters in this room more than it would anywhere else.
 
-Three things. It finds every reference to a heading and puts the count above it, so you can see what depends on something before you break it. It renames, and the links come along. And it warns you about links to files that don't exist.
+Four things, and the first two are the ones that matter. It finds every reference to a heading and puts the count above it, so you can see what depends on something before you break it. It renames, and the links come along. It underlines a link to a file that isn't there while you're still typing. And it does the ordinary editor things: autocomplete, hover, jump to the target.
 
 The diagram on the right is the one from earlier, after the rename. Same three files, except now they point at the heading that actually exists. I ran this against a real workspace rather than drawing it hopefully: the server rewrites the heading and all three anchors in a single edit.
 
@@ -544,10 +548,10 @@ And lychee stays in CI regardless, because nothing in your editor is ever going 
 class: code-sm
 ---
 
-# One that has nothing to do with links
+# Renaming a word, not a heading
 
 <p class="small mt-1 max-w-3xl">
-You rename a concept. Not a heading, not a file: the word itself, the one your product uses for the thing.
+Your product renames Workspace to Project. Every page that says workspace is now wrong.
 </p>
 
 <div class="grid grid-cols-[0.95fr_1.05fr] gap-10 mt-6 items-start">
@@ -582,7 +586,7 @@ This is a rename refactor with none of the tooling. No editor offers you rename-
 <!--
 I promised you this wasn't only about links, so here's the one I hit most often.
 
-You rename a concept. Workspace becomes project. It's the same refactor: something got renamed and everything referring to it should follow. Except now there's nothing to follow, because prose has no symbols. Find and replace gets you the easy ones and leaves you the plurals, the possessives, the one buried in a code sample, the one in alt text that nobody will ever read but a screen reader.
+Your product renames Workspace to Project. It's the same refactor: something got renamed and everything referring to it should follow. Except now there's nothing to follow, because prose has no symbols. Find and replace gets you the easy ones and leaves you the plurals, the possessives, the one buried in a code sample, the one in alt text that nobody will ever read but a screen reader.
 
 Vale is the nearest thing to help, and notice it solves the opposite half of the problem: it can't do the rename for you, but once you've settled on a word it won't let you slide back to the old one. That's still worth a lot.
 
