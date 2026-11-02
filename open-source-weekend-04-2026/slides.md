@@ -51,7 +51,7 @@ hideInToc: true
 
 <div class="osw-content max-w-4xl mx-auto text-center">
   <div class="text-4xl leading-tight font-semibold max-w-3xl mx-auto">
-    I did not set out to build a community.
+    I didn't set out to build a community.
   </div>
 
   <div class="mt-6 text-xl leading-relaxed opacity-80 max-w-3xl mx-auto">
@@ -61,9 +61,8 @@ hideInToc: true
 
   <v-click>
     <div class="mt-8 text-base opacity-68 max-w-3xl mx-auto">
-      That is why this talk starts so close to product use. The community part did not begin
-      with strategy. It began with paying attention, helping where I could, and watching that
-      slowly turn into something bigger.
+      So this talk starts close to product use. I didn't begin with a community strategy.
+      I paid attention, helped where I could, and watched that turn into something bigger.
     </div>
   </v-click>
 </div>
@@ -82,7 +81,7 @@ hideInToc: true
   <li>Technical Writer at Deepnote; previously educational dev-rel and advocacy at marimo</li>
   <li>I spend most of my time around notebooks, documentation, tutorials, integrations, and developer tooling</li>
   <li>This talk comes out of work close to the product: contributions, learning material, spotlights, workshops, and follow-up conversations</li>
-  <li>The recurring thread has been simple: use the thing properly, help the next person, and make useful work easier to find</li>
+  <li>Most of it came down to using the thing properly, helping the next person, and making useful work easier to find</li>
 </ul>
 
 ::right::
@@ -94,7 +93,7 @@ hideInToc: true
       <li>maintaining community spotlights and curated resource paths</li>
       <li>building notebook-first teaching material and workshop content</li>
       <li>helping people find the right resource, example, or next step in context</li>
-      <li>navigating ambiguity and trial-and-error in fast-moving OSS settings</li>
+      <li>figuring things out by trial and error in fast-moving OSS projects</li>
     </ul>
   </div>
 </div>
@@ -185,15 +184,14 @@ hideInToc: true
 
   <div class="mt-6 text-lg leading-relaxed opacity-78 max-w-3xl mx-auto">
     Because this is where my judgment changed. Using the tool closely made it obvious
-    what was actually helping users, what was just busywork, and what kind of
+    what helped users, what was busywork, and what kind of
     contributions were worth investing in.
   </div>
 
   <v-click>
     <div class="mt-8 text-sm opacity-68 max-w-3xl mx-auto">
-      The widget, the snippets, the Windows fixes, even the numbers on the next slide are not
-      there as a resume. They are there to show the kind of product contact the community work
-      grew out of.
+      The widget, the snippets, the Windows fixes and the numbers on the next slide show the
+      kind of product contact the community work grew out of. I'm not putting them up as a resume.
     </div>
   </v-click>
 </div>
@@ -219,7 +217,7 @@ hideInToc: true
 
 <v-click>
   <div class="mt-4 text-sm opacity-70 leading-relaxed">
-    <span v-mark.underline="{ at: 5, color: '#5fa26a' }">The shift: reviewing for usability, not just correctness.</span>
+    <span v-mark.underline="{ at: 5, color: '#5fa26a' }">I started reviewing for usability as well as correctness.</span>
   </div>
 </v-click>
 
@@ -241,7 +239,7 @@ comparison
 ```
 
 <div class="mt-4 osw-outline-card text-sm leading-relaxed">
-  The point is not to over-index on one widget. It is that product contact gave me better instincts for snippets, docs, fixes, and the occasional feature.
+  I don't want to over-index on one widget. Using the product gave me better instincts for snippets, docs, fixes, and the occasional feature.
 </div>
 </div>
 
@@ -289,7 +287,7 @@ title: Teaching, spotlights, and contributor paths
   <div class="osw-kicker mb-5">Lesson 2</div>
   <h1 class="osw-title text-center">Teach in public.</h1>
   <div class="mt-5 text-lg max-w-3xl mx-auto opacity-72 text-center">
-    Tutorials, examples, and notebooks are not marketing garnish. They are infrastructure for adoption.
+    Tutorials, examples, and notebooks are infrastructure for adoption.
   </div>
 </div>
 
@@ -360,7 +358,7 @@ hideInToc: true
 - Every week, I would find a community project using marimo, write it up, attribute the creator, and share it through the spotlights work.
 - This was not automated. It meant paying attention to what people were building, reaching out, writing the showcase, and linking their work properly.
 - Contributors who were spotlighted often stayed closer to the project. Some brought the tool into their teams or became louder advocates for it.
-- **Attribution turned out to be one of the main levers.** People who felt seen kept building.
+- **Attribution was one of the biggest levers.** People who felt seen kept building.
 
 </v-clicks>
 
@@ -383,7 +381,7 @@ transition: slide-up
 # Contributor paths should feel useful
 
 <div class="mt-5 text-sm opacity-80 leading-relaxed">
-  One of the better community instincts I picked up was: do not build contributor pathways out of tidy little chores that only teach process.
+  One of the better community instincts I picked up was: don't build contributor pathways out of tidy little chores that only teach process.
 </div>
 
 <div class="mt-6 osw-card-light">
@@ -425,7 +423,7 @@ Greg Wilson, co-founder of Software Carpentry and author of *Teaching Tech Toget
 
 <v-click>
 <div class="mt-5 text-sm max-w-2xl opacity-72 leading-relaxed">
-  Community work gets explained as process. Its durability comes from whether people feel respected, helped, and properly attributed.
+  People talk about community work as process. It lasts when people feel respected, helped, and properly credited.
 </div>
 </v-click>
 
@@ -449,7 +447,7 @@ title: The ripple effects I didn't plan for
   <div class="osw-kicker mb-5">What surprised me</div>
   <h1 class="osw-title text-center">Some of them became vocal advocates.</h1>
   <div class="mt-5 text-lg max-w-3xl mx-auto opacity-72 text-center">
-    I expected better onboarding and better contributions. I did not expect the ripple effect to travel this far on its own.
+    I expected better onboarding and better contributions. I didn't expect it to spread this far without me pushing it.
   </div>
 </div>
 
@@ -466,9 +464,9 @@ hideInToc: true
 <v-clicks>
 
 - People I had spotlighted or helped onboard started advocating independently: writing their own tutorials, presenting at meetups, bringing the tool into their teams.
-- In OSS, your product speaks for itself. You can do genuine outreach, but nothing compares to people advocating without being asked.
+- In OSS you can do genuine outreach, but nothing beats people advocating without being asked.
 - Parul Pandey, the first woman Kaggle Grandmaster in India, [wrote about switching to marimo](https://pandeyparul.medium.com/why-im-making-the-switch-to-marimo-notebooks-6e2218b5c98d) and now shares her data science work through it. Nobody asked her to.
-- **Trust creates advocates.** Advocates create reach you cannot manufacture.
+- **People advocated because they trusted the project**, and you can't buy that kind of reach.
 
 </v-clicks>
 
@@ -495,7 +493,7 @@ hideInToc: true
 
 <v-clicks class="mt-4 osw-list text-sm leading-relaxed">
 
-- Presented CocoIndex at the Rust Delhi Meetup, making an unfamiliar tool legible to a new audience
+- Presented CocoIndex at the Rust Delhi Meetup, explaining an unfamiliar tool to a new audience
 - Held marimo community booths at PyCon India and IndiaFOSS 2025: live demos, onboarding new users, collecting friction feedback firsthand
 - Active across socials and community channels, pointing people to relevant resources in context
 - Partnering with GroundZeroAI on linear algebra course content, connecting tools to communities where they fill a real gap
@@ -558,7 +556,7 @@ hideInToc: true
     <li>weekly spotlights, every week, no exceptions</li>
     <li>small DX improvements filed as PRs</li>
     <li>writing the notebook or example I wished I had</li>
-    <li>showing up consistently at events, socials, and community channels while pointing people to genuinely useful resources</li>
+    <li>showing up consistently at events, socials, and community channels while pointing people to useful resources</li>
     <li>figuring things out as I went instead of waiting for a playbook</li>
   </ul>
 </div>
