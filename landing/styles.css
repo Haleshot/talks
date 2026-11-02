@@ -529,3 +529,12 @@ html[data-theme="dark"] .theme-toggle__moon {
     min-height: 2.5rem;
   }
 }
+
+.filter-count {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+
+.action-link img {
+  border-radius: 3px;
+}

@@ -5,6 +5,8 @@ event: IndiaFOSS 2026 · Bengaluru
 date: Sep 2026
 blogUrl: https://haleshot.github.io/posts/indiafoss-2026-experience
 recordingUrl: https://www.youtube.com/live/KNKAi9dfZxA?t=4718
+writeups:
+  - https://write-the-docs-india.github.io/blog/2026/indiafoss-2026-devroom/
 description: Renaming a heading or moving a page is a refactor, and your editor treats it as a text edit. Three link-repair PRs, and what an editor that understood the project could have caught.
 tags:
   - Documentation

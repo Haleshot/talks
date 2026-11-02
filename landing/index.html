@@ -132,10 +132,14 @@
 
       chips.forEach(function(chip) {
         chip.addEventListener('click', function() {
+          // Pressing the active topic again shows every talk
+          var wasActive = chip.getAttribute('aria-pressed') === 'true';
           chips.forEach(function(c) { c.classList.remove('is-active'); c.setAttribute('aria-pressed', 'false'); });
-          chip.classList.add('is-active');
-          chip.setAttribute('aria-pressed', 'true');
-          apply(chip.getAttribute('data-filter'));
+          if (!wasActive) {
+            chip.classList.add('is-active');
+            chip.setAttribute('aria-pressed', 'true');
+          }
+          apply(wasActive ? 'all' : chip.getAttribute('data-filter'));
         });
       });
     })();

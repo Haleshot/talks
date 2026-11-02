@@ -193,6 +193,7 @@ function getTalkMeta(folderPath) {
     meta.linkedinUrl = frontmatter.linkedinUrl || '';
     meta.blogUrl = frontmatter.blogUrl || '';
     meta.recordingUrl = frontmatter.recordingUrl || '';
+    meta.writeups = Array.isArray(frontmatter.writeups) ? frontmatter.writeups : [];
     // The deck's own brand colour (themeConfig.primary) is nested, so read it directly.
     const primaryMatch = content.match(/primary:\s*['"]?(#[0-9a-fA-F]{3,8})/);
     meta.primary = primaryMatch ? primaryMatch[1] : '';
@@ -354,15 +355,29 @@ function talkData(talk) {
   };
 }
 
+// Write-ups elsewhere, named by the site they're on and marked with its icon
+const WRITEUP_OUTLETS = {
+  'write-the-docs-india.github.io': { label: 'Write the Docs India', icon: 'write-the-docs-india.svg' },
+  'scipy.in': { label: 'SciPy India', icon: 'scipy-india.svg' },
+  'deepnote.com': { label: 'Deepnote', icon: 'deepnote.png' },
+};
+
+function writeupAction(href) {
+  const host = new URL(href).hostname.replace(/^www\./, '');
+  const outlet = WRITEUP_OUTLETS[host] || { label: host };
+  return { label: outlet.label, href, icon: outlet.icon };
+}
+
 function buildActions(d) {
   const actions = [
     { label: 'Slides', href: d.slidesHref, primary: true },
     d.meta.recordingUrl ? { label: 'Recording', href: d.meta.recordingUrl } : null,
     d.meta.blogUrl ? { label: 'Blog post', href: d.meta.blogUrl } : null,
+    ...d.meta.writeups.map(writeupAction),
     d.meta.linkedinUrl ? { label: 'LinkedIn post', href: d.meta.linkedinUrl } : null,
   ].filter(Boolean);
   return `<div class="talk-actions">${actions.map(a => `
-        <a href="${a.href}" class="action-link${a.primary ? ' primary' : ''}"${a.href.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${a.label}</a>`).join('')}
+        <a href="${a.href}" class="action-link${a.primary ? ' primary' : ''}"${a.href.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${a.icon ? `<img src="${basePath}outlets/${a.icon}" alt="" width="14" height="14">` : ''}${a.label}</a>`).join('')}
       </div>`;
 }
 
@@ -432,9 +447,11 @@ function renderTalkCard(d) {
 function renderFilters(data) {
   const tags = [...new Set(data.flatMap(d => d.tags))].sort((a, b) => a.localeCompare(b));
   if (tags.length === 0) return '';
-  const buttons = [`<button class="filter-chip is-active" data-filter="all" type="button" aria-pressed="true">All</button>`]
-    .concat(tags.map(t => `<button class="filter-chip" data-filter="${slugifyTag(t)}" type="button" aria-pressed="false">${escapeHtml(t)}</button>`));
-  return buttons.join('');
+  // Counts come from the decks, so they stay right as talks get added
+  const count = t => data.filter(d => d.tags.includes(t)).length;
+  return tags
+    .map(t => `<button class="filter-chip" data-filter="${slugifyTag(t)}" type="button" aria-pressed="false">${escapeHtml(t)} <span class="filter-count">${count(t)}</span></button>`)
+    .join('');
 }
 
 function generateLandingPage(talks) {
@@ -478,6 +495,7 @@ async function main() {
   // Create dist directory
   mkdirSync(distDir, { recursive: true });
   cpSync(join(rootDir, 'landing', 'fonts'), join(distDir, 'fonts'), { recursive: true });
+  cpSync(join(rootDir, 'landing', 'outlets'), join(distDir, 'outlets'), { recursive: true });
 
   // Find all talk folders
   const folders = getTalkFolders();
