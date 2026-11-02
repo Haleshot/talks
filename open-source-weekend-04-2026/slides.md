@@ -4,6 +4,7 @@ layout: cover
 title: Lessons from Building a Devtool Community
 event: Open Source Weekend · Gandhinagar
 date: Apr 2026
+blogUrl: https://haleshot.github.io/posts/osd-2026-experience
 description: How dogfooding, educational artifacts, and contributor recognition shape durable OSS communities around developer tools.
 tags:
   - Open Source

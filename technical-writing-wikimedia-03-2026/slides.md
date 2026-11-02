@@ -4,6 +4,7 @@ layout: cover
 title: Technical Writing in the Age of AI
 event: Wikimedia DSDP · India 2026
 date: Mar 2026
+blogUrl: https://haleshot.github.io/posts/wikimedia-dsdp-experience
 description: A 90-minute workshop on writing quality in the AI era, the Diátaxis documentation framework, and community advocacy as an extension of technical writing.
 tags:
   - Technical Writing

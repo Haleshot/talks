@@ -4,6 +4,7 @@ layout: cover
 title: Declare State, Not Messages
 event: Apache Kafka Meetup · Chennai
 date: May 2026
+blogUrl: https://haleshot.github.io/posts/chennai-kafka-cocoindex-05-2026
 description: CocoIndex's new Kafka target connector for the unstructured world. A live CSV-to-Kafka demo, then the declare_target_state model behind it.
 tags:
   - Kafka
