@@ -143,7 +143,7 @@ Today we'll focus on building a knowledge graph from meeting notes - my actual u
 
 ---
 
-# The Problem: Scattered Meeting Notes
+# My meeting notes are everywhere
 
 <div class="grid grid-cols-2 gap-6 mt-8">
   <v-click>
@@ -251,7 +251,7 @@ Set up a **cron job** to run the same code every hour...
   :enter="{ y: 0, opacity: 1 }"
   class="mt-8 text-2xl text-red-400"
 >
-As input keeps growing, problems quickly emerge
+Then the notes keep piling up
 </div>
 
 </v-click>
@@ -380,7 +380,7 @@ Think of it like hidden state in Jupyter notebooks - you deleted the cell, but t
 When you have notes scattered across **GDrive, HackMD, Deepnote, and chat** - a single reorganization can cascade ghost data across your entire pipeline.
 
 <div class="mt-2 text-sm text-gray-400">
-The complexity of maintaining transformed output incrementally is easily overlooked... and very error-prone.
+Keeping transformed output in sync incrementally is harder than it looks, and easy to get wrong.
 </div>
 
 </div>
@@ -436,7 +436,7 @@ for file in input_drive.list():
 
 <div class="mt-8 text-center">
 
-The code has all necessary information – **intuitively describes the business logic**.
+The code already **describes the business logic**.
 
 <div class="mt-4 text-2xl font-bold text-orange-400">
 But we're executing it in a naive way
@@ -448,7 +448,7 @@ But we're executing it in a naive way
 
 ---
 
-# The Solution: Let the Engine Handle It
+# Let the engine handle it
 
 <div class="grid grid-cols-2 gap-8">
 <div>
@@ -550,7 +550,7 @@ backgroundSize: contain
 
 <div class="mt-8 p-4 bg-gray-800 rounded text-sm">
 
-**Bottom line:** Data infrastructure needs reliability, performance, and tight control over resources. Rust delivers all three.
+A pipeline that runs for days can't leak memory or stall on GC pauses, so the engine is in Rust.
 
 </div>
 
@@ -569,7 +569,7 @@ CocoIndex uses the same **Rust-to-Python binding approach** as Polars, Pydantic 
 <v-clicks>
 
 - You write normal Python (dataclasses, decorators)
-- A Rust engine handles the heavy lifting
+- A Rust engine does the hashing, diffing, and reconciliation
 - Enabled by **PyO3** - Rust bindings as idiomatic Python objects
 - CocoIndex codebase: **77.9% Rust**
 
@@ -591,7 +591,7 @@ Materialized view concept: daft.ai/blog/knowledge-curation-not-search-is-the-big
 
 ---
 
-# Rust + Python: Best of Both Worlds
+# Rust engine, Python API
 
 <div class="grid grid-cols-2 gap-8 mt-6">
 <div
@@ -644,7 +644,7 @@ Materialized view concept: daft.ai/blog/knowledge-curation-not-search-is-the-big
 
 <div class="mt-6 text-center p-3 bg-gray-800/50 rounded-lg">
 
-This pattern is <span v-mark.circle.green="12">revolutionizing</span> Python devtools: **uv**, **Polars**, **Ruff**, **Pydantic v2**...
+You've probably used other Python tools <span v-mark.circle.green="12">built this way</span>: **uv**, **Polars**, **Ruff**, **Pydantic v2**...
 
 </div>
 
