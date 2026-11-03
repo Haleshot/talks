@@ -119,7 +119,7 @@ layoutClass: gap-10
 ::right::
 
 <div class="h-full flex items-center justify-end">
-  <img src="/srihari.png" alt="Srihari Thyagarajan" class="w-72 h-96 object-cover" />
+  <img src="../srihari.png" alt="Srihari Thyagarajan" class="w-72 h-96 object-cover" />
 </div>
 
 <!--
