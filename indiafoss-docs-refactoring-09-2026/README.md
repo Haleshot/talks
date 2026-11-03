@@ -4,9 +4,11 @@ Slidev deck for IndiaFOSS 2026, Documentation & Technical Writing devroom.
 
 - Title: Refactoring documentation without breaking it
 - Format: lightning talk, 15 slides, about 10 minutes by the notes
-- Proposal: https://fossunited.org/c/indiafoss/2026/cfp/6dpd2lbkma
+- Proposal: [FOSS United CFP](https://fossunited.org/c/indiafoss/2026/cfp/6dpd2lbkma)
+- Recording: [the devroom livestream, from 1:18:38](https://www.youtube.com/live/KNKAi9dfZxA?t=4718)
+- Write-ups: [my IndiaFOSS 2026 post](https://haleshot.github.io/posts/indiafoss-2026-experience) and [the devroom debrief on the Write the Docs India blog](https://write-the-docs-india.github.io/blog/2026/indiafoss-2026-devroom/)
 
-## Check before you present
+## Notes on Marksman
 
 **The proposal still describes a Zensical Studio talk.** That tooling is proprietary, so the talk now uses [Marksman](https://github.com/artempyanykh/marksman) instead: MIT, F#, one self-contained binary, and it works through LSP in VS Code, Neovim, Helix, Emacs, Vim, Sublime and Kakoune. Reword the abstract if FOSS United still lets you edit it.
 
@@ -20,7 +22,7 @@ Everything the deck claims about Marksman was tested against release `2026-02-08
 | Inline link to a missing **anchor** | Not flagged. Wiki links are |
 | Moving or renaming a file | Unsupported. No `willRename` or `didRename` |
 
-Re-run it before the talk. A six-month-old release is exactly the sort of thing that shifts underneath a claim, and the inline-anchor gap is the one the deck leans on.
+Re-run it before giving the talk again, since the deck leans on the inline-anchor gap and a newer release might close it.
 
 **Marksman needs a project root.** A `.git` directory or a `.marksman.toml` file. Without one it drops into single-file mode and none of the cross-file work happens, which the [features doc](https://github.com/artempyanykh/marksman/blob/main/docs/features.md) explains under "Workspace folders, project roots, and single-file mode". Worth saying out loud, because everyone hits it.
 
@@ -29,9 +31,9 @@ Re-run it before the talk. A six-month-old release is exactly the sort of thing 
 - Seriph, light. Off-white paper, ink text, the theme's own serif for headings.
 - One accent (Material indigo, the Zensical site's primary) for links and the thing being pointed at. Deep orange only for something broken.
 - No pills, badges, cards, gradients, glows or icon grids. Type, hairline rules, tables.
-- The cover shows the title with the anchor that title would generate sitting under it. It is the whole argument in one grey line, and the opening note points at it.
+- The cover shows the title with the anchor that title would generate sitting under it. The opening note points at it.
 - `global-bottom.vue` puts the IndiaFOSS 2026 and Write the Docs India logos in the bottom-right corner of every slide. Change the size or corner there.
-- `components/LinkGraph.vue` is inline SVG on the rename slide: three pages linking to one heading, following the slide's clicks. Right-angle connectors, masked labels, one accent, per the diagram-design skill's connector rules.
+- `components/LinkGraph.vue` is inline SVG on the rename slide: three pages linking to one heading, following the slide's clicks. Right-angle connectors, masked labels, one accent.
 - `components/LinkRot.vue` is the hundred-square grid on the link rot slide. Thirty-eight are marked gone, which is the Pew figure, not a guess.
 - The two PR diffs are rendered as `diff` code blocks rather than screenshots. The screenshots were 1919x1001 at 72dpi, so at 1:1 in a 980px canvas they got upscaled roughly twice on a projector and looked soft. Code blocks stay sharp at any size and say the same thing.
 

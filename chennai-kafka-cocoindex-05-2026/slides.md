@@ -4,6 +4,7 @@ layout: cover
 title: Declare State, Not Messages
 event: Apache Kafka Meetup · Chennai
 date: May 2026
+blogUrl: https://haleshot.github.io/posts/chennai-kafka-cocoindex-05-2026
 description: CocoIndex's new Kafka target connector for the unstructured world. A live CSV-to-Kafka demo, then the declare_target_state model behind it.
 tags:
   - Kafka
@@ -50,7 +51,7 @@ A look at CocoIndex's Kafka target connector, and how file changes become keyed 
 </div>
 
 <!--
-Hey folks, I'm Srihari. Glad to be part of this meetup. My world, at work and outside it, is notebooks and Python (I came to Kafka recently). I pull data from a lot of sources through integrations and work with it once it has already landed. The engineering that moves data around and gets it onto a broker is not where I sit day to day.
+Hey folks, I'm Srihari. Glad to be part of this meetup. My world, at work and outside it, is notebooks and Python (I came to Kafka recently). I pull data from a lot of sources through integrations and work with it once it has already landed. I don't spend my days moving data around and getting it onto a broker.
 
 So take this as a talk from the data-consumer side of the fence. The question I care about is how file-backed sources, docs, repos, exports, get into Kafka without every source and every consumer turning into its own integration project. CocoIndex's Kafka connector is the example I'll use. I'll start with why the snapshot and webhook habits get painful, then build a small CSV-to-Kafka pipeline and run it live.
 -->
@@ -79,7 +80,7 @@ This talk is about turning those sources into ordinary keyed Kafka records. Noth
 <!--
 Most Kafka deployments already have a clean story for operational data. Orders, clicks, payments, CDC feeds. Records have identity, changes are naturally event-shaped, and replay is part of the model.
 
-The sources behind AI features are different. Wikis, shared drives, Git repos, PDFs, design files. They are edited constantly, but teams usually feed them to downstream systems through cron jobs or one-off webhooks. The gap this talk focuses on is the producer side: how those sources become keyed Kafka records without asking every consumer to invent its own sync path.
+The sources behind AI features are different. Wikis, shared drives, Git repos, PDFs, design files. They are edited constantly, but teams usually feed them to downstream systems through cron jobs or one-off webhooks. This talk is about the producer side: how those sources become keyed Kafka records without asking every consumer to invent its own sync path.
 -->
 
 ---
@@ -115,7 +116,7 @@ Outside work I contribute to [CocoIndex](https://github.com/cocoindex-io/cocoind
 <!--
 My day job is technical writing at Deepnote, and before that I worked at marimo. Both are notebook tools, so I spend a lot of time around Python, data workflows, and the places where people expect state to stay understandable.
 
-Outside work I contribute to CocoIndex, which is the framework behind the demo. I am not presenting this as a Kafka internals talk. I am looking at the producer boundary from the point of view of a Python data workflow that needs to stay in sync with Kafka.
+Outside work I contribute to CocoIndex, which is the framework behind the demo. This isn't a Kafka internals talk. I'm looking at the producer side, from a Python data workflow that needs to stay in sync with Kafka.
 -->
 
 ---
@@ -160,7 +161,7 @@ CocoIndex is an incremental data transformation framework: it tracks source item
 </div>
 
 <!--
-For this talk, the important thing about CocoIndex is dependency tracking. You point it at a source, write Python that turns each item into downstream data, and CocoIndex tracks which inputs produced which outputs. If one source item changes, only the dependent output reruns. If nothing changed, nothing reruns.
+The bit of CocoIndex that matters for this talk is dependency tracking. You point it at a source, write Python that turns each item into downstream data, and CocoIndex tracks which inputs produced which outputs. If one source item changes, only the dependent output reruns. If nothing changed, nothing reruns.
 
 The model has three parts. Sources are folders, Drive, Notion, repos. Transforms are plain Python functions. Targets are where the derived data lands: vector databases, Postgres, and now Kafka. The Kafka target uses Confluent's `confluent-kafka` Python client, while the broker can be local Kafka, Confluent Cloud, Confluent Platform, or another Kafka-compatible endpoint.
 -->
@@ -206,9 +207,9 @@ title: Agenda
 </div>
 
 <!--
-The first part is the failure mode. By snapshot here, I mean "read the current copy of the data on a schedule": re-embed the wiki at midnight, pull the CRM every few hours, scan the repo once a day. That is easy to set up, but it does not give consumers a durable record of what changed.
+The first part is the failure mode. By snapshot here, I mean "read the current copy of the data on a schedule": re-embed the wiki at midnight, pull the CRM every few hours, scan the repo once a day. That's easy to set up, but it doesn't give consumers a durable record of what changed.
 
-After that the talk becomes concrete. CocoIndex declares topic state instead of manually sending messages. The demo is a small CSV-to-Kafka pipeline, then the same pipeline in live mode against a local broker.
+After that I get concrete. CocoIndex declares topic state instead of manually sending messages. The demo is a small CSV-to-Kafka pipeline, then the same pipeline in live mode against a local broker.
 -->
 
 ---
@@ -220,9 +221,9 @@ layout: section
 # Knowledge changes continuously.<br/>Most pipelines read it on a schedule.
 
 <!--
-Operational systems usually treat change as the primitive. Knowledge systems often treat the latest snapshot as the primitive. That is the mismatch this connector is trying to remove.
+Operational systems usually treat change as the primitive. Knowledge systems often treat the latest snapshot as the primitive. That mismatch is what this connector is for.
 
-The next few slides stay on the problem before showing the connector, because the API makes more sense once the failure mode is visible.
+I'll stay on the problem for a few slides before showing the connector, because the API makes more sense once you've seen what breaks.
 -->
 
 ---
@@ -264,9 +265,9 @@ title: Webhook trap diagram
 </div>
 
 <!--
-The common reaction is to replace polling with direct webhooks. Notion fires on edit, the indexer updates. GitHub sends a webhook, the agent context refreshes. For one source and one consumer, that can be enough.
+The usual next step is to swap polling for webhooks. Notion fires on edit, the indexer updates. GitHub sends a webhook, the agent context refreshes. For one source and one consumer, that can be enough.
 
-In the diagram, Notion is the source on the left and each orange box is a consumer: vector index, agent runtime, search backend, analytics. The pink arrows are point-to-point integrations. Each arrow carries a slightly different payload shape and repeats the same machinery: retries, dedup, queues, acknowledgements. The point is not that webhooks are bad; it is that every pair starts rebuilding pieces of a durable log.
+In the diagram, Notion is the source on the left and each orange box is a consumer: vector index, agent runtime, search backend, analytics. The pink arrows are point-to-point integrations. Each arrow carries a slightly different payload shape and repeats the same machinery: retries, dedup, queues, acknowledgements. Webhooks are fine. The trouble is that every pair ends up rebuilding pieces of a durable log.
 -->
 
 ---
@@ -304,7 +305,7 @@ In the diagram, Notion is the source on the left and each orange box is a consum
 <!--
 The costs are the parts Kafka normally absorbs for us. A new consumer wants history, but webhooks only describe what happens after it subscribes. A burst lands all at once, and the consumer has to absorb it directly. A rename or delete happens, and every integration decides what that means.
 
-The last row is the structural problem: the number of paths grows as sources times consumers. The more teams depend on the same knowledge sources, the more expensive this gets.
+The last row is the one that hurts: the number of paths grows as sources times consumers. The more teams depend on the same knowledge sources, the more expensive this gets.
 -->
 
 ---
@@ -316,7 +317,7 @@ layout: section
 # Treat docs and repos<br/>like <span class="accent">event sources</span>
 
 <!--
-The Kafka part of the talk starts from a conservative claim. We do not need a new broker or a new consumer model for this. We need a producer that can turn document and repo changes into ordinary keyed records.
+The Kafka part starts from a modest claim. We don't need a new broker or a new consumer model for this. We need a producer that can turn document and repo changes into ordinary keyed records.
 -->
 
 ---
@@ -330,9 +331,9 @@ title: Snapshot vs change-event backbone
 
 
 <!--
-The left side is snapshot-driven. Sources feed scheduled re-indexers, consumers read from whatever the latest snapshot store contains, and the clock is the mechanism that makes progress happen.
+The left side is snapshot-driven. Sources feed scheduled re-indexers, consumers read from whatever the latest snapshot store contains, and nothing moves until the clock says so.
 
-The right side is log-driven. Sources publish changes, the log keeps them durable and ordered, and consumers can join at different times without asking the sources to resend anything. The offsets and timestamps under the topic are the audit trail: they let you talk about which change a consumer saw, not just which cron run happened last.
+The right side is log-driven. Sources publish changes, the log keeps them durable and ordered, and consumers can join at different times without asking the sources to resend anything. The offsets and timestamps under the topic are the audit trail: they tell you which change a consumer saw, instead of which cron run happened last.
 -->
 
 ---
@@ -368,9 +369,9 @@ The right side is log-driven. Sources publish changes, the log keeps them durabl
 </div>
 
 <!--
-Fan-out means the producer does not need to know which systems will read the change later. Freshness means we stop reprocessing the whole corpus just because one document moved.
+Fan-out means the producer doesn't need to know which systems will read the change later. Freshness means we stop reprocessing the whole corpus just because one document moved.
 
-Replay is the sharpest difference from webhooks: a new service can join and read history. Audit is the operational payoff: if someone asks whether an agent saw a specific version, you can answer with an offset and timestamp instead of guessing from cron timing.
+Replay is the biggest difference from webhooks, because a new service can join and read history. Audit pays off when something goes wrong. If someone asks whether an agent saw a specific version, you can answer with an offset and timestamp instead of guessing from cron timing.
 -->
 
 ---
@@ -386,7 +387,7 @@ Same wire protocol, same consumers, same partitioner. The only new piece is on t
 </div>
 
 <!--
-Before the code, it is important to narrow the scope. The connector is not asking Kafka to behave differently. There is no new wire protocol and no sidecar in the middle.
+Before the code, a quick scope check. The connector doesn't ask Kafka to behave any differently. There's no new wire protocol and no sidecar in the middle.
 
 Consumers still see ordinary keyed Kafka records, with normal partitioning, retention, and compaction behavior. The new logic sits on the producer side, between the source system and the `confluent-kafka` client.
 -->
@@ -403,7 +404,7 @@ title: Kafka message in message out
 <!--
 This diagram has two lanes. The top lane is the Kafka world people already know: orders, clicks, telemetry, Postgres CDC flow into a topic log, then out to Flink, search, vector stores, and agent runtimes.
 
-The bottom lane is the awkward part: meeting notes, codebases, PDFs, wikis, docs. They often sit behind SaaS webhooks, cron jobs, custom polling, and brittle ETL. CocoIndex's role is to turn that bottom lane into the top lane by producing normal keyed Kafka records from unstructured or file-backed sources.
+The bottom lane is the awkward part: meeting notes, codebases, PDFs, wikis, docs. They often sit behind SaaS webhooks, cron jobs, custom polling, and brittle ETL. CocoIndex turns that bottom lane into the top lane by producing normal keyed Kafka records from unstructured or file-backed sources.
 -->
 
 ---
@@ -419,7 +420,7 @@ About <span class="accent">60 lines</span> of Python. A folder watching for chan
 </div>
 
 <!--
-The example is deliberately small: a local folder of CSV files. The pipeline reads each file, treats each row as a record, and publishes JSON to Kafka using the first column as the key.
+I kept the example small on purpose: a local folder of CSV files. The pipeline reads each file, treats each row as a record, and publishes JSON to Kafka using the first column as the key.
 
 The three code slides match the three responsibilities in the app: create the producer once, declare target state for each row, and mount the source to the target.
 -->
@@ -483,7 +484,7 @@ E102,Bob,Smith,Marketing,bob.smith@example.com
 <!--
 The two files have different schemas on purpose. `products.csv` uses `sku` as its first column, so the first row is keyed by `SKU001`. `employees.csv` uses `emp_id`, so `E101` becomes the key there.
 
-The pipeline does not need a shared schema across files for this demo. It needs a stable key per row and a JSON payload. CSV is a useful example because it is structured enough to reason about and file-like enough to show the same problems as documents, exports, and shared-folder data.
+The pipeline doesn't need a shared schema across files for this demo. It needs a stable key per row and a JSON payload. CSV is a useful example because it's structured enough to reason about and file-like enough to show the same problems as documents, exports, and shared-folder data.
 -->
 
 ---
@@ -525,9 +526,9 @@ SASL block is for any managed broker. For local Kafka, drop those four lines and
 </div>
 
 <!--
-This block is all setup. `AIOProducer` comes from Confluent's async Python client. CocoIndex is not replacing that client; it is mounting a target on top of a producer you provide.
+This block is all setup. `AIOProducer` comes from Confluent's async Python client. CocoIndex doesn't replace that client. It mounts a target on top of a producer you hand it.
 
-The `ContextKey` is the way the flow refers to that producer later without threading it through every function. The lifespan hook runs once at startup, builds the client config, creates the producer, registers it under the key, and keeps it alive for the app lifetime.
+The `ContextKey` is how the flow refers to that producer later without threading it through every function. The lifespan hook runs once at startup, builds the client config, creates the producer, registers it under the key, and keeps it alive for the app lifetime.
 -->
 
 ---
@@ -559,7 +560,7 @@ async def process_csv(file: FileLike, topic_target: kafka.KafkaTopicTarget) -> N
 <!--
 This function is where file contents become declared Kafka state. The `memo=True` decorator is what keeps unchanged files out of the work path: if the file contents match what CocoIndex has already seen, the function is skipped.
 
-Inside the loop, the first column becomes the key and the row becomes JSON. The important call is `declare_target_state`: for this key, this value should exist on the topic. There is no `producer.send` here, and that is the point of the next slide.
+Inside the loop, the first column becomes the key and the row becomes JSON. The important call is `declare_target_state`: for this key, this value should exist on the topic. There's no `producer.send` here, which is what the next slide is about.
 -->
 
 ---
@@ -597,9 +598,9 @@ This is a reconciliation model, not a send loop:
 </v-click>
 
 <!--
-This is the API distinction the title is pointing at. `send_message` is imperative: emit this record now. `declare_target_state` is declarative: this key should currently have this value.
+This is the difference the title is about. `send_message` is imperative: emit this record now. `declare_target_state` is declarative: this key should currently have this value.
 
-The analogies are there to anchor the reconciliation model. A spreadsheet recalculates from formulas. A SQL view materializes from a query. A Kubernetes controller reconciles toward a manifest. CocoIndex compares declared topic state with previously published topic state, then emits only the required upserts and tombstones.
+The analogies are there because you've already used this model somewhere. A spreadsheet recalculates from formulas. A SQL view materializes from a query. A Kubernetes controller reconciles toward a manifest. CocoIndex compares declared topic state with previously published topic state, then emits only the required upserts and tombstones.
 -->
 
 ---
@@ -633,7 +634,7 @@ app = coco.App(coco.AppConfig(name="CsvToKafka"), app_main)
 </div>
 
 <!--
-This slide wires the two sides together. `mount_kafka_topic_target` resolves the producer from the context key and gives the flow a topic target. CocoIndex does not create the Kafka topic; the topic is infrastructure you bring in.
+This slide wires the two sides together. `mount_kafka_topic_target` resolves the producer from the context key and gives the flow a topic target. CocoIndex doesn't create the Kafka topic. You bring your own.
 
 `walk_dir` is the source. It points at `./data`, filters for CSV files, and with `live=True` keeps watching after the initial scan. `mount_each` connects every source item to `process_csv` with the Kafka topic target.
 -->
@@ -679,9 +680,9 @@ await coco.mount_each(process_csv, files.items(), topic_target)
 </div>
 
 <!--
-The first version is catch-up mode: scan the folder, reconcile the topic, exit. That is the path you would use for a scheduled update or a backfill.
+The first version is catch-up mode: scan the folder, reconcile the topic, exit. That's the path you would use for a scheduled update or a backfill.
 
-The second version adds `live=True`, so the same source keeps watching for filesystem events. The processor function and Kafka target do not fork into separate batch and streaming implementations. The CLI mirrors that: `cocoindex update` for catch-up, `cocoindex update -L` for live.
+The second version adds `live=True`, so the same source keeps watching for filesystem events. The processor function and Kafka target don't split into separate batch and streaming versions. The CLI mirrors that: `cocoindex update` for catch-up, `cocoindex update -L` for live.
 -->
 
 ---
@@ -719,9 +720,9 @@ What you'll see in the live demo, before we tab over to it.
 </div>
 
 <!--
-This is the expected behavior in the demo. Editing one row should produce one updated value on the topic. Adding one row should produce one upsert for the new key. Deleting one row should produce one tombstone for the key that disappeared.
+This is what you should see in the demo. Editing one row should produce one updated value on the topic. Adding one row should produce one upsert for the new key. Deleting one row should produce one tombstone for the key that disappeared.
 
-The restart case matters because it separates declaration from blind publishing. If the process restarts and the source files are unchanged, CocoIndex already knows the target state it declared earlier, so it does not re-emit those rows.
+The restart case is the one that shows how this differs from blind publishing. If the process restarts and the source files are unchanged, CocoIndex already knows the target state it declared earlier, so it doesn't re-emit those rows.
 -->
 
 ---
@@ -762,7 +763,7 @@ Small on purpose. I edit a file, CocoIndex compares the declared rows with the s
 <!--
 For the live run, there are three moving parts. Docker is running a local Kafka broker on port 9092. One terminal has a console consumer parked at the end of the topic. Another terminal runs `cocoindex update -L`, which scans once and then waits for file changes.
 
-The action is just editing `products.csv`. Add a row, save, and the consumer should receive one JSON record. Delete the row, save again, and the consumer should receive the delete representation. The thing to watch is that the producer behavior is driven by file state, not by a send call in the demo script.
+The action is just editing `products.csv`. Add a row, save, and the consumer should receive one JSON record. Delete the row, save again, and the consumer should receive the delete representation. Keep an eye on what drives the producer: the file state. There's no send call anywhere in the demo script.
 -->
 
 ---
@@ -804,7 +805,7 @@ title: What just happened
 <!--
 The left output shows the unit of recomputation: one file reprocessed. The right output shows the unit of publication: one Kafka record.
 
-That is the distinction from a send loop. I changed source state. CocoIndex compared the newly declared target state with what it had already published for that key, found one difference, and emitted one message. Saving the file again without changing the row should produce nothing.
+That's the difference from a send loop. I changed source state. CocoIndex compared the newly declared target state with what it had already published for that key, found one difference, and emitted one message. Saving the file again without changing the row should produce nothing.
 -->
 
 ---
@@ -877,7 +878,7 @@ title: Wrapping up
 <!--
 The demo used CSV because the mechanics are visible. The same pattern applies when the source is a repo, a folder of PDFs, a wiki, or a shared drive, and the consumers are RAG stores, search indexes, vector databases, analytics, or audit jobs.
 
-The part to carry forward is not "CSV to Kafka." It is incremental processing over changing source data: declare the target state by key, let CocoIndex reconcile the difference, and keep catch-up and live updates on the same code path where possible.
+The CSV was only a stand-in. The pattern is incremental processing over changing source data: declare the target state by key, let CocoIndex reconcile the difference, and keep catch-up and live updates on the same code path where possible.
 -->
 
 ---
@@ -924,5 +925,5 @@ title: Thanks
 <!--
 The demo repo has the code path we just walked through. The connector docs cover the Kafka-specific options, including local Kafka and managed brokers. My site is there if you want to follow up after the meetup.
 
-I am especially interested in producer-side cases where teams are already tracking sent keys, deletes, or backfills manually. Those are the places where this model is easiest to test against real pain.
+I'd love to hear about producer-side cases where teams are already tracking sent keys, deletes, or backfills manually. That's where I'd most like to test this model.
 -->

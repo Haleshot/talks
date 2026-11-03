@@ -4,6 +4,7 @@ layout: cover
 title: Technical Writing in the Age of AI
 event: Wikimedia DSDP · India 2026
 date: Mar 2026
+blogUrl: https://haleshot.github.io/posts/wikimedia-dsdp-experience
 description: A 90-minute workshop on writing quality in the AI era, the Diátaxis documentation framework, and community advocacy as an extension of technical writing.
 tags:
   - Technical Writing
@@ -59,7 +60,7 @@ You built something. Does anyone know how to use it?
 
 <v-click>
 <div class="text-lg text-center mt-8 opacity-70">
-Documentation is not packaging. It's the product.
+Documentation is part of the product.
 </div>
 </v-click>
 
@@ -108,7 +109,7 @@ hideInToc: true
 # Table of contents
 
 <div class="mt-8 text-sm opacity-75 leading-relaxed max-w-xl">
-We are going to move from why writing feels harder now, to what good writing is actually doing, to how to structure docs so they stop fighting the reader, and then to what that kind of work can grow into in public.
+We'll go from why writing feels harder now, to what good writing does, to how to structure docs so they stop fighting the reader, and then to what that kind of work can grow into in public.
 </div>
 
 <div class="mt-4 text-sm opacity-60 leading-relaxed max-w-xl">
@@ -179,13 +180,13 @@ transition: slide-up
 
 <v-click at="5">
 <div class="mt-6 text-sm opacity-70 max-w-3xl">
-The point of Kailash Nadh's inversion is not that code stopped mattering. It is that code generation has been commodified so aggressively that output alone no longer tells you who understood the problem, who made the trade-offs, or who can be trusted to review what was produced.
+Kailash Nadh's point is that code is now so cheap to generate that output alone no longer tells you who understood the problem, who made the trade-offs, or who can be trusted to review what was produced.
 </div>
 </v-click>
 
 <v-click at="6">
 <div class="mt-3 text-xs opacity-60 max-w-3xl">
-  He has made the same point in other contexts too, including a Perfology talk on performance and large-scale systems. The recurring theme is the same: the valuable part is not raw output, but the thinking that makes systems legible and reviewable.
+  He has made the same point in other contexts too, including a Perfology talk on performance and large-scale systems. Each time he comes back to the thinking that makes a system legible and reviewable, more than the output itself.
 </div>
 </v-click>
 
@@ -198,13 +199,13 @@ The point of Kailash Nadh's inversion is not that code stopped mattering. It is 
 
 <v-click at="8">
 <div class="mt-3 text-xs opacity-60">
-  This is the world that made <a href="https://github.com/mitchellh/vouch" class="underline">Vouch</a> necessary: "contributors can no longer be trusted based on the minimal barrier to entry to simply submit a change."
+  Mitchell Hashimoto built <a href="https://github.com/mitchellh/vouch" class="underline">Vouch</a> because of this: "contributors can no longer be trusted based on the minimal barrier to entry to simply submit a change."
 </div>
 </v-click>
 
 <v-click at="9">
 <div class="mt-3 text-xs opacity-60 max-w-3xl">
-  And honestly, I would still rather take a little less traffic and a little more friction if it means the people showing up are actual humans, not waves of bot-generated drive-by contributions.
+  And honestly, I'd still rather take a little less traffic and a little more friction if it means the people showing up are actual humans, not waves of bot-generated drive-by contributions.
 </div>
 </v-click>
 
@@ -238,7 +239,7 @@ hideInToc: true
 
 - Code is near-free
 - Judgment is the bottleneck
-- Clear articulation becomes the differentiator
+- Explaining clearly is what sets you apart
 - Opinionated review starts mattering again
 
 </div>
@@ -255,7 +256,7 @@ hideInToc: true
 
 - Borges imagined a library containing every possible book. Most of it would be nonsense, and the few useful things would be buried beyond recovery. That is why <em>Library of Babel</em> fits here.
 - AI generation: every possible README already exists. Most of it is hollow.
-- The problem is not volume. The problem is ownership.
+- The problem is that nobody owns most of it.
 
 </v-clicks>
 
@@ -266,7 +267,7 @@ hideInToc: true
 
 <v-click>
 <div class="text-sm mt-4 opacity-70">
-Slop did not begin with AI. We have always had filler, SEO sludge, and content farms. AI changes the scale, speed, and confidence of the problem. The floor rises, the volume explodes, and the cost of producing something plausible drops so far that discernment and ownership become the scarce part.
+Slop did not begin with AI. We have always had filler, SEO sludge, and content farms. AI changes the scale and the speed. Producing something plausible costs so little now that judgment and ownership are the scarce part.
 </div>
 </v-click>
 
@@ -336,7 +337,7 @@ hideInToc: true
 <v-clicks>
 
 - WikiMedia runs on documentation. Extensions, gadgets, bots all depend on contributors being able to read and write clearly.
-- Auto-generated docs feel hollow because they are. Users notice the absence of judgment.
+- Auto-generated docs feel hollow because they are. Readers can tell when nobody decided what mattered.
 - If you want an example of this done well, look at notebook ecosystems: people like <a href="https://github.com/willingc" class="underline">Carol Willing</a> helped make documentation, governance, and education part of the project itself.
 - The person who writes well often becomes the person who shapes how the community understands the project.
 
@@ -352,9 +353,9 @@ hideInToc: true
 
 <v-clicks>
 
-- <carbon-decision-tree class="inline mr-2 text-primary" /> The ability to decide *what* to say, not just how to say it
-- <carbon-checkmark-filled class="inline mr-2 text-primary" /> The ability to verify claims before publishing
-- <carbon-user-avatar class="inline mr-2 text-primary" /> The ability to own the reasoning, not just the output
+- <carbon-decision-tree class="inline mr-2 text-primary" /> Deciding *what* to say before how to say it
+- <carbon-checkmark-filled class="inline mr-2 text-primary" /> Checking claims before you publish
+- <carbon-user-avatar class="inline mr-2 text-primary" /> Owning the reasoning behind the output
 
 </v-clicks>
 
@@ -368,12 +369,12 @@ hideInToc: true
 
 ---
 layout: section
-title: What Writing Actually Is
+title: What Writing Is For
 ---
 
 <div v-motion :initial="{ y: -30, opacity: 0 }" :enter="{ y: 0, opacity: 1, transition: { type: 'spring', stiffness: 80, damping: 12 } }">
 
-# What Writing Actually Is
+# What Writing Is For
 
 </div>
 
@@ -389,13 +390,13 @@ hideInToc: true
 
 <v-click>
 <div class="text-sm mt-8 opacity-70 max-w-2xl mx-auto text-center">
-When you write a design doc, a README, or a how-to guide, you are not just recording thought after the fact. You are using the act of writing to notice gaps, make trade-offs visible, and arrive at something worth sharing.
+When you write a design doc, a README, or a how-to guide, you notice gaps, see the trade-offs, and arrive at something worth sharing while you write it.
 </div>
 </v-click>
 
 <v-click>
 <div class="text-sm mt-4 opacity-60 max-w-3xl mx-auto text-center">
-That is the part I want to protect in an AI-heavy workflow: not the romance of suffering, but the thinking work that only becomes visible once you try to explain it to someone else.
+In an AI-heavy workflow, that's the part I want to protect: the thinking you only see once you try to explain something to someone else. I don't mean the romance of suffering.
 </div>
 </v-click>
 
@@ -512,7 +513,7 @@ hideInToc: true
 # Somebody Wanted But So Then
 
 <div class="text-sm opacity-75 leading-relaxed max-w-3xl">
-This is a compact narrative scaffold Shreya Shankar recommends because it forces you to include motivation, friction, and consequence. It is popular because it works on more than stories: incidents, design docs, changelogs, postmortems, and PR descriptions all get clearer when the tension is explicit.
+This is a compact narrative scaffold Shreya Shankar recommends because it forces you to include motivation, friction, and consequence. It works on more than stories. Incidents, design docs, changelogs, postmortems and PR descriptions all get clearer when you spell out the tension.
 </div>
 
 <div class="mt-10 max-w-3xl">
@@ -575,12 +576,12 @@ transition: slide-up
 ---
 
 <div class="max-w-4xl mx-auto text-left">
-  <div class="text-3xl font-semibold mb-6">Before I show the next slide, here is the useful part.</div>
+  <div class="text-3xl font-semibold mb-6">Two questions, four kinds of page.</div>
   <div class="text-lg opacity-75 leading-relaxed">
-    Diataxis is a way of looking at docs by asking two questions at once: is the reader trying to <em>learn</em> or <em>get something done</em>, and do they need <em>action</em> or <em>understanding</em>? The map is useful because it makes mixed-up docs visible.
+    Diataxis is a way of looking at docs by asking two questions at once: is the reader trying to <em>learn</em> or <em>get something done</em>, and do they need <em>action</em> or <em>understanding</em>? The map helps you spot docs that are trying to be two things.
   </div>
   <div class="text-base opacity-60 leading-relaxed mt-5">
-    When a tutorial starts explaining architecture, or a reference page starts behaving like a walkthrough, the problem is often not bad prose. The problem is that one page is trying to do multiple jobs.
+    When a tutorial starts explaining architecture, or a reference page starts behaving like a walkthrough, the prose is usually fine. One page is trying to do two jobs.
   </div>
 </div>
 
@@ -793,7 +794,7 @@ hideInToc: true
 # Three moves. No rewrite required.
 
 <div class="text-sm opacity-75 leading-relaxed max-w-3xl mb-6">
-This is the part I want people to leave with because it makes the framework feel usable. You do not need a full rewrite to improve docs. You need a better way to separate jobs.
+If you take one thing from this section, take this. You don't need a full rewrite to improve docs. You need a better way to separate jobs.
 </div>
 
 <v-clicks>
@@ -820,7 +821,7 @@ hideInToc: true
 ## Growing the Practice
 
 <div class="text-sm opacity-75 max-w-3xl leading-relaxed mb-8">
-This is the part of the workshop for anyone who has ever thought: "I can follow the docs, but I don't know if I'm technical enough to write them." Janine Chan's point is that this is not an identity problem. It is a habit problem.
+This is the part of the workshop for anyone who has ever thought: "I can follow the docs, but I don't know if I'm technical enough to write them." Janine Chan's point is that it's a habit problem, not an identity one.
 </div>
 
 <div class="text-sm italic mb-6 opacity-70">Seven habits of increasingly technical technical writers</div>
@@ -874,7 +875,7 @@ layout: default
 hideInToc: true
 ---
 
-# Your background is the point, not the detour.
+# Your background counts.
 
 <div class="flex items-center gap-4 text-sm my-6 flex-wrap">
   <div
@@ -943,14 +944,14 @@ layout: default
 hideInToc: true
 ---
 
-# Technical writing is not the destination.
+# Technical writing leads somewhere.
 
 <v-clicks>
 
 - Docs are infrastructure. Advocacy is what builds on top.
 - When you write clearly about a project, you become the person who shapes how others understand it.
-- That's not just a writing role. It's a community role.
-- In Wiki spaces especially, good writing does not sit next to the project. It becomes part of how the project survives handoffs, volunteers, forks, and new contributors.
+- That makes it a community role as much as a writing one.
+- In Wiki spaces especially, good writing is part of how the project survives handoffs, volunteers, forks, and new contributors.
 
 </v-clicks>
 
@@ -1024,11 +1025,11 @@ hideInToc: true
 # A docs problem I cared enough to write down
 
 <div class="text-sm opacity-80 leading-relaxed mt-6">
-One of the clearest signs that I genuinely like this work is that I keep ending up writing about documentation structure even when nobody asked for a slide deck.
+I know I like this work because I keep writing about documentation structure when nobody asked me to.
 </div>
 
 <div class="text-sm opacity-80 leading-relaxed mt-4">
-For CocoIndex, I wrote up a larger migration proposal around how the framework docs should evolve because the information architecture itself was becoming part of the product experience.
+For CocoIndex, I wrote up a larger migration proposal around how the framework docs should evolve because the way the docs were organised had started to affect how people used CocoIndex.
 </div>
 
 <div class="mt-6 text-xs opacity-60">
@@ -1083,7 +1084,7 @@ hideInToc: true
 # How I got here
 
 <div class="text-sm opacity-75 leading-relaxed max-w-4xl mt-4">
-This is the part I care about saying carefully. None of this felt linear while it was happening. It mostly felt like showing up repeatedly for projects and communities I cared about, usually through writing first, and only later realising that people had actually been paying attention.
+None of this felt linear while it was happening. It mostly felt like showing up repeatedly for projects and communities I cared about, usually through writing first, and only later realising that people had been paying attention.
 </div>
 
 <div class="grid grid-cols-4 gap-4 mt-8 text-sm">
@@ -1124,7 +1125,7 @@ This is the part I care about saying carefully. None of this felt linear while i
 
 <v-click>
 <div class="mt-7 text-sm opacity-65 text-center max-w-3xl mx-auto">
-No technical-writing title at the start. Just reading a lot, writing where I felt friction, and discovering that careful public thinking has a way of travelling further than you expect.
+No technical-writing title at the start. Just reading a lot, writing where I felt friction, and finding out that careful writing in public travels further than you'd expect.
 </div>
 </v-click>
 
@@ -1140,7 +1141,7 @@ hideInToc: true
 
 - "I've already noticed that I am slowly starting to <span v-mark.underline="1">atrophy my ability</span> to write code manually." -- Benjamin Breen
 - The same risk exists for writing. If you outsource the thinking, <span v-mark.underline="2">you lose the thinking.</span>
-- Writing is not just communication. It's <span v-mark.circle="3">how you know what you know.</span>
+- Writing is <span v-mark.circle="3">how you know what you know.</span>
 
 </v-clicks>
 
@@ -1171,7 +1172,7 @@ hideInToc: true
 
 <v-clicks>
 
-- <carbon-grid class="inline mr-2 text-primary" /> **A way to diagnose docs**: ask what job the page is actually doing before you rewrite it.
+- <carbon-grid class="inline mr-2 text-primary" /> **A way to diagnose docs**: ask what job the page is doing before you rewrite it.
 - <carbon-text-align-left class="inline mr-2 text-primary" /> **A way to shape technical narrative**: use SWBST when the point, friction, or consequence feels muddy.
 - <carbon-growth class="inline mr-2 text-primary" /> **A way to stay human in the loop**: keep one part of the writing process that you still do from first principles.
 

@@ -45,9 +45,8 @@
 
     <main class="container">
       <section class="hero">
-        <p class="kicker reveal-up">Speaking &middot; Workshops &middot; Conference decks</p>
-        <h1 class="hero-title reveal-up">Talks</h1>
-        <p class="subtitle reveal-up">
+        <h1 class="hero-title">Talks</h1>
+        <p class="subtitle">
           Workshops, meetup talks, and conference decks, with links to slides and related posts when they exist.
         </p>
       </section>
@@ -57,7 +56,7 @@
       </section>
 
       <section class="archive" aria-label="Talks archive">
-        <div class="archive-head reveal-up">
+        <div class="archive-head">
           <h2 class="archive-title">Archive</h2>
           <div class="filters" role="group" aria-label="Filter by topic">
 {{FILTERS}}
@@ -73,7 +72,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-note">
-          <a href="https://github.com/Haleshot/talks" target="_blank" rel="noopener noreferrer">Open Source &#10138; CC BY 4.0 &middot; Code MIT</a>
+          <a href="https://github.com/Haleshot/talks" target="_blank" rel="noopener noreferrer">Open source, writing CC BY 4.0, code MIT</a>
         </div>
         <div class="links">
           <a href="https://github.com/haleshot" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -91,7 +90,6 @@
     </footer>
   </div>
   <script>
-    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Theme toggle
     (function() {
@@ -103,56 +101,6 @@
         var next = current === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
-      });
-    })();
-
-    // Scroll reveal
-    (function() {
-      var items = document.querySelectorAll('.reveal-up');
-      if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-        items.forEach(function(el) { el.classList.add('active'); });
-        return;
-      }
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      items.forEach(function(el, i) {
-        if (i < 6 && !el.style.transitionDelay) el.style.transitionDelay = (i * 60) + 'ms';
-        observer.observe(el);
-      });
-    })();
-
-    // Glow + magnetic + 3D tilt pointer effects
-    (function() {
-      if (prefersReducedMotion) return;
-      document.querySelectorAll('.glow-card').forEach(function(card) {
-        card.addEventListener('pointermove', function(e) {
-          var rect = card.getBoundingClientRect();
-          card.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width) * 100 + '%');
-          card.style.setProperty('--mouse-y', ((e.clientY - rect.top) / rect.height) * 100 + '%');
-        });
-      });
-      document.querySelectorAll('.tilt').forEach(function(card) {
-        card.addEventListener('pointermove', function(e) {
-          if (e.pointerType === 'touch') return;
-          var rect = card.getBoundingClientRect();
-          var px = (e.clientX - rect.left) / rect.width - 0.5;
-          var py = (e.clientY - rect.top) / rect.height - 0.5;
-          card.style.transform = 'perspective(900px) rotateX(' + (-py * 3).toFixed(2) + 'deg) rotateY(' + (px * 3).toFixed(2) + 'deg) translateY(-2px)';
-        });
-        card.addEventListener('pointerleave', function() { card.style.transform = ''; });
-      });
-      document.querySelectorAll('.magnetic-wrap').forEach(function(wrap) {
-        wrap.addEventListener('pointermove', function(e) {
-          var rect = wrap.getBoundingClientRect();
-          wrap.style.transform = 'translate(' + (e.clientX - rect.left - rect.width / 2) * 0.2 + 'px, ' + (e.clientY - rect.top - rect.height / 2) * 0.2 + 'px)';
-        });
-        wrap.addEventListener('pointerleave', function() { wrap.style.transform = ''; });
       });
     })();
 
@@ -184,9 +132,14 @@
 
       chips.forEach(function(chip) {
         chip.addEventListener('click', function() {
-          chips.forEach(function(c) { c.classList.remove('is-active'); });
-          chip.classList.add('is-active');
-          apply(chip.getAttribute('data-filter'));
+          // Pressing the active topic again shows every talk
+          var wasActive = chip.getAttribute('aria-pressed') === 'true';
+          chips.forEach(function(c) { c.classList.remove('is-active'); c.setAttribute('aria-pressed', 'false'); });
+          if (!wasActive) {
+            chip.classList.add('is-active');
+            chip.setAttribute('aria-pressed', 'true');
+          }
+          apply(wasActive ? 'all' : chip.getAttribute('data-filter'));
         });
       });
     })();

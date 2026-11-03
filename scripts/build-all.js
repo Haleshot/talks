@@ -192,6 +192,8 @@ function getTalkMeta(folderPath) {
     meta.slidesUrl = frontmatter.slidesUrl || '';
     meta.linkedinUrl = frontmatter.linkedinUrl || '';
     meta.blogUrl = frontmatter.blogUrl || '';
+    meta.recordingUrl = frontmatter.recordingUrl || '';
+    meta.writeups = Array.isArray(frontmatter.writeups) ? frontmatter.writeups : [];
     // The deck's own brand colour (themeConfig.primary) is nested, so read it directly.
     const primaryMatch = content.match(/primary:\s*['"]?(#[0-9a-fA-F]{3,8})/);
     meta.primary = primaryMatch ? primaryMatch[1] : '';
@@ -325,11 +327,11 @@ function coverUrl(folder) {
   return null;
 }
 
-const ACTION_ICONS = {
-  slides: '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
-  linkedin: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>',
-  blog: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
-};
+
+// Frontmatter writes events as "IndiaFOSS 2026 · Bengaluru"; the landing reads them as plain text
+function eventText(event) {
+  return String(event).replace(/\s*·\s*/g, ', ');
+}
 
 function slugifyTag(tag) {
   return String(tag).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -353,22 +355,35 @@ function talkData(talk) {
   };
 }
 
+// Write-ups elsewhere, named by the site they're on and marked with its icon
+const WRITEUP_OUTLETS = {
+  'write-the-docs-india.github.io': { label: 'Write the Docs India', icon: 'write-the-docs-india.svg' },
+  'scipy.in': { label: 'SciPy India', icon: 'scipy-india.svg' },
+  'deepnote.com': { label: 'Deepnote', icon: 'deepnote.png' },
+};
+
+function writeupAction(href) {
+  const host = new URL(href).hostname.replace(/^www\./, '');
+  const outlet = WRITEUP_OUTLETS[host] || { label: host };
+  return { label: outlet.label, href, icon: outlet.icon };
+}
+
 function buildActions(d) {
   const actions = [
-    { label: 'Slides', icon: 'slides', href: d.slidesHref, primary: true },
-    d.meta.linkedinUrl ? { label: 'LinkedIn Post', icon: 'linkedin', href: d.meta.linkedinUrl } : null,
-    d.meta.blogUrl ? { label: 'Blog Post', icon: 'blog', href: d.meta.blogUrl } : null,
+    { label: 'Slides', href: d.slidesHref, primary: true },
+    d.meta.recordingUrl ? { label: 'Recording', href: d.meta.recordingUrl } : null,
+    d.meta.blogUrl ? { label: 'Blog post', href: d.meta.blogUrl } : null,
+    ...d.meta.writeups.map(writeupAction),
+    d.meta.linkedinUrl ? { label: 'LinkedIn post', href: d.meta.linkedinUrl } : null,
   ].filter(Boolean);
   return `<div class="talk-actions">${actions.map(a => `
-        <span class="magnetic-wrap"><a href="${a.href}" class="action-link${a.primary ? ' primary' : ''}"${a.href.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>
-          <span>${a.label}</span>${ACTION_ICONS[a.icon] || ''}
-        </a></span>`).join('')}
+        <a href="${a.href}" class="action-link${a.primary ? ' primary' : ''}"${a.href.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${a.icon ? `<img src="${basePath}outlets/${a.icon}" alt="" width="14" height="14">` : ''}${a.label}</a>`).join('')}
       </div>`;
 }
 
 function buildTags(d) {
   if (!d.tags.length) return '';
-  return `<div class="talk-tags">${d.tags.map(t => `<span class="talk-tag">${escapeHtml(t)}</span>`).join('')}</div>`;
+  return `<p class="talk-tags">${d.tags.map(escapeHtml).join(', ')}</p>`;
 }
 
 function buildBadges(d) {
@@ -394,13 +409,12 @@ function accentStyle(d) {
 function renderFeatured(d) {
   const badges = buildBadges(d);
   return `
-    <article class="featured-card glow-card tilt reveal-up"${accentStyle(d)} data-tags="${d.tags.map(slugifyTag).join(' ')}">
+    <article class="featured-card"${accentStyle(d)} data-tags="${d.tags.map(slugifyTag).join(' ')}">
       ${buildThumb(d, 'featured-thumb')}
       <div class="featured-body">
-        <span class="kicker">★ Latest talk</span>
         <div class="talk-meta-row">
           <span class="talk-date">${escapeHtml(d.date)}</span>
-          <span class="talk-event">${escapeHtml(d.event)}</span>
+          <span class="talk-event">${escapeHtml(eventText(d.event))}</span>
           ${badges ? `<span class="talk-badges">${badges}</span>` : ''}
         </div>
         <h2 class="featured-title"><a href="${d.slidesHref}">${escapeHtml(d.title)}</a></h2>
@@ -414,7 +428,7 @@ function renderFeatured(d) {
 function renderTalkCard(d) {
   const badges = buildBadges(d);
   return `
-      <article class="talk-card glow-card tilt reveal-up"${accentStyle(d)} data-tags="${d.tags.map(slugifyTag).join(' ')}">
+      <article class="talk-card"${accentStyle(d)} data-tags="${d.tags.map(slugifyTag).join(' ')}">
         ${buildThumb(d, 'talk-thumb')}
         <div class="talk-body">
           <div class="talk-card-header">
@@ -422,7 +436,7 @@ function renderTalkCard(d) {
             ${badges ? `<span class="talk-badges">${badges}</span>` : ''}
           </div>
           <h3 class="talk-title"><a href="${d.slidesHref}">${escapeHtml(d.title)}</a></h3>
-          <div class="talk-event">${escapeHtml(d.event)}</div>
+          <div class="talk-event">${escapeHtml(eventText(d.event))}</div>
           ${d.meta.description ? `<p class="talk-description">${escapeHtml(d.meta.description)}</p>` : ''}
           ${buildTags(d)}
           ${buildActions(d)}
@@ -433,9 +447,11 @@ function renderTalkCard(d) {
 function renderFilters(data) {
   const tags = [...new Set(data.flatMap(d => d.tags))].sort((a, b) => a.localeCompare(b));
   if (tags.length === 0) return '';
-  const buttons = [`<button class="filter-chip is-active" data-filter="all" type="button">All</button>`]
-    .concat(tags.map(t => `<button class="filter-chip" data-filter="${slugifyTag(t)}" type="button">${escapeHtml(t)}</button>`));
-  return buttons.join('');
+  // Counts come from the decks, so they stay right as talks get added
+  const count = t => data.filter(d => d.tags.includes(t)).length;
+  return tags
+    .map(t => `<button class="filter-chip" data-filter="${slugifyTag(t)}" type="button" aria-pressed="false">${escapeHtml(t)} <span class="filter-count">${count(t)}</span></button>`)
+    .join('');
 }
 
 function generateLandingPage(talks) {
@@ -456,7 +472,7 @@ function generateLandingPage(talks) {
     .sort((a, b) => b - a)
     .map(year => `
       <section class="year-group" data-year="${year}">
-        <div class="year-label reveal-up"><span>${year}</span></div>
+        <div class="year-label"><span>${year}</span></div>
         <div class="year-talks">${cardsByYear.get(year).join('\n')}</div>
       </section>`)
     .join('\n');
@@ -479,6 +495,7 @@ async function main() {
   // Create dist directory
   mkdirSync(distDir, { recursive: true });
   cpSync(join(rootDir, 'landing', 'fonts'), join(distDir, 'fonts'), { recursive: true });
+  cpSync(join(rootDir, 'landing', 'outlets'), join(distDir, 'outlets'), { recursive: true });
 
   // Find all talk folders
   const folders = getTalkFolders();

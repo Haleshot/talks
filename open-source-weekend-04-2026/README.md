@@ -22,10 +22,3 @@ npm run dev
 npm run build
 npm run export
 ```
-
-## Human Review Checklist
-
-- Verify factual claims, counts, and wording
-- Verify external links and attributions
-- Rehearse presenter notes against click timing
-- Review export output before sharing
